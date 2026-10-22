@@ -787,11 +787,14 @@
   }
   .sub-row .btn{flex:0 0 auto;min-width:84px}
   .sub-actions{display:flex;gap:8px;margin-top:9px}
-  .sub-note{
-    margin-top:16px;padding-top:12px;border-top:1px solid #ECE6DA;
-    font-size:12.5px;line-height:1.85;color:#7A756A;
+  .sub-list{
+    margin-top:16px;padding-top:13px;border-top:1px solid #ECE6DA;
+    display:flex;flex-direction:column;gap:8px;
   }
-  .sub-note b{color:#4E4A42;font-weight:600}
+  .sub-list > div{display:flex;gap:10px;font-size:12.5px;line-height:1.7;color:#7A756A}
+  .sub-list b{flex:0 0 56px;color:#4E4A42;font-weight:600}
+  .sub-list span{flex:1;min-width:0}
+  .sub-aside{margin:11px 0 0;font-size:12.5px;line-height:1.6;color:#9A9487}
   .update-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .update-head h2{margin:6px 0 0;font-size:27.5px;font-weight:650;letter-spacing:-.03em;color:#14181E}
   .update-state{
@@ -990,7 +993,7 @@
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.2 7.2A5.3 5.3 0 1 0 12 11.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 3.7v3.6H9.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>更新</span>
         </button>
-        <button class="update-btn" id="btn-subscribe" title="订阅到手机日历">
+        <button class="update-btn" id="btn-subscribe" title="加到手机日历">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.2" y="3.6" width="11.6" height="10.2" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2.2 6.8h11.6M5.6 1.9v2.7M10.4 1.9v2.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           <span>订阅</span>
         </button>
@@ -1123,23 +1126,24 @@
   <div class="update-card" role="dialog" aria-modal="true" aria-labelledby="sub-title">
     <div class="update-head">
       <div>
-        <div class="guide-kicker">SUBSCRIBE</div>
-        <h2 id="sub-title">订阅到手机日历</h2>
+        <div class="guide-kicker">日历订阅</div>
+        <h2 id="sub-title">加到手机日历</h2>
       </div>
       <button class="icon-btn" data-close-sub aria-label="关闭订阅面板">✕</button>
     </div>
-    <p class="sub-lead">加一次订阅，报名截止和开赛时间就会出现在你的系统日历里。我改了数据，你手机上跟着更新，不用再回来导出一次。</p>
+    <p class="sub-lead">订阅一次，报名截止和比赛时间会出现在你的日历里，提前一天提醒。数据改了，手机上跟着变。</p>
     <div class="sub-row">
       <input id="sub-url" readonly spellcheck="false" autocomplete="off">
-      <button class="btn primary" id="sub-copy">复制</button>
+      <button class="btn primary" id="sub-copy">复制地址</button>
     </div>
+    <div class="sub-list">
+      <div><b>iPhone</b><span>设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历</span></div>
+      <div><b>Android</b><span>电脑打开 Google 日历 → 其他日历 → 通过网址添加</span></div>
+      <div><b>电脑</b><span>Outlook、Thunderbird 里选「添加订阅」，别用「导入」</span></div>
+    </div>
+    <p class="sub-aside">当然你也可以每天都来这个网页看。</p>
     <div class="sub-actions">
-      <a class="btn ghost" id="sub-open" href="#">用日历打开</a>
-    </div>
-    <div class="sub-note">
-      <b>iPhone</b>：设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历<br>
-      <b>Android</b>：电脑上打开 Google 日历 → 其他日历 → 通过网址添加<br>
-      <b>电脑</b>：Thunderbird、Outlook 都能加。选「添加订阅」而不是「导入」，导入的是死文件，不会更新。
+      <a class="btn ghost" id="sub-open" href="#">直接打开日历</a>
     </div>
   </div>
 </div>
