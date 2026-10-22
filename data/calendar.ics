@@ -1,0 +1,1634 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CS Competition Calendar//ZH-CN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:CS 竞赛日历
+X-WR-CALDESC:计算机 / 人工智能 / 软件工程 / 信息安全竞赛
+ 的报名截止与开赛时间
+X-WR-TIMEZONE:Asia/Shanghai
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:math2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261019
+DTEND;VALUE=DATE:20261020
+SUMMARY:报名截止：数学竞赛
+DESCRIPTION:中国数学会主办，初赛考高等数学（非数学 A 
+ 类），决赛 2027 年 4 月在大连理工大学举行。AI 专业属
+ 于理工类，应报非数学 A 类。\n报名：通过所在省数学
+ 会或学校统一报名；2026 报名已于 10/19 截止。AI 专业报
+ 非数学 A 类（理工），不是数学专业类。\n详情：https://
+ www.cmathc.org.cn/tzgg/545.html
+URL:https://www.cmathc.org.cn/tzgg/545.html
+CATEGORIES:math
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：数学竞赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mathorcup2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261031
+SUMMARY:开赛：MathorCup 大数据
+DESCRIPTION:MathorCup 数学应用挑战赛从 2020 年起增设的大数
+ 据独立赛项。用企业真实场景数据出题，要求提交论文
+ 、完整代码和泛化性能评估，初赛—复赛。\n报名：全
+ 日制在校生可报，赛氪 / 官网直接报名；1–3 人一队，
+ 可跨专业。报名费 200 元/队，10/9 后不可退费。\n详情：
+ https://www.saikr.com/vse/bigdata2026
+URL:https://www.saikr.com/vse/bigdata2026
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：MathorCup 大数据
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mathorcup2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261024
+SUMMARY:报名截止：MathorCup 大数据
+DESCRIPTION:MathorCup 数学应用挑战赛从 2020 年起增设的大数
+ 据独立赛项。用企业真实场景数据出题，要求提交论文
+ 、完整代码和泛化性能评估，初赛—复赛。\n报名：全
+ 日制在校生可报，赛氪 / 官网直接报名；1–3 人一队，
+ 可跨专业。报名费 200 元/队，10/9 后不可退费。\n详情：
+ https://www.saikr.com/vse/bigdata2026
+URL:https://www.saikr.com/vse/bigdata2026
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：MathorCup 大数据
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cmit2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261024
+SUMMARY:报名截止：数媒竞赛
+DESCRIPTION:面向数字媒体、AIGC、VR/AR、智能产品与数字创
+ 意的作品赛。2026 年新增 AIGC 数字创意、OPC 数字新消费
+ 、国际专项等赛道，分校赛、赛区选拔、全国总决赛三
+ 级。\n报名：全日制在校生可报，官网直报；可跨校组
+ 队，但需明确第一申报单位。AIGC 作品记得附《AI 工具
+ 使用情况说明》。\n详情：https://www.cmit.cn
+URL:https://www.cmit.cn
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：数媒竞赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mooctest2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:报名截止：软件测试
+DESCRIPTION:软件工程方向最对口的国家级赛事，四个赛项
+ ：开发者测试（JUnit）、Web 应用测试（Selenium）、嵌入
+ 式测试，以及微信小微 AI 助手评测专项赛。\n报名：个
+ 人赛需 1 名指导教师，报名免费，在 mooctest.net 报名；
+ 省赛 11/14–15，全国总决赛 12/5–6 在广州。\n详情：https
+ ://www.mooctest.org
+URL:https://www.mooctest.org
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：软件测试
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mooctest2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261102
+SUMMARY:开赛：软件测试
+DESCRIPTION:软件工程方向最对口的国家级赛事，四个赛项
+ ：开发者测试（JUnit）、Web 应用测试（Selenium）、嵌入
+ 式测试，以及微信小微 AI 助手评测专项赛。\n报名：个
+ 人赛需 1 名指导教师，报名免费，在 mooctest.net 报名；
+ 省赛 11/14–15，全国总决赛 12/5–6 在广州。\n详情：https
+ ://www.mooctest.org
+URL:https://www.mooctest.org
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：软件测试
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:airace2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:报名截止：AI 应用创新
+DESCRIPTION:中国技术经济学会主办，主题是“让人工智能
+ 赋能千行百业”。聚焦 AI Agent、大模型应用和真实业务
+ 场景，围绕教育、医疗、制造、消费、金融、出海六大
+ 领域，1–3 人组队，校赛—区域赛—国赛三级。\n报名
+ ：需先通过本校校赛选拔，再由学校推荐区域赛；本校
+ 是否组织校赛请尽快问教务部 / 创新创业部门。专项赛
+ 道不设校赛，可直接报名区域赛。\n详情：https://www.ai-ra
+ ce.com.cn/
+URL:https://www.ai-race.com.cn/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：AI 应用创新
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:math2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:开赛：数学竞赛
+DESCRIPTION:中国数学会主办，初赛考高等数学（非数学 A 
+ 类），决赛 2027 年 4 月在大连理工大学举行。AI 专业属
+ 于理工类，应报非数学 A 类。\n报名：通过所在省数学
+ 会或学校统一报名；2026 报名已于 10/19 截止。AI 专业报
+ 非数学 A 类（理工），不是数学专业类。\n详情：https://
+ www.cmathc.org.cn/tzgg/545.html
+URL:https://www.cmathc.org.cn/tzgg/545.html
+CATEGORIES:math
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：数学竞赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zhuanzhi2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+SUMMARY:报名截止：传智杯
+DESCRIPTION:全国大学生计算机应用能力与数字素养大赛暨
+ 传智杯，2026 年为第九届，设研究生组、A/B/C 组，覆盖
+ 数智创新与 AI 应用。省赛 11 月、国赛 12 月。\n报名：
+ 本科院校，通常报 B 组（A 组限 985/211）。先确认本校是
+ 否设赛点：赛点院校由学校遴选省赛名单，非赛点院校
+ 需参加初赛。\n详情：http://dasai.ityxb.com/
+URL:http://dasai.ityxb.com/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：传智杯
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zhuanzhi2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261221
+SUMMARY:开赛：传智杯
+DESCRIPTION:全国大学生计算机应用能力与数字素养大赛暨
+ 传智杯，2026 年为第九届，设研究生组、A/B/C 组，覆盖
+ 数智创新与 AI 应用。省赛 11 月、国赛 12 月。\n报名：
+ 本科院校，通常报 B 组（A 组限 985/211）。先确认本校是
+ 否设赛点：赛点院校由学校遴选省赛名单，非赛点院校
+ 需参加初赛。\n详情：http://dasai.ityxb.com/
+URL:http://dasai.ityxb.com/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：传智杯
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:airace2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261228
+SUMMARY:开赛：AI 应用创新
+DESCRIPTION:中国技术经济学会主办，主题是“让人工智能
+ 赋能千行百业”。聚焦 AI Agent、大模型应用和真实业务
+ 场景，围绕教育、医疗、制造、消费、金融、出海六大
+ 领域，1–3 人组队，校赛—区域赛—国赛三级。\n报名
+ ：需先通过本校校赛选拔，再由学校推荐区域赛；本校
+ 是否组织校赛请尽快问教务部 / 创新创业部门。专项赛
+ 道不设校赛，可直接报名区域赛。\n详情：https://www.ai-ra
+ ce.com.cn/
+URL:https://www.ai-race.com.cn/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：AI 应用创新
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apmcm2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:报名截止：亚太赛
+DESCRIPTION:亚太地区大学生数学建模竞赛，2026 年为第十
+ 六届。1–3 人一队，可跨校跨专业，4 天完成英文论文
+ ；题目偏应用，适合作为美赛前的热身。各校认定不同
+ （国 B / 国 C / 省级），以本校文件为准。\n报名：全日
+ 制在校生可报，可跨校组队；全英文授课对英文论文有
+ 优势。赛氪和官网都能报名，最终以 apmcm.org 为准。\n详
+ 情：http://www.apmcm.org
+URL:http://www.apmcm.org
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：亚太赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apmcm2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261201
+SUMMARY:开赛：亚太赛
+DESCRIPTION:亚太地区大学生数学建模竞赛，2026 年为第十
+ 六届。1–3 人一队，可跨校跨专业，4 天完成英文论文
+ ；题目偏应用，适合作为美赛前的热身。各校认定不同
+ （国 B / 国 C / 省级），以本校文件为准。\n报名：全日
+ 制在校生可报，可跨校组队；全英文授课对英文论文有
+ 优势。赛氪和官网都能报名，最终以 apmcm.org 为准。\n详
+ 情：http://www.apmcm.org
+URL:http://www.apmcm.org
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：亚太赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cmit2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261130
+SUMMARY:开赛：数媒竞赛
+DESCRIPTION:面向数字媒体、AIGC、VR/AR、智能产品与数字创
+ 意的作品赛。2026 年新增 AIGC 数字创意、OPC 数字新消费
+ 、国际专项等赛道，分校赛、赛区选拔、全国总决赛三
+ 级。\n报名：全日制在校生可报，官网直报；可跨校组
+ 队，但需明确第一申报单位。AIGC 作品记得附《AI 工具
+ 使用情况说明》。\n详情：https://www.cmit.cn
+URL:https://www.cmit.cn
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：数媒竞赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:huawei2026-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:报名截止：华为 ICT
+DESCRIPTION:华为年度 ICT 赛事，AI 相关赛道包括创新赛（AI
+  + ICT 方案）、挑战赛（昇腾 + 鲲鹏的超智融合调优）、
+ 算子赛（Ascend C 算子开发）与实践赛云赛道。同校组队
+ ，晋级后有中国总决赛和全球总决赛。\n报名：全日制
+ 在校生可报，官网直报；必须同校组队并配 1 名指导教
+ 师。建议找计算机 / AI 方向老师，英文答辩是优势。\n
+ 详情：https://e.huawei.com/cn/talent/ict-academy/#/ict-contest
+URL:https://e.huawei.com/cn/talent/ict-academy/#/ict-contest
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：华为 ICT
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:huawei2026-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20270501
+SUMMARY:开赛：华为 ICT
+DESCRIPTION:华为年度 ICT 赛事，AI 相关赛道包括创新赛（AI
+  + ICT 方案）、挑战赛（昇腾 + 鲲鹏的超智融合调优）、
+ 算子赛（Ascend C 算子开发）与实践赛云赛道。同校组队
+ ，晋级后有中国总决赛和全球总决赛。\n报名：全日制
+ 在校生可报，官网直报；必须同校组队并配 1 名指导教
+ 师。建议找计算机 / AI 方向老师，英文答辩是优势。\n
+ 详情：https://e.huawei.com/cn/talent/ict-academy/#/ict-contest
+URL:https://e.huawei.com/cn/talent/ict-academy/#/ict-contest
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：华为 ICT
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lanqiao2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:报名截止：蓝桥杯
+DESCRIPTION:国内规模最大的软件和信息技术个人赛之一。
+ 软件赛重点考察程序设计语言、数据结构与算法，校赛
+ —省赛—全国总决赛三级赛制。\n报名：需以院校为单
+ 位报名。先确认本校是否设赛点、是否有校内选拔；若
+ 没有，联系教务部或蓝桥杯组委会确认借考 / 名额。\n
+ 详情：https://dasai.lanqiao.cn
+URL:https://dasai.lanqiao.cn
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：蓝桥杯
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mcm2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270128
+DTEND;VALUE=DATE:20270129
+SUMMARY:报名截止：美赛
+DESCRIPTION:国际影响力最大的数学建模竞赛之一。2027 年 1
+  月 29 日至 2 月 2 日举行，3 人一队，在 4 天内完成建模
+ 、求解并提交英文论文。\n报名：全日制在校生可报，
+ 官网直报或走辅助报名（注意第三方服务费）。英文授
+ 课是优势；需 1 名指导教师，可跨专业组队。\n详情：ht
+ tps://www.comap.com/contests/mcm-icm
+URL:https://www.comap.com/contests/mcm-icm
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：美赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mcm2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270129
+DTEND;VALUE=DATE:20270203
+SUMMARY:开赛：美赛
+DESCRIPTION:国际影响力最大的数学建模竞赛之一。2027 年 1
+  月 29 日至 2 月 2 日举行，3 人一队，在 4 天内完成建模
+ 、求解并提交英文论文。\n报名：全日制在校生可报，
+ 官网直报或走辅助报名（注意第三方服务费）。英文授
+ 课是优势；需 1 名指导教师，可跨专业组队。\n详情：ht
+ tps://www.comap.com/contests/mcm-icm
+URL:https://www.comap.com/contests/mcm-icm
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：美赛
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:neccs2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:报名截止：英语竞赛（预计）
+DESCRIPTION:全国大学生英语竞赛，2027 年为第二十九届。
+ 分 A/B/C/D 四类，AI 专业报 C 类（非英语专业本科）；一
+ 般 12 月报名、4 月初赛、5 月决赛，校内即可参加。\n报
+ 名：全日制在校生可报，C 类（非英语专业本科）；通
+ 常通过学校 / 赛氪分赛区报名。英语基础好的同学性价
+ 比很高，但别轻敌——NECCS 题量大、时间紧。\n详情：ht
+ tp://www.chinaneccs.cn
+URL:http://www.chinaneccs.cn
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：英语竞赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:gplt2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270315
+DTEND;VALUE=DATE:20270316
+SUMMARY:报名截止：天梯赛（预计）
+DESCRIPTION:团体程序设计天梯赛，PAT 风格，题目分基础、
+ 进阶、顶级三个难度，按团队总分排名。\n报名：每校
+ 名额有限，需学校统一组队报名。先问教务部 / 计算机
+ 方向老师是否组织校队；没有校队可尝试联系组委会。\
+ n详情：https://gplt.patest.cn
+URL:https://gplt.patest.cn
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：天梯赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:challengecup2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:报名截止：挑战杯（预计）
+DESCRIPTION:“挑战杯”全国大学生课外学术科技作品竞赛
+ ，2027 年为第二十届。含自然科学类学术论文、哲学社
+ 会科学类社会调查报告、科技发明制作等赛道。\n报名
+ ：校团委组织校赛并推荐，个人不能直接报国赛。提前
+ 联系实验室 / 导师，把大创或课程成果转成参赛作品。\
+ n详情：https://www.tiaozhanbei.net
+URL:https://www.tiaozhanbei.net
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：挑战杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fwwb2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:报名截止：服务外包（预计）
+DESCRIPTION:中国大学生服务外包创新创业大赛，企业命题 
+ + 自主命题，区域赛—全国总决赛。题目偏真实业务场
+ 景和落地。\n报名：学校统一报名并推荐；先确认校内
+ 赛时间和名额。企业命题可直接对接实习，适合有项目
+ 经验的同学。\n详情：http://www.fwwb.org.cn
+URL:http://www.fwwb.org.cn
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：服务外包（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lanqiao2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270410
+DTEND;VALUE=DATE:20270616
+SUMMARY:开赛：蓝桥杯
+DESCRIPTION:国内规模最大的软件和信息技术个人赛之一。
+ 软件赛重点考察程序设计语言、数据结构与算法，校赛
+ —省赛—全国总决赛三级赛制。\n报名：需以院校为单
+ 位报名。先确认本校是否设赛点、是否有校内选拔；若
+ 没有，联系教务部或蓝桥杯组委会确认借考 / 名额。\n
+ 详情：https://dasai.lanqiao.cn
+URL:https://dasai.lanqiao.cn
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：蓝桥杯
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:neccs2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270510
+SUMMARY:开赛：英语竞赛（预计）
+DESCRIPTION:全国大学生英语竞赛，2027 年为第二十九届。
+ 分 A/B/C/D 四类，AI 专业报 C 类（非英语专业本科）；一
+ 般 12 月报名、4 月初赛、5 月决赛，校内即可参加。\n报
+ 名：全日制在校生可报，C 类（非英语专业本科）；通
+ 常通过学校 / 赛氪分赛区报名。英语基础好的同学性价
+ 比很高，但别轻敌——NECCS 题量大、时间紧。\n详情：ht
+ tp://www.chinaneccs.cn
+URL:http://www.chinaneccs.cn
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：英语竞赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:huaweisof2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
+SUMMARY:报名截止：华为软挑（预计）
+DESCRIPTION:华为每年 3 月启动的软件工程竞赛，赛题来自
+ 真实业务场景（调度、资源分配、路径优化等），分区
+ 域赛和总决赛，历届都有实习/校招绿色通道。\n报名：
+ 面向在校大学生，官网直接报名、按赛区参赛；赛题来
+ 自华为真实业务，允许使用 AI 编程助手。\n详情：https:/
+ /s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html
+URL:https://s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：华为软挑（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:jsjds2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
+SUMMARY:报名截止：计设大赛（预计）
+DESCRIPTION:教育部相关教指委主办的榜单赛事，设人工智
+ 能应用、软件应用、数媒设计等大类。一般 3–4 月校赛
+ 报名，5 月省赛，7 月国赛。\n报名：需学校管理员统一
+ 报名，校内名额有限。先找教务部确认本校校赛时间、
+ 申报名额和作品类别。\n详情：https://jsjds.blcu.edu.cn
+URL:https://jsjds.blcu.edu.cn
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：计设大赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:gplt2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:开赛：天梯赛（预计）
+DESCRIPTION:团体程序设计天梯赛，PAT 风格，题目分基础、
+ 进阶、顶级三个难度，按团队总分排名。\n报名：每校
+ 名额有限，需学校统一组队报名。先问教务部 / 计算机
+ 方向老师是否组织校队；没有校队可尝试联系组委会。\
+ n详情：https://gplt.patest.cn
+URL:https://gplt.patest.cn
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：天梯赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:century2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:开赛：21世纪杯（预计）
+DESCRIPTION:中国日报社主办的全国英语演讲比赛，个人赛
+ ，大学组。一般 1–4 月报名并提交演讲视频，经校赛 / 
+ 地区选拔，9–10 月公布省奖、国奖。\n报名：全日制在
+ 校生可报，大学组；学校有校园选拔就走学校通道，没
+ 有可走官网个人通道。全英文授课和国际化背景适合演
+ 讲赛道。\n详情：https://contest.i21st.cn/
+URL:https://contest.i21st.cn/
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：21世纪杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:century2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:报名截止：21世纪杯（预计）
+DESCRIPTION:中国日报社主办的全国英语演讲比赛，个人赛
+ ，大学组。一般 1–4 月报名并提交演讲视频，经校赛 / 
+ 地区选拔，9–10 月公布省奖、国奖。\n报名：全日制在
+ 校生可报，大学组；学校有校园选拔就走学校通道，没
+ 有可走官网个人通道。全英文授课和国际化背景适合演
+ 讲赛道。\n详情：https://contest.i21st.cn/
+URL:https://contest.i21st.cn/
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：21世纪杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:robomaster2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:报名截止：RoboMaster（预计）
+DESCRIPTION:DJI 主办的机器人对抗赛，战队自制步兵、英雄
+ 、工程机器人打 5v5，涉及机械设计、电控、视觉识别和
+ 自动决策四个方向。\n报名：需要学校战队、场地和经
+ 费，招新一般在秋季；非机械专业的同学主要做视觉自
+ 瞄、决策和电控。\n详情：https://www.robomaster.com
+URL:https://www.robomaster.com
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：RoboMaster（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ciscnsec2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:报名截止：信安实践赛（预计）
+DESCRIPTION:信息安全竞赛的实战赛项：线上初赛解题，分
+ 区赛、决赛打 AWD 攻防，是国内高校 CTF 选手的主战场。
+ \n报名：一般 3–4 人一队，多由学校统一报名或先校内
+ 选拔；线上初赛是解题（Jeopardy），分区赛和决赛是攻
+ 防（AWD）。\n详情：http://www.ciscn.cn
+URL:http://www.ciscn.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：信安实践赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:smartcar2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:报名截止：智能汽车（预计）
+DESCRIPTION:全国大学生智能汽车竞赛，含摄像头、电磁、
+ 百度智慧交通、讯飞智慧餐厅等组别，分区赛—全国总
+ 决赛。\n报名：需学校领队统一报名，涉及车模采购、
+ 实验室和经费。先确认工程系是否有带队老师和往届车
+ 模。\n详情：https://www.smartcarrace.com
+URL:https://www.smartcarrace.com
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：智能汽车（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:stats2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:报名截止：统计建模（预计）
+DESCRIPTION:中国统计教育学会主办，3 人一队，围绕经济
+ 社会热点做数据挖掘、统计分析和论文；校赛—省赛—
+ 国赛，2025 年参赛队超过 3 万支。\n报名：全日制在校生
+ 可报，3 人一队、不可跨校；需学校推荐 / 校赛。AI 专
+ 业适合数据清洗、建模和可视化，找 1 名统计或经济背
+ 景队友更稳。\n详情：http://tjjmds.ai-learning.net/
+URL:http://tjjmds.ai-learning.net/
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：统计建模（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:robomaster2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270517
+SUMMARY:开赛：RoboMaster（预计）
+DESCRIPTION:DJI 主办的机器人对抗赛，战队自制步兵、英雄
+ 、工程机器人打 5v5，涉及机械设计、电控、视觉识别和
+ 自动决策四个方向。\n报名：需要学校战队、场地和经
+ 费，招新一般在秋季；非机械专业的同学主要做视觉自
+ 瞄、决策和电控。\n详情：https://www.robomaster.com
+URL:https://www.robomaster.com
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：RoboMaster（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:huaweisof2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270517
+SUMMARY:开赛：华为软挑（预计）
+DESCRIPTION:华为每年 3 月启动的软件工程竞赛，赛题来自
+ 真实业务场景（调度、资源分配、路径优化等），分区
+ 域赛和总决赛，历届都有实习/校招绿色通道。\n报名：
+ 面向在校大学生，官网直接报名、按赛区参赛；赛题来
+ 自华为真实业务，允许使用 AI 编程助手。\n详情：https:/
+ /s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html
+URL:https://s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：华为软挑（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:stats2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270701
+SUMMARY:开赛：统计建模（预计）
+DESCRIPTION:中国统计教育学会主办，3 人一队，围绕经济
+ 社会热点做数据挖掘、统计分析和论文；校赛—省赛—
+ 国赛，2025 年参赛队超过 3 万支。\n报名：全日制在校生
+ 可报，3 人一队、不可跨校；需学校推荐 / 校赛。AI 专
+ 业适合数据清洗、建模和可视化，找 1 名统计或经济背
+ 景队友更稳。\n详情：http://tjjmds.ai-learning.net/
+URL:http://tjjmds.ai-learning.net/
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：统计建模（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:internetplus2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:报名截止：创新大赛（预计）
+DESCRIPTION:教育部主办的高校双创赛事，设高教主赛道、
+ 红旅、产业命题等。一般 3–5 月报名，6 月校赛，7–8 
+ 月省赛，10 月国赛。\n报名：校赛由学校创新创业部门
+ 组织，需学校推荐。国际化背景适合做跨境 AI、教育科
+ 技项目；提前找导师和商科队友。\n详情：https://cy.ncss.c
+ n
+URL:https://cy.ncss.cn
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：创新大赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cnsoftbei2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:报名截止：软件杯（预计）
+DESCRIPTION:工信部系的老牌软件赛事，赛题来自企业真实
+ 需求（信创、AI 应用、大数据方向都有），按赛题分别
+ 评审，分区域赛和全国总决赛。\n报名：按赛题组队，
+ 一队 3–4 人 + 1 名指导教师；赛题由企业出，交作品后
+ 先打区域赛，再进全国总决赛答辩。\n详情：https://www.cn
+ softbei.com
+URL:https://www.cnsoftbei.com
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：软件杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ciscnsec2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270518
+SUMMARY:开赛：信安实践赛（预计）
+DESCRIPTION:信息安全竞赛的实战赛项：线上初赛解题，分
+ 区赛、决赛打 AWD 攻防，是国内高校 CTF 选手的主战场。
+ \n报名：一般 3–4 人一队，多由学校统一报名或先校内
+ 选拔；线上初赛是解题（Jeopardy），分区赛和决赛是攻
+ 防（AWD）。\n详情：http://www.ciscn.cn
+URL:http://www.ciscn.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：信安实践赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ospp2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270520
+DTEND;VALUE=DATE:20270521
+SUMMARY:报名截止：开源之夏（预计）
+DESCRIPTION:中科院软件所发起的开源暑期活动：给 RISC-V、
+ 操作系统、编译器、AI 等方向的开源项目做贡献，通过
+ 导师评审后结项，拿奖金与证书。\n报名：严格说不是
+ 比赛，是项目制活动：要写申请材料、和导师双选，按
+ 期结项才有奖金和证书，中途退出没有。\n详情：https://
+ summer.ospp.ac.cn
+URL:https://summer.ospp.ac.cn
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：开源之夏（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zte2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:报名截止：中兴捧月（预计）
+DESCRIPTION:中兴每年春季启动的算法与软件挑战赛，赛题
+ 偏通信、调度和工程优化，分区域赛和全国决赛，获奖
+ 有实习与校招通道。\n报名：一般 3 人一队，分算法、
+ 软件、硬件多个赛道；获奖选手有实习和校招绿色通道
+ ，具体以当年公告为准。\n详情：http://mp.weixin.qq.com/s?__b
+ iz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1&sn=98161956c172566baeac4c34cc1c2
+ 698
+URL:http://mp.weixin.qq.com/s?__biz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1
+ &sn=98161956c172566baeac4c34cc1c2698
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：中兴捧月（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bdc2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:报名截止：大数据挑战赛（预计）
+DESCRIPTION:中国高校计算机大赛系列的数据竞赛，用真实
+ 业务数据（如金融量价）出题，线上赛 A/B 阶段按排行
+ 榜晋级，决赛现场答辩并做代码复现。\n报名：可跨校
+ 组队，学生队伍要做学信网学籍验证；决赛需提交 Docker
+  复现，代码规范要提前读。\n详情：https://nercbds.tsinghua.
+ edu.cn/bdc/zytz.html
+URL:https://nercbds.tsinghua.edu.cn/bdc/zytz.html
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：大数据挑战赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:raicom2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:报名截止：睿抗（预计）
+DESCRIPTION:睿抗机器人开发者大赛，含编程、机器视觉、R
+ OS 导航、机器人应用等赛道，省赛—全国总决赛。\n报
+ 名：官网直报，学校限制相对少；仍需指导教师。报名
+ 前确认本校是否将该赛事列入竞赛目录，避免综测不认
+ 。\n详情：https://www.raicom.com.cn
+URL:https://www.raicom.com.cn
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：睿抗（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:tencenttaa2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:报名截止：腾讯广告算法（预计）
+DESCRIPTION:腾讯广告办的算法赛，题目基于真实的广告投
+ 放数据，考察推荐、点击率预估和排序模型，决赛现场
+ 答辩。\n报名：组队参赛，赛题用脱敏后的真实广告数
+ 据；晋级决赛要现场答辩并提交可复现代码。\n详情：ht
+ tp://www.c114.net.cn/ainews/68160.html
+URL:http://www.c114.net.cn/ainews/68160.html
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：腾讯广告算法（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ospp2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270601
+DTEND;VALUE=DATE:20271001
+SUMMARY:开赛：开源之夏（预计）
+DESCRIPTION:中科院软件所发起的开源暑期活动：给 RISC-V、
+ 操作系统、编译器、AI 等方向的开源项目做贡献，通过
+ 导师评审后结项，拿奖金与证书。\n报名：严格说不是
+ 比赛，是项目制活动：要写申请材料、和导师双选，按
+ 期结项才有奖金和证书，中途退出没有。\n详情：https://
+ summer.ospp.ac.cn
+URL:https://summer.ospp.ac.cn
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：开源之夏（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iot2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270615
+DTEND;VALUE=DATE:20270616
+SUMMARY:报名截止：物联网设计（预计）
+DESCRIPTION:物联网方向的实物作品赛，用厂商套件做硬件 
+ + 云平台联动，分赛区预赛、全国总决赛，总决赛还有
+ 八强争霸赛。\n报名：要做实物（开发板 + 传感器），
+ 分赛区预赛晋级全国总决赛；每队必须有 1 名领队，一
+ 般由指导老师兼任。\n详情：https://iot.sjtu.edu.cn
+URL:https://iot.sjtu.edu.cn
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：物联网设计（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zte2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270620
+DTEND;VALUE=DATE:20270622
+SUMMARY:开赛：中兴捧月（预计）
+DESCRIPTION:中兴每年春季启动的算法与软件挑战赛，赛题
+ 偏通信、调度和工程优化，分区域赛和全国决赛，获奖
+ 有实习与校招通道。\n报名：一般 3 人一队，分算法、
+ 软件、硬件多个赛道；获奖选手有实习和校招绿色通道
+ ，具体以当年公告为准。\n详情：http://mp.weixin.qq.com/s?__b
+ iz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1&sn=98161956c172566baeac4c34cc1c2
+ 698
+URL:http://mp.weixin.qq.com/s?__biz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1
+ &sn=98161956c172566baeac4c34cc1c2698
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：中兴捧月（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:appcontest2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270630
+DTEND;VALUE=DATE:20270701
+SUMMARY:报名截止：移动应用创新赛（预计）
+DESCRIPTION:面向 iOS / iPadOS / visionOS 的 App 作品赛，分启明
+ （设计）、启迪（完整产品）、启航（已上架）三条赛
+ 道，评审看创新性、前景和完成度。\n报名：要有 Mac + X
+ code 才能做 iOS 作品；晋级复赛需提交学校教务盖章或指
+ 导教师签名的报名表。\n详情：https://www.appcontest.net
+URL:https://www.appcontest.net
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：移动应用创新赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ciscn2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270705
+DTEND;VALUE=DATE:20270706
+SUMMARY:报名截止：信安作品赛（预计）
+DESCRIPTION:教育部网络空间安全教指委和中国信息安全测
+ 评中心办的本科生作品赛，分自由作品赛和命题挑战赛
+ ：作品可以是软件、硬件或安全方案，决赛现场答辩评
+ 审。\n报名：每队不超过 4 名学生（含 1 名组长），每
+ 人限报 1 队；作品要先过校内评审，再在官网完成校级
+ 审核提交组委会。\n详情：http://www.ciscn.cn
+URL:http://www.ciscn.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：信安作品赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fwwb2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270715
+DTEND;VALUE=DATE:20270721
+SUMMARY:开赛：服务外包（预计）
+DESCRIPTION:中国大学生服务外包创新创业大赛，企业命题 
+ + 自主命题，区域赛—全国总决赛。题目偏真实业务场
+ 景和落地。\n报名：学校统一报名并推荐；先确认校内
+ 赛时间和名额。企业命题可直接对接实习，适合有项目
+ 经验的同学。\n详情：http://www.fwwb.org.cn
+URL:http://www.fwwb.org.cn
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：服务外包（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:appcontest2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270715
+DTEND;VALUE=DATE:20270717
+SUMMARY:开赛：移动应用创新赛（预计）
+DESCRIPTION:面向 iOS / iPadOS / visionOS 的 App 作品赛，分启明
+ （设计）、启迪（完整产品）、启航（已上架）三条赛
+ 道，评审看创新性、前景和完成度。\n报名：要有 Mac + X
+ code 才能做 iOS 作品；晋级复赛需提交学校教务盖章或指
+ 导教师签名的报名表。\n详情：https://www.appcontest.net
+URL:https://www.appcontest.net
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：移动应用创新赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:tencenttaa2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270715
+DTEND;VALUE=DATE:20270717
+SUMMARY:开赛：腾讯广告算法（预计）
+DESCRIPTION:腾讯广告办的算法赛，题目基于真实的广告投
+ 放数据，考察推荐、点击率预估和排序模型，决赛现场
+ 答辩。\n报名：组队参赛，赛题用脱敏后的真实广告数
+ 据；晋级决赛要现场答辩并提交可复现代码。\n详情：ht
+ tp://www.c114.net.cn/ainews/68160.html
+URL:http://www.c114.net.cn/ainews/68160.html
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：腾讯广告算法（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:jsjds2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270715
+DTEND;VALUE=DATE:20270801
+SUMMARY:开赛：计设大赛（预计）
+DESCRIPTION:教育部相关教指委主办的榜单赛事，设人工智
+ 能应用、软件应用、数媒设计等大类。一般 3–4 月校赛
+ 报名，5 月省赛，7 月国赛。\n报名：需学校管理员统一
+ 报名，校内名额有限。先找教务部确认本校校赛时间、
+ 申报名额和作品类别。\n详情：https://jsjds.blcu.edu.cn
+URL:https://jsjds.blcu.edu.cn
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：计设大赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cumcm2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270731
+DTEND;VALUE=DATE:20270801
+SUMMARY:报名截止：建模国赛（预计）
+DESCRIPTION:国内规模最大的数学建模竞赛，每年 9 月举行
+ ，3 人一队，在 3 天 4 夜内完成建模、求解和论文。\n报
+ 名：学校统一报名，需指导教师，通常有校内选拔或集
+ 训。暑假前确认本校报名入口和集训安排。\n详情：https
+ ://www.mcm.edu.cn
+URL:https://www.mcm.edu.cn
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：建模国赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bdc2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270817
+SUMMARY:开赛：大数据挑战赛（预计）
+DESCRIPTION:中国高校计算机大赛系列的数据竞赛，用真实
+ 业务数据（如金融量价）出题，线上赛 A/B 阶段按排行
+ 榜晋级，决赛现场答辩并做代码复现。\n报名：可跨校
+ 组队，学生队伍要做学信网学籍验证；决赛需提交 Docker
+  复现，代码规范要提前读。\n详情：https://nercbds.tsinghua.
+ edu.cn/bdc/zytz.html
+URL:https://nercbds.tsinghua.edu.cn/bdc/zytz.html
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：大数据挑战赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:smartcar2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270821
+SUMMARY:开赛：智能汽车（预计）
+DESCRIPTION:全国大学生智能汽车竞赛，含摄像头、电磁、
+ 百度智慧交通、讯飞智慧餐厅等组别，分区赛—全国总
+ 决赛。\n报名：需学校领队统一报名，涉及车模采购、
+ 实验室和经费。先确认工程系是否有带队老师和往届车
+ 模。\n详情：https://www.smartcarrace.com
+URL:https://www.smartcarrace.com
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：智能汽车（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:raicom2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270821
+SUMMARY:开赛：睿抗（预计）
+DESCRIPTION:睿抗机器人开发者大赛，含编程、机器视觉、R
+ OS 导航、机器人应用等赛道，省赛—全国总决赛。\n报
+ 名：官网直报，学校限制相对少；仍需指导教师。报名
+ 前确认本校是否将该赛事列入竞赛目录，避免综测不认
+ 。\n详情：https://www.raicom.com.cn
+URL:https://www.raicom.com.cn
+CATEGORIES:robot
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：睿抗（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:baidustar2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270816
+SUMMARY:报名截止：百度之星（预计）
+DESCRIPTION:百度办了二十多年的算法赛，初赛三小时八题
+ 、决赛五小时十二题，题目以算法和数据结构为主，分
+ 省赛和总决赛两级评奖。\n报名：报名在官网完成，线
+ 上初赛两场可任选一场参加；决赛按大学组、高中组分
+ 别排名，报名费按当年章程。\n详情：https://astar.baidu.com
+URL:https://astar.baidu.com
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：百度之星（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ciscn2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270820
+DTEND;VALUE=DATE:20270823
+SUMMARY:开赛：信安作品赛（预计）
+DESCRIPTION:教育部网络空间安全教指委和中国信息安全测
+ 评中心办的本科生作品赛，分自由作品赛和命题挑战赛
+ ：作品可以是软件、硬件或安全方案，决赛现场答辩评
+ 审。\n报名：每队不超过 4 名学生（含 1 名组长），每
+ 人限报 1 队；作品要先过校内评审，再在官网完成校级
+ 审核提交组委会。\n详情：http://www.ciscn.cn
+URL:http://www.ciscn.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：信安作品赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cnsoftbei2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270821
+DTEND;VALUE=DATE:20270825
+SUMMARY:开赛：软件杯（预计）
+DESCRIPTION:工信部系的老牌软件赛事，赛题来自企业真实
+ 需求（信创、AI 应用、大数据方向都有），按赛题分别
+ 评审，分区域赛和全国总决赛。\n报名：按赛题组队，
+ 一队 3–4 人 + 1 名指导教师；赛题由企业出，交作品后
+ 先打区域赛，再进全国总决赛答辩。\n详情：https://www.cn
+ softbei.com
+URL:https://www.cnsoftbei.com
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：软件杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iot2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270822
+DTEND;VALUE=DATE:20270825
+SUMMARY:开赛：物联网设计（预计）
+DESCRIPTION:物联网方向的实物作品赛，用厂商套件做硬件 
+ + 云平台联动，分赛区预赛、全国总决赛，总决赛还有
+ 八强争霸赛。\n报名：要做实物（开发板 + 传感器），
+ 分赛区预赛晋级全国总决赛；每队必须有 1 名领队，一
+ 般由指导老师兼任。\n详情：https://iot.sjtu.edu.cn
+URL:https://iot.sjtu.edu.cn
+CATEGORIES:engineering
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：物联网设计（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:baidustar2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270822
+DTEND;VALUE=DATE:20270823
+SUMMARY:开赛：百度之星（预计）
+DESCRIPTION:百度办了二十多年的算法赛，初赛三小时八题
+ 、决赛五小时十二题，题目以算法和数据结构为主，分
+ 省赛和总决赛两级评奖。\n报名：报名在官网完成，线
+ 上初赛两场可任选一场参加；决赛按大学组、高中组分
+ 别排名，报名费按当年章程。\n详情：https://astar.baidu.com
+URL:https://astar.baidu.com
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：百度之星（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cumcm2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270909
+DTEND;VALUE=DATE:20270913
+SUMMARY:开赛：建模国赛（预计）
+DESCRIPTION:国内规模最大的数学建模竞赛，每年 9 月举行
+ ，3 人一队，在 3 天 4 夜内完成建模、求解和论文。\n报
+ 名：学校统一报名，需指导教师，通常有校内选拔或集
+ 训。暑假前确认本校报名入口和集训安排。\n详情：https
+ ://www.mcm.edu.cn
+URL:https://www.mcm.edu.cn
+CATEGORIES:modeling
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：建模国赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ccpc2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270910
+DTEND;VALUE=DATE:20270911
+SUMMARY:报名截止：CCPC（预计）
+DESCRIPTION:与 ICPC 同规则的中国大学生程序设计竞赛，网
+ 络预选赛后进入各分站现场赛，年底总决赛；赛区与 ICP
+ C 相互独立。\n报名：3 人一队，先打网络预选赛拿分站
+ 赛名额；多数学校由教练统一报名，没有教练的同学可
+ 以找学院竞赛负责人。\n详情：https://ccpc.io
+URL:https://ccpc.io
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：CCPC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:icpc2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270915
+DTEND;VALUE=DATE:20270916
+SUMMARY:报名截止：ICPC（预计）
+DESCRIPTION:ICPC 国际大学生程序设计竞赛与 CCPC 中国大学
+ 生程序设计竞赛，是计算机专业最核心的算法团队赛。3
+  人一队，现场赛，按区域赛 / 分站赛成绩晋级。\n报名
+ ：需学校教练 / 集训队选拔；以本校 ACM 队伍通知为准
+ 。\n详情：https://icpc.global/
+URL:https://icpc.global/
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：ICPC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iflytek1024_2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20270915
+DTEND;VALUE=DATE:20270916
+SUMMARY:报名截止：讯飞 1024（预计）
+DESCRIPTION:讯飞每年在 1024 开发者节期间办的 AI 赛，赛道
+ 覆盖语音识别、计算机视觉和大模型应用，多数题目用
+ 讯飞开放平台的接口完成。\n报名：赛道覆盖语音、视
+ 觉、大模型应用，个人或组队都能报；决赛在合肥 1024 
+ 开发者节现场，差旅自理。\n详情：https://1024.iflytek.com/
+URL:https://1024.iflytek.com/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：讯飞 1024（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:icpc2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271001
+DTEND;VALUE=DATE:20271216
+SUMMARY:开赛：ICPC（预计）
+DESCRIPTION:ICPC 国际大学生程序设计竞赛与 CCPC 中国大学
+ 生程序设计竞赛，是计算机专业最核心的算法团队赛。3
+  人一队，现场赛，按区域赛 / 分站赛成绩晋级。\n报名
+ ：需学校教练 / 集训队选拔；以本校 ACM 队伍通知为准
+ 。\n详情：https://icpc.global/
+URL:https://icpc.global/
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：ICPC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iscc2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271010
+DTEND;VALUE=DATE:20271011
+SUMMARY:报名截止：ISCC（预计）
+DESCRIPTION:国内最早的信安竞赛（2004 年起），含破阵夺
+ 旗、博弈对抗、数据安全、智能安全等多个赛项，校级
+ 赛—区域赛—国赛三级，获奖面较宽。\n报名：必须先
+ 打校级赛才能进区域赛；同一作品只能报一个赛项，报
+ 名要交加盖学院公章的报名表。\n详情：https://www.isclab.o
+ rg.cn
+URL:https://www.isclab.org.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：ISCC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:uchallenge2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271010
+DTEND;VALUE=DATE:20271011
+SUMMARY:报名截止：国才杯（预计）
+DESCRIPTION:外研社·国才杯“理解当代中国”全国大学生
+ 外语能力大赛，英语组设演讲、写作、阅读、翻译等赛
+ 项；校赛—省赛—国赛，2026 年国赛 12 月在北京举行。\
+ n报名：全日制在校生可报，英语组；校赛由学校组织，
+ 2027 通知未出。英语基础好的同学在演讲 / 写作赛道有
+ 优势，先确认校内选拔时间。\n详情：https://ucc.fltrp.com/
+URL:https://ucc.fltrp.com/
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：国才杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:internetplus2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271015
+DTEND;VALUE=DATE:20271021
+SUMMARY:开赛：创新大赛（预计）
+DESCRIPTION:教育部主办的高校双创赛事，设高教主赛道、
+ 红旅、产业命题等。一般 3–5 月报名，6 月校赛，7–8 
+ 月省赛，10 月国赛。\n报名：校赛由学校创新创业部门
+ 组织，需学校推荐。国际化背景适合做跨境 AI、教育科
+ 技项目；提前找导师和商科队友。\n详情：https://cy.ncss.c
+ n
+URL:https://cy.ncss.cn
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：创新大赛（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:qwb2027-reg@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271015
+DTEND;VALUE=DATE:20271016
+SUMMARY:报名截止：强网杯（预计）
+DESCRIPTION:国内影响力最大的网络安全挑战赛之一，线上
+ 解题赛筛选后进入线下攻防，2026 年为第十届，含行业
+ 专项、学院邀请赛等六个部分。\n报名：线上赛个人/团
+ 队都能参加，晋级后到郑州打线下赛；报名入口在"强网
+ 竞赛"公众号，学校一般不统一组织。\n详情：https://www.j
+ swx.gov.cn/yw/202610/t20261010_1363840.shtml
+URL:https://www.jswx.gov.cn/yw/202610/t20261010_1363840.shtml
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:报名截止：强网杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ccpc2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271017
+DTEND;VALUE=DATE:20271019
+SUMMARY:开赛：CCPC（预计）
+DESCRIPTION:与 ICPC 同规则的中国大学生程序设计竞赛，网
+ 络预选赛后进入各分站现场赛，年底总决赛；赛区与 ICP
+ C 相互独立。\n报名：3 人一队，先打网络预选赛拿分站
+ 赛名额；多数学校由教练统一报名，没有教练的同学可
+ 以找学院竞赛负责人。\n详情：https://ccpc.io
+URL:https://ccpc.io
+CATEGORIES:algo
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：CCPC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iscc2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271020
+DTEND;VALUE=DATE:20271022
+SUMMARY:开赛：ISCC（预计）
+DESCRIPTION:国内最早的信安竞赛（2004 年起），含破阵夺
+ 旗、博弈对抗、数据安全、智能安全等多个赛项，校级
+ 赛—区域赛—国赛三级，获奖面较宽。\n报名：必须先
+ 打校级赛才能进区域赛；同一作品只能报一个赛项，报
+ 名要交加盖学院公章的报名表。\n详情：https://www.isclab.o
+ rg.cn
+URL:https://www.isclab.org.cn
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：ISCC（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:iflytek1024_2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271022
+DTEND;VALUE=DATE:20271025
+SUMMARY:开赛：讯飞 1024（预计）
+DESCRIPTION:讯飞每年在 1024 开发者节期间办的 AI 赛，赛道
+ 覆盖语音识别、计算机视觉和大模型应用，多数题目用
+ 讯飞开放平台的接口完成。\n报名：赛道覆盖语音、视
+ 觉、大模型应用，个人或组队都能报；决赛在合肥 1024 
+ 开发者节现场，差旅自理。\n详情：https://1024.iflytek.com/
+URL:https://1024.iflytek.com/
+CATEGORIES:ai
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：讯飞 1024（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:qwb2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271025
+DTEND;VALUE=DATE:20271027
+SUMMARY:开赛：强网杯（预计）
+DESCRIPTION:国内影响力最大的网络安全挑战赛之一，线上
+ 解题赛筛选后进入线下攻防，2026 年为第十届，含行业
+ 专项、学院邀请赛等六个部分。\n报名：线上赛个人/团
+ 队都能参加，晋级后到郑州打线下赛；报名入口在"强网
+ 竞赛"公众号，学校一般不统一组织。\n详情：https://www.j
+ swx.gov.cn/yw/202610/t20261010_1363840.shtml
+URL:https://www.jswx.gov.cn/yw/202610/t20261010_1363840.shtml
+CATEGORIES:security
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：强网杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:challengecup2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271106
+SUMMARY:开赛：挑战杯（预计）
+DESCRIPTION:“挑战杯”全国大学生课外学术科技作品竞赛
+ ，2027 年为第二十届。含自然科学类学术论文、哲学社
+ 会科学类社会调查报告、科技发明制作等赛道。\n报名
+ ：校团委组织校赛并推荐，个人不能直接报国赛。提前
+ 联系实验室 / 导师，把大创或课程成果转成参赛作品。\
+ n详情：https://www.tiaozhanbei.net
+URL:https://www.tiaozhanbei.net
+CATEGORIES:innovation
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：挑战杯（预计）
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:uchallenge2027-contest@cs-competition-calendar
+DTSTAMP:20271215T000000Z
+DTSTART;VALUE=DATE:20271201
+DTEND;VALUE=DATE:20271216
+SUMMARY:开赛：国才杯（预计）
+DESCRIPTION:外研社·国才杯“理解当代中国”全国大学生
+ 外语能力大赛，英语组设演讲、写作、阅读、翻译等赛
+ 项；校赛—省赛—国赛，2026 年国赛 12 月在北京举行。\
+ n报名：全日制在校生可报，英语组；校赛由学校组织，
+ 2027 通知未出。英语基础好的同学在演讲 / 写作赛道有
+ 优势，先确认校内选拔时间。\n详情：https://ucc.fltrp.com/
+URL:https://ucc.fltrp.com/
+CATEGORIES:english
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:开赛：国才杯（预计）
+END:VALARM
+END:VEVENT
+END:VCALENDAR

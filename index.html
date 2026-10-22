@@ -777,6 +777,21 @@
     box-shadow:0 40px 100px -20px rgba(20,16,8,.4);
     animation:cardIn .26s cubic-bezier(.2,.8,.2,1) both;
   }
+  .sub-lead{margin:14px 0 0;font-size:13.5px;line-height:1.75;color:#68645B}
+  .sub-row{display:flex;gap:8px;margin-top:15px}
+  .sub-row input{
+    flex:1;min-width:0;height:38px;padding:0 11px;
+    border:1px solid #DED7C8;border-radius:9px;background:#fff;
+    font-size:12.5px;color:#3A3F47;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .sub-row .btn{flex:0 0 auto;min-width:84px}
+  .sub-actions{display:flex;gap:8px;margin-top:9px}
+  .sub-note{
+    margin-top:16px;padding-top:12px;border-top:1px solid #ECE6DA;
+    font-size:12.5px;line-height:1.85;color:#7A756A;
+  }
+  .sub-note b{color:#4E4A42;font-weight:600}
   .update-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .update-head h2{margin:6px 0 0;font-size:27.5px;font-weight:650;letter-spacing:-.03em;color:#14181E}
   .update-state{
@@ -975,6 +990,10 @@
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.2 7.2A5.3 5.3 0 1 0 12 11.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 3.7v3.6H9.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>更新</span>
         </button>
+        <button class="update-btn" id="btn-subscribe" title="订阅到手机日历">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.2" y="3.6" width="11.6" height="10.2" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2.2 6.8h11.6M5.6 1.9v2.7M10.4 1.9v2.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <span>订阅</span>
+        </button>
         <button class="icon-btn" id="btn-guide-2" aria-label="使用说明" title="使用说明">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M6.3 6.1c.1-1 .8-1.7 1.8-1.7 1 0 1.8.7 1.8 1.6 0 1.4-1.8 1.5-1.8 2.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8.1 11.3v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
@@ -1095,6 +1114,32 @@
     <div class="update-foot">
       <a href="https://www.saikr.com/vs" target="_blank" rel="noreferrer">打开赛氪找赛事 ↗</a>
       <span id="update-checked">尚未检查</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SUBSCRIBE ================= -->
+<div class="modal" id="sub-modal" hidden>
+  <div class="update-card" role="dialog" aria-modal="true" aria-labelledby="sub-title">
+    <div class="update-head">
+      <div>
+        <div class="guide-kicker">SUBSCRIBE</div>
+        <h2 id="sub-title">订阅到手机日历</h2>
+      </div>
+      <button class="icon-btn" data-close-sub aria-label="关闭订阅面板">✕</button>
+    </div>
+    <p class="sub-lead">加一次订阅，报名截止和开赛时间就会出现在你的系统日历里。我改了数据，你手机上跟着更新，不用再回来导出一次。</p>
+    <div class="sub-row">
+      <input id="sub-url" readonly spellcheck="false" autocomplete="off">
+      <button class="btn primary" id="sub-copy">复制</button>
+    </div>
+    <div class="sub-actions">
+      <a class="btn ghost" id="sub-open" href="#">用日历打开</a>
+    </div>
+    <div class="sub-note">
+      <b>iPhone</b>：设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历<br>
+      <b>Android</b>：电脑上打开 Google 日历 → 其他日历 → 通过网址添加<br>
+      <b>电脑</b>：Thunderbird、Outlook 都能加。选「添加订阅」而不是「导入」，导入的是死文件，不会更新。
     </div>
   </div>
 </div>
@@ -3394,6 +3439,32 @@ async function checkForUpdates(){
     refreshUpdateMeta();
   }
 }
+const ICS_URL = new URL('data/calendar.ics', location.href).href;
+
+function openSubModal(){
+  const modal = $('#sub-modal');
+  if (!modal) return;
+  const input = $('#sub-url');
+  input.value = ICS_URL;
+  const open = $('#sub-open');
+  open.href = ICS_URL.replace(/^https?:/i, 'webcal:');
+  modal.hidden = false;
+  setTimeout(() => { try { input.focus(); input.select(); } catch (err) {} }, 30);
+}
+function closeSubModal(){
+  const modal = $('#sub-modal');
+  if (modal) modal.hidden = true;
+}
+async function copyIcsUrl(){
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(ICS_URL);
+    else { const i = $('#sub-url'); i.select(); document.execCommand('copy'); }
+    toast('订阅地址已复制');
+  } catch (err) {
+    toast('复制失败，手动选中链接复制');
+  }
+}
+
 function openUpdateModal(){
   const modal = $('#update-modal');
   if (!modal) return;
@@ -3651,6 +3722,12 @@ $('#btn-reset-feed').addEventListener('click', resetFeed);
 $('#update-modal').addEventListener('click', ev => {
   if (ev.target === $('#update-modal') || ev.target.closest('[data-close-update]')) closeUpdateModal();
 });
+$('#btn-subscribe').addEventListener('click', openSubModal);
+$('#sub-copy').addEventListener('click', copyIcsUrl);
+$('#sub-modal').addEventListener('click', ev => {
+  if (ev.target === $('#sub-modal') || ev.target.closest('[data-close-sub]')) closeSubModal();
+});
+
 $('#update-url').addEventListener('keydown', ev => {
   if (ev.key === 'Enter') { ev.preventDefault(); checkForUpdates(); }
 });
@@ -3659,6 +3736,7 @@ $('#update-url').addEventListener('keydown', ev => {
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape') return;
   hideDayMenu();
+  if (!$('#sub-modal').hidden) { closeSubModal(); return; }
   if (!$('#update-modal').hidden) { closeUpdateModal(); return; }
   if (!$('#guide').hidden) { closeGuide(); return; }
   if ($('#drawer').classList.contains('open')) closeDetail();
@@ -3670,6 +3748,7 @@ render();
 updateDateLabels();
 setTimeout(maybeRefreshFeed, 350);
 if (params.get('panel') === 'update') setTimeout(openUpdateModal, 600);
+if (params.get('panel') === 'subscribe') setTimeout(openSubModal, 600);
 if (params.get('open')) {
   const id = params.get('open');
   if (EVENTS.some(e => e.id === id)) setTimeout(() => openDetail(id), 80);

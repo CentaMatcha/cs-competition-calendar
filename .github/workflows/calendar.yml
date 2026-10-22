@@ -1,0 +1,41 @@
+name: 重建订阅日历
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'data/feed.latest.json'
+      - 'scripts/build-calendar.mjs'
+      - '.github/workflows/calendar.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: calendar-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 生成 data/calendar.ics
+        run: node scripts/build-calendar.mjs
+      - name: 有变化就提交
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/calendar.ics; then
+            echo "日历没有变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "CentaMatcha"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/calendar.ics
+          git commit -m "更新订阅日历"
+          git push
