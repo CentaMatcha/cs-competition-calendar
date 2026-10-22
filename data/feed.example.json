@@ -1,0 +1,45 @@
+{
+  "version": "2027.01.01.1",
+  "updatedAt": "2027-01-01",
+  "notice": "这是一个示例更新源，不是真实赛事；复制后替换成自己的数据。",
+  "events": [
+    {
+      "id": "example-competition-2027",
+      "short": "示例赛事",
+      "title": "示例计算机竞赛 2027（请勿报名）",
+      "subtitle": "示例 · 仅用于演示更新格式",
+      "cat": "algo",
+      "level": "国家级",
+      "org": "示例主办方",
+      "format": "个人 / 团队",
+      "regStart": "2027-02-01",
+      "regEnd": "2027-03-01",
+      "contestStart": "2027-04-01",
+      "contestEnd": "2027-04-02",
+      "deadlineText": "2027年3月1日",
+      "contestText": "2027年4月1–2日",
+      "contestShort": "初赛",
+      "confidence": "expected",
+      "route": "院校报名",
+      "risk": "mid",
+      "source": "official",
+      "sourceUrl": "https://example.com",
+      "sourceNote": "示例来源",
+      "schoolNote": "是否需要校内选拔，以本校通知为准。",
+      "link": "https://example.com",
+      "linkLabel": "示例官网",
+      "summary": "示例数据，不是真实赛事。",
+      "why": "用于演示更新源的字段格式。",
+      "tips": ["示例建议一", "示例建议二"],
+      "tags": ["示例", "算法"],
+      "schedule": [
+        { "d": "03.01", "t": "报名截止", "s": "示例" },
+        { "d": "04.01", "t": "初赛", "s": "示例" }
+      ],
+      "deadlines": [
+        { "date": "2027-03-01", "label": "报名截止" }
+      ]
+    }
+  ],
+  "remove": []
+}

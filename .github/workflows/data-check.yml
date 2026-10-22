@@ -1,0 +1,83 @@
+name: 数据源过期检查
+
+# 每月 1 日 01:00 UTC（北京 09:00）跑一次，超过阈值才动作。
+# 用每月而不是每季度：GitHub 会在仓库 60 天无提交后停用定时任务，
+# 90 天的季度间隔太容易踩到这条规则。
+on:
+  schedule:
+    - cron: '0 1 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: data-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查 updatedAt
+        id: feed
+        run: node scripts/check-feed.mjs
+
+      - name: 过期则开 issue（已开过则追加评论）
+        if: steps.feed.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.repository }}
+          DAYS: ${{ steps.feed.outputs.days }}
+          UPDATED: ${{ steps.feed.outputs.updated }}
+        run: |
+          set -euo pipefail
+          TITLE="数据源已过期 ${DAYS} 天，请更新 data/feed.latest.json"
+          EXISTING=$(gh issue list --state open --search 'in:title "数据源已过期"' --json number --jq '.[0].number // empty')
+
+          if [ -n "${EXISTING}" ]; then
+            gh issue comment "${EXISTING}" --body "再次检查：updatedAt=${UPDATED}，已过期 ${DAYS} 天。修好后请关闭本 issue。"
+            echo "已在 #${EXISTING} 追加评论"
+            exit 0
+          fi
+
+          BODY=$(cat <<EOF
+          自动检查发现 data/feed.latest.json 的 updatedAt 是 ${UPDATED}，距今 ${DAYS} 天（阈值 180 天）。
+
+          日期一旧，用户点「更新」拿到的还是老数据，日历会一屏"已结束"。
+
+          **怎么修**
+
+          1. 打开 https://github.com/${REPO}/blob/main/data/feed.latest.json
+          2. 在 events 里写要改或新增的赛事：按 id 合并，只写变化的字段即可
+          3. 在 remove 里写赛季结束、要下架的 id
+          4. version 改成新的 YYYY.MM.DD.N，且不能小于当前内置版本；updatedAt 改成今天
+          5. 推到 main。用户下次打开页面会自动拉取，点右上角「更新」也能立即拿到
+
+          改完关闭本 issue。下次过期时会再开一条新的。
+
+          参考：https://github.com/${REPO}/blob/main/README.md
+          EOF
+          )
+
+          URL=$(gh issue create --title "${TITLE}" --body "${BODY}")
+          gh issue edit "${URL}" --add-assignee "${OWNER}" >/dev/null 2>&1 || true
+          echo "已创建 ${URL}"
+
+      - name: 写入运行摘要
+        if: always()
+        run: |
+          {
+            echo "### 数据源检查"
+            echo ""
+            echo "| 项目 | 值 |"
+            echo "|---|---|"
+            echo "| updatedAt | ${{ steps.feed.outputs.updated }} |"
+            echo "| 距今 | ${{ steps.feed.outputs.days }} 天 |"
+            echo "| 阈值 | 180 天 |"
+            echo "| 结论 | ${{ steps.feed.outputs.stale == 'true' && '已过期，已开 issue' || '正常' }} |"
+          } >> "$GITHUB_STEP_SUMMARY"

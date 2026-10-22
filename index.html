@@ -1,0 +1,3557 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：35 场赛事、月历/议程、备注、ICS 导出、可更新数据源。">
+<meta name="theme-color" content="#12161B">
+<meta name="author" content="CentaMatcha">
+<link rel="author" href="https://github.com/CentaMatcha">
+<link rel="icon" href="favicon.png">
+<link rel="canonical" href="https://centamatcha.github.io/cs-competition-calendar/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CS 竞赛日历">
+<meta property="og:title" content="CS 竞赛日历 · 计算机专业">
+<meta property="og:description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：35 场赛事、月历 / 议程、备注、ICS 导出、可更新数据源。">
+<meta property="og:url" content="https://centamatcha.github.io/cs-competition-calendar/">
+<meta property="og:image" content="https://centamatcha.github.io/cs-competition-calendar/screenshots/calendar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CS 竞赛日历 · 计算机专业">
+<meta name="twitter:description" content="35 场精选赛事，可筛选、可备注、一键导出 ICS。">
+<meta name="twitter:image" content="https://centamatcha.github.io/cs-competition-calendar/screenshots/calendar.png">
+<title>CS 竞赛日历 · 计算机专业</title>
+<style>
+  :root{
+    --paper:#F2EFE7;
+    --paper-2:#E9E4D8;
+    --card:#FFFFFF;
+    --ink:#15181D;
+    --ink-2:#3D434B;
+    --muted:#7B8087;
+    --line:#E5DFD3;
+    --line-soft:#EEE9DE;
+    --accent:#2E5BFF;
+    --accent-soft:#EDF1FF;
+    --red:#D93B4A;
+    --green:#188A5B;
+    --amber:#B26A12;
+    --sidebar:#12161B;
+    --sidebar-2:#1A2027;
+    --sidebar-text:#F3F0E8;
+    --sidebar-muted:#8C939D;
+    --radius:20px;
+    --font:"PingFang SC","SF Pro Text","Helvetica Neue",Arial,"Noto Sans CJK SC",sans-serif;
+    --serif:"New York","Iowan Old Style","Songti SC",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:var(--font);
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 560px at 88% -12%, #FFFFFF 0%, rgba(255,255,255,0) 62%),
+      radial-gradient(900px 500px at 8% 108%, #EAE4D4 0%, rgba(234,228,212,0) 58%),
+      var(--paper);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow:hidden;
+  }
+  button,input,textarea{font:inherit;color:inherit}
+  button{border:0;background:none;cursor:pointer}
+  a{color:inherit}
+  [hidden]{display:none !important}
+  ::selection{background:#C9D4FF;color:#10131A}
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-thumb{background:#D5CFC3;border-radius:999px;border:2px solid transparent;background-clip:content-box}
+  ::-webkit-scrollbar-track{background:transparent}
+
+  .app{
+    display:grid;
+    grid-template-columns:274px minmax(0,1fr);
+    height:100vh;
+    overflow:hidden;
+  }
+
+  /* ============ SIDEBAR ============ */
+  .sidebar{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    padding:24px 18px 18px;
+    background:
+      radial-gradient(420px 260px at 10% 0%, rgba(63,95,204,.18), transparent 70%),
+      linear-gradient(180deg, #14191F 0%, #101419 100%);
+    color:var(--sidebar-text);
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+  .sidebar::after{
+    content:"";
+    position:absolute;inset:0;
+    pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.045) .7px, transparent .7px);
+    background-size:5px 5px;
+    opacity:.35;
+    mix-blend-mode:soft-light;
+  }
+  .brand{
+    display:flex;align-items:center;gap:11px;
+    padding:2px 7px 0;
+    position:relative;z-index:1;
+  }
+  .brand-mark{
+    width:42px;height:42px;flex:0 0 42px;
+    filter:drop-shadow(0 8px 18px rgba(46,91,255,.25));
+  }
+  .brand-title{font-size:20px;font-weight:650;letter-spacing:.01em;line-height:1.2}
+  .brand-sub{
+    margin-top:4px;font-size:12.5px;letter-spacing:.19em;
+    color:#8E96A1;font-weight:550;
+  }
+  .brand-author{
+    display:inline-block;margin-top:8px;font-size:12px;letter-spacing:.02em;
+    color:#8C939D;text-decoration:none;border-bottom:1px solid transparent;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .brand-author:hover{color:#E7E4DC;border-bottom-color:rgba(231,228,220,.45)}
+  .term{
+    position:relative;z-index:1;
+    margin:22px 2px 20px;
+    padding:14px 15px 13px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:14px;
+    background:linear-gradient(140deg, rgba(255,255,255,.065), rgba(255,255,255,.015));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .term-top{
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:12.5px;letter-spacing:.18em;color:#8E96A1;
+  }
+  .term-top b{font-weight:600;color:#C8CED7}
+  .term-dot{width:6px;height:6px;border-radius:50%;background:#6F8CFF;box-shadow:0 0 0 4px rgba(111,140,255,.12)}
+  .term-name{margin-top:9px;font-size:20.5px;font-weight:600;letter-spacing:.02em}
+  .term-meta{margin-top:6px;font-size:13.5px;line-height:1.5;color:#8B929C}
+  .side-section{position:relative;z-index:1;margin-bottom:18px}
+  .side-label{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 9px;margin:0 0 7px;
+    font-size:12.5px;letter-spacing:.17em;color:#717884;font-weight:600;
+  }
+  .side-item{
+    width:100%;height:34px;
+    display:flex;align-items:center;gap:9px;
+    padding:0 9px;margin-bottom:1px;
+    border-radius:9px;
+    color:#B9BFC8;font-size:16px;text-align:left;
+    transition:background .16s ease,color .16s ease;
+  }
+  .side-item:hover{background:rgba(255,255,255,.055);color:#F0EDE5}
+  .side-item.active{background:rgba(255,255,255,.075);color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+  .side-item.active .side-count{color:#C7D2FF}
+  .side-item .side-count{
+    margin-left:auto;font-size:13.5px;color:#6C737E;font-variant-numeric:tabular-nums;
+  }
+  .side-item .dot{width:7px;height:7px;border-radius:50%;background:var(--c,#888);flex:0 0 7px;box-shadow:0 0 0 3px color-mix(in srgb,var(--c,#888) 14%, transparent)}
+  .side-item .glyph{
+    width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;color:#7C838E;
+  }
+  .side-item.active .glyph{color:#DCE3FF}
+  .side-item .glyph svg{width:15px;height:15px}
+  .side-spacer{flex:1;min-height:12px}
+  .nearest{
+    position:relative;z-index:1;
+    margin:4px 2px 14px;
+    padding:13px 14px 12px;
+    border-radius:13px;
+    border:1px solid rgba(120,150,255,.24);
+    background:
+      radial-gradient(160px 90px at 100% 0%, rgba(80,115,255,.28), transparent 70%),
+      linear-gradient(145deg, #1D2638, #161C26);
+    cursor:pointer;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .nearest:hover{border-color:rgba(130,160,255,.45);transform:translateY(-1px)}
+  .nearest-kicker{
+    display:flex;align-items:center;gap:6px;
+    font-size:11.5px;letter-spacing:.14em;color:#9FB0DD;font-weight:600;
+  }
+  .pulse{width:5px;height:5px;border-radius:50%;background:#7C9BFF;box-shadow:0 0 0 0 rgba(124,155,255,.5);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,155,255,.45)}70%{box-shadow:0 0 0 7px rgba(124,155,255,0)}100%{box-shadow:0 0 0 0 rgba(124,155,255,0)}}
+  .nearest-title{margin-top:7px;font-size:17.5px;font-weight:600;color:#F6F3EB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nearest-meta{margin-top:4px;font-size:13.5px;color:#A9B0BB}
+  .nearest-meta b{color:#DCE4FF;font-weight:600}
+  .side-foot{
+    position:relative;z-index:1;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 9px 2px;
+    border-top:1px solid rgba(255,255,255,.075);
+    font-size:12.5px;color:#666D78;
+  }
+  .side-foot button{font-size:13px;color:#969DA7;padding:4px 0;transition:color .15s}
+  .side-foot button:hover{color:#E7E4DC}
+  .side-foot .update{font-size:11.5px;letter-spacing:.02em;color:#5E6570}
+
+  /* ============ MAIN ============ */
+  .main{
+    min-width:0;
+    display:flex;flex-direction:column;
+    padding:22px 26px 15px;
+    gap:14px;
+    overflow:hidden;
+  }
+  .topbar{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:18px;
+    padding:0 2px;
+    flex:0 0 auto;
+  }
+  .topbar > div:first-child{min-width:0}
+  .eyebrow{
+    font-size:11.5px;font-weight:650;letter-spacing:.2em;
+    color:#8A8579;text-transform:uppercase;
+  }
+  .topbar h1{
+    margin:5px 0 0;
+    font-size:32.5px;line-height:1.08;font-weight:650;letter-spacing:-.035em;
+    color:#111419;
+  }
+  .page-sub{margin-top:7px;font-size:14.5px;color:#858073;letter-spacing:.01em}
+  .page-sub .stale{color:var(--amber);font-weight:600}
+  .page-sub b{color:#3A3F47;font-weight:600}
+  .top-actions{display:flex;align-items:center;gap:9px;padding-top:3px}
+  .search{
+    width:238px;height:40px;
+    display:flex;align-items:center;gap:8px;
+    padding:0 12px;
+    border:1px solid #E2DCCF;border-radius:11px;
+    background:rgba(255,255,255,.72);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset;
+    transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .search:focus-within{border-color:#AAB9FF;background:#fff;box-shadow:0 0 0 3px rgba(46,91,255,.09)}
+  .search svg{width:14px;height:14px;color:#8C8F95;flex:0 0 14px}
+  .search input{
+    width:100%;border:0;outline:0;background:transparent;
+    font-size:15px;color:#2A2F36;
+  }
+  .search input::placeholder{color:#A09C92}
+  .search kbd{
+    font-family:var(--font);font-size:11px;color:#9A9588;
+    border:1px solid #DED8CB;border-radius:4px;padding:1px 4px;background:#FBF9F3;
+  }
+  .segmented{
+    display:flex;align-items:center;gap:2px;
+    padding:3px;border-radius:10px;background:#E7E2D6;
+    flex:0 0 auto;
+  }
+  .segmented button{white-space:nowrap}
+  .segmented button{
+    height:32px;padding:0 13px;border-radius:8px;
+    font-size:14.5px;color:#716D63;font-weight:550;
+    transition:background .18s ease,color .18s ease,box-shadow .18s ease;
+  }
+  .segmented button.active{background:#fff;color:#1C2026;box-shadow:0 1px 3px rgba(30,25,15,.1)}
+  .update-btn{
+    height:34px;padding:0 10px;
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px solid #D9D3C6;border-radius:9px;
+    background:rgba(255,255,255,.72);
+    color:#4E4A42;font-size:13.5px;font-weight:600;
+    transition:background .16s ease,border-color .16s ease,color .16s ease;
+    white-space:nowrap;
+  }
+  .update-btn svg{width:13px;height:13px;flex:0 0 13px}
+  .update-btn:hover{background:#fff;border-color:#C9C1B1;color:#1D2127}
+  .update-btn.loading svg{animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .icon-btn{
+    width:36px;height:36px;border-radius:10px;
+    display:grid;place-items:center;
+    color:#6F6A5F;font-size:17.5px;
+    border:1px solid transparent;
+    transition:background .16s ease,color .16s ease,border-color .16s ease;
+  }
+  .icon-btn:hover{background:rgba(255,255,255,.7);border-color:#E2DCCF;color:#1D2127}
+
+  /* ============ CALENDAR CARD ============ */
+  .calendar-card{
+    flex:1;min-height:0;
+    display:flex;flex-direction:column;
+    background:var(--card);
+    border:1px solid #E5DFD2;
+    border-radius:var(--radius);
+    box-shadow:0 24px 60px -22px rgba(45,37,20,.2),0 2px 6px rgba(45,37,20,.035);
+    overflow:hidden;
+  }
+  .cal-toolbar{
+    flex:0 0 auto;
+    min-height:62px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line-soft);
+    background:linear-gradient(180deg,#FFFFFF,#FEFDFA);
+  }
+  .cal-month{display:flex;align-items:baseline;gap:11px;min-width:0}
+  .cal-month h2{
+    margin:0;font-size:23.5px;font-weight:650;letter-spacing:-.03em;color:#161A20;
+    white-space:nowrap;
+  }
+  .cal-meta{
+    font-size:13.5px;color:#8A8579;white-space:nowrap;
+    padding-left:11px;border-left:1px solid #E7E1D5;
+  }
+  .search-all{
+    height:25px;padding:0 7px;margin-left:2px;
+    border-radius:6px;border:1px solid #D9E2FF;
+    background:#EEF2FF;color:#2448C9;
+    font-size:11.5px;font-weight:600;white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .search-all:hover{background:#E4EAFF}
+  .legend{display:flex;align-items:center;gap:15px;margin-left:auto;padding-right:2px}
+  .legend span{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#8B867A;white-space:nowrap}
+  .legend i{width:7px;height:7px;border-radius:2px;display:block}
+  .legend .deadline{background:#E25762}
+  .legend .contest{background:#4D74FF}
+  .legend .pre{background:#fff;border:1px dashed #B8B2A5}
+  .cal-nav{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+  .cal-nav button{
+    height:30px;min-width:30px;padding:0 9px;
+    border-radius:8px;border:1px solid #E5DFD2;
+    background:#fff;color:#5E5A51;font-size:14.5px;
+    transition:background .15s ease,border-color .15s ease,color .15s ease;
+  }
+  .cal-nav button:hover{background:#F8F5EE;border-color:#D8D1C2;color:#1C2026}
+  .cal-nav .nav-arrow{font-size:18.5px;line-height:1;padding:0 8px}
+  .cal-nav .today-btn{font-weight:600;color:#2448C9;border-color:#D5DDFB;background:#F4F6FF}
+  .cal-nav .today-btn:hover{background:#E9EDFF}
+
+  .weekdays{
+    flex:0 0 32px;
+    display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+    border-bottom:1px solid var(--line-soft);
+    background:#FCFBF7;
+  }
+  .weekdays div{
+    display:flex;align-items:center;justify-content:center;
+    font-size:12.5px;font-weight:600;letter-spacing:.16em;color:#918C80;
+    border-right:1px solid var(--line-soft);
+  }
+  .weekdays div:last-child{border-right:0}
+  .weekdays div:nth-child(6),.weekdays div:nth-child(7){color:#B18A65}
+
+  .calendar-grid{
+    flex:1;min-height:0;
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    grid-template-rows:repeat(6,minmax(0,1fr));
+    background:#fff;
+  }
+  .day{
+    position:relative;min-width:0;min-height:0;
+    display:flex;flex-direction:column;
+    padding:7px 7px 5px;
+    border-right:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft);
+    overflow:hidden;
+    cursor:default;
+    transition:background .15s ease;
+  }
+  .day:nth-child(7n){border-right:0}
+  .day:nth-child(n+36){border-bottom:0}
+  .day.weekend{background:#FCFBF7}
+  .day.other{background:#FDFCF9}
+  .day.other .day-num{color:#C9C3B7}
+  .day.other.weekend{background:#FAF8F2}
+  .day:hover{background:#FAF8F2}
+  .day.today{
+    background:linear-gradient(180deg,#F1F4FF 0%,#FBFBFF 72%);
+    box-shadow:inset 0 0 0 1.5px rgba(46,91,255,.22);
+  }
+  .day.today:hover{background:linear-gradient(180deg,#E9EEFF 0%,#F8F9FF 72%)}
+  .day-head{display:flex;align-items:center;justify-content:space-between;gap:4px;height:24px;flex:0 0 24px}
+  .day-num{
+    font-family:var(--serif);
+    font-size:20.5px;font-weight:500;line-height:1;
+    color:#33383F;font-variant-numeric:tabular-nums;
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:22px;height:22px;
+  }
+  .day.today .day-num{
+    background:var(--accent);color:#fff;
+    border-radius:50%;font-size:17.5px;font-weight:600;
+    width:24px;height:24px;min-width:24px;
+    box-shadow:0 4px 10px rgba(46,91,255,.28);
+  }
+  .day-month{
+    font-size:11px;letter-spacing:.08em;color:#A8A294;
+    text-transform:uppercase;
+  }
+  .day.today .day-month{color:#5169C9}
+  .chips{display:flex;flex-direction:column;gap:2px;margin-top:3px;min-height:0;overflow:hidden}
+  .chip{
+    --c:#4D74FF;
+    width:100%;height:18px;
+    display:flex;align-items:center;gap:4px;
+    padding:0 4px 0 5px;
+    border-left:2.5px solid var(--c);
+    border-radius:4px;
+    background:color-mix(in srgb,var(--c) 8%, #fff);
+    color:#30353C;font-size:12.5px;line-height:1;
+    text-align:left;white-space:nowrap;overflow:hidden;
+    transition:background .13s ease,transform .13s ease;
+  }
+  .chip:hover{background:color-mix(in srgb,var(--c) 15%, #fff);transform:translateX(1px)}
+  .chip .chip-k{
+    flex:0 0 auto;font-size:10.5px;font-weight:650;letter-spacing:.02em;
+    color:var(--c);opacity:.95;
+  }
+  .chip .chip-t{overflow:hidden;text-overflow:ellipsis;font-weight:500}
+  .chip.deadline{
+    --c:#D93B4A;
+    background:#FFF2F1;
+    border-left-color:#D93B4A;
+  }
+  .chip.deadline:hover{background:#FFE8E7}
+  .chip.deadline .chip-k{color:#C4313F}
+  .chip.expected{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 4px,rgba(255,255,255,0) 4px 8px);opacity:.9}
+  .chip-pre{
+    flex:0 0 auto;font-size:9px;line-height:1;
+    padding:1px 2px;border-radius:2px;
+    border:1px solid currentColor;opacity:.5;font-weight:600;
+  }
+  .chip-more{
+    align-self:flex-start;
+    padding:1px 4px;margin-top:1px;
+    font-size:11px;color:#6B6F76;
+    border-radius:4px;
+  }
+  .chip-more:hover{background:#F0ECE3;color:#1C2026}
+  .note-dot{
+    width:4px;height:4px;border-radius:50%;background:#D79A2B;
+    margin-left:auto;flex:0 0 4px;
+  }
+
+  /* ============ AGENDA ============ */
+  .agenda{
+    flex:1;min-height:0;overflow-y:auto;
+    padding:8px 20px 24px;
+    background:linear-gradient(180deg,#FEFDFA,#FFFFFF);
+  }
+  .agenda-group{margin-top:10px}
+  .agenda-group h3{
+    position:sticky;top:0;z-index:2;
+    margin:0 -20px 9px;padding:12px 20px 8px;
+    font-size:12.5px;letter-spacing:.17em;font-weight:650;color:#918C80;
+    background:linear-gradient(180deg,#FEFDFA 70%,rgba(254,253,250,0));
+  }
+  .agenda-row{
+    display:grid;grid-template-columns:58px minmax(0,1fr) 126px;
+    gap:14px;align-items:center;
+    padding:13px 14px;margin-bottom:8px;
+    border:1px solid #E8E2D6;border-radius:13px;
+    background:#fff;
+    cursor:pointer;
+    transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+    animation:rowIn .28s ease both;
+  }
+  @keyframes rowIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .agenda-row:hover{border-color:#C9D2F2;box-shadow:0 8px 24px -12px rgba(40,50,90,.22);transform:translateY(-1px)}
+  .date-block{text-align:center;line-height:1;padding-right:11px;border-right:1px solid #EEE8DC}
+  .date-day{display:block;font-family:var(--serif);font-size:30.5px;font-weight:500;color:#20242A;letter-spacing:-.03em}
+  .date-mon{display:block;margin-top:3px;font-size:11px;font-weight:600;letter-spacing:.12em;color:#918C80}
+  .date-wd{display:block;margin-top:2px;font-size:11px;color:#B0AA9D}
+  .agenda-body{min-width:0}
+  .agenda-title-line{display:flex;align-items:center;gap:7px;min-width:0}
+  .cat-line{width:3px;height:14px;border-radius:2px;background:var(--c,#4D74FF);flex:0 0 3px}
+  .agenda-body h4{
+    margin:0;font-size:17.5px;font-weight:600;letter-spacing:-.01em;color:#1B1F25;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .agenda-org{margin-top:4px;font-size:13px;color:#8C877B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .agenda-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+  .agenda-tags span{
+    font-size:11px;color:#6D6A61;background:#F6F3EC;
+    border:1px solid #ECE6D9;border-radius:4px;padding:2px 5px;line-height:1;
+  }
+  .agenda-tags .src-tag{
+    color:var(--s);
+    background:color-mix(in srgb,var(--s) 7%, #fff);
+    border-color:color-mix(in srgb,var(--s) 20%, #fff);
+  }
+  .agenda-tags .src-tag::before{content:"来源 ";opacity:.55;font-weight:500}
+  .agenda-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .status{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 7px;border-radius:999px;
+    font-size:11px;font-weight:600;line-height:1;white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .status::before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.8}
+  .status.open{color:#13724C;background:#E9F6EF;border-color:#D2EDDF}
+  .status.urgent{color:#B52F3C;background:#FDECEC;border-color:#F7D6D8}
+  .status.closed{color:#8A6A2E;background:#FBF3E2;border-color:#EFE1C4}
+  .status.live{color:#2250C7;background:#ECF1FF;border-color:#D9E2FF}
+  .status.watch{color:#6C6F76;background:#F3F2EE;border-color:#E7E4DC}
+  .status.ended{color:#8A8D93;background:#F4F4F2;border-color:#E8E7E2}
+  .milestone{font-size:11.5px;color:#948F83;white-space:nowrap}
+  .milestone b{color:#4E4A42;font-weight:600}
+  .star-btn{
+    color:#C9C2B4;font-size:18.5px;line-height:1;
+    width:26px;height:24px;border-radius:6px;
+    display:grid;place-items:center;
+    transition:color .15s ease,background .15s ease,transform .15s ease;
+  }
+  .star-btn:hover{background:#F6F2E9;color:#B98A1E;transform:scale(1.06)}
+  .star-btn.on{color:#E0A21D;text-shadow:0 2px 8px rgba(224,162,29,.25)}
+  .agenda-empty{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;padding:80px 20px;color:#8C877B;text-align:center;
+  }
+  .agenda-empty .empty-mark{
+    width:48px;height:48px;border-radius:14px;border:1px dashed #D8D1C2;
+    display:grid;place-items:center;color:#B3AC9D;background:#FBF9F3;
+  }
+  .agenda-empty h4{margin:0;font-size:17.5px;font-weight:600;color:#4D4A43}
+  .agenda-empty p{margin:0;font-size:14.5px;line-height:1.6;max-width:280px}
+  .agenda-empty button{margin-top:4px;font-size:14.5px;color:var(--accent);font-weight:600;padding:5px 10px;border-radius:7px;background:#EEF2FF}
+
+  .main-foot{
+    flex:0 0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 4px;
+    font-size:11.5px;color:#9D978A;letter-spacing:.01em;
+  }
+  .main-foot b{color:#736E63;font-weight:600}
+  .main-foot a{color:#736E63;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#D8D1C2}
+  .main-foot a:hover{color:#2448C9;text-decoration-color:#AAB9FF}
+  .main-foot .foot-right{display:flex;align-items:center;gap:14px}
+  .main-foot .foot-right span{display:flex;align-items:center;gap:5px}
+  .main-foot .foot-right i{width:5px;height:5px;border-radius:50%;background:#B9B2A3;display:block}
+  .main-foot .foot-right i.live{background:#3DA774;box-shadow:0 0 0 3px rgba(61,167,116,.12)}
+
+  /* ============ DRAWER ============ */
+  .drawer-backdrop{
+    position:fixed;inset:0;z-index:40;
+    background:rgba(17,21,27,.26);
+    backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .drawer-backdrop.open{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;z-index:50;top:0;right:0;bottom:0;
+    width:462px;max-width:94vw;
+    display:flex;flex-direction:column;
+    background:#FCFBF7;
+    box-shadow:-32px 0 90px rgba(20,16,8,.24);
+    transform:translateX(102%);
+    transition:transform .38s cubic-bezier(.22,.85,.24,1);
+    will-change:transform;
+  }
+  .drawer.open{transform:none}
+  .drawer-head{
+    flex:0 0 auto;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    padding:22px 24px 12px;
+  }
+  .drawer-eyebrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:2px}
+  .cat-pill{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:4px 8px;border-radius:999px;
+    font-size:12.5px;font-weight:600;line-height:1;color:var(--c);
+    background:color-mix(in srgb,var(--c) 9%, #fff);
+    border:1px solid color-mix(in srgb,var(--c) 22%, #fff);
+  }
+  .cat-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c)}
+  .conf-pill{
+    padding:4px 7px;border-radius:999px;
+    font-size:11px;font-weight:600;line-height:1;letter-spacing:.02em;
+    color:#6E6A60;background:#F3F0E8;border:1px solid #E6E1D5;
+  }
+  .conf-pill.expected{color:#9A6A1C;background:#FDF5E3;border-color:#F0E2C2}
+  .source-pill{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:4px 7px;border-radius:999px;
+    font-size:11px;font-weight:600;line-height:1;letter-spacing:.02em;
+    color:var(--s);
+    background:color-mix(in srgb,var(--s) 8%, #fff);
+    border:1px solid color-mix(in srgb,var(--s) 20%, #fff);
+  }
+  .source-pill::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--s);opacity:.85}
+  .drawer-head-actions{display:flex;align-items:center;gap:2px;margin-top:-3px}
+  .drawer-scroll{flex:1;min-height:0;overflow-y:auto;padding:2px 24px 24px}
+  .drawer h2{
+    margin:8px 0 0;
+    font-size:28.5px;line-height:1.28;font-weight:650;letter-spacing:-.03em;color:#14181E;
+  }
+  .drawer-sub{margin:7px 0 0;font-size:13.5px;color:#8A8579;line-height:1.5}
+  .tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+  .tag-row span{
+    font-size:11px;color:#68645B;background:#F5F2EA;
+    border:1px solid #EAE4D7;border-radius:5px;padding:3px 6px;line-height:1;
+  }
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+  .fact{
+    padding:10px 11px;border-radius:10px;
+    background:#F5F1E8;border:1px solid #EAE4D7;
+    min-width:0;
+  }
+  .fact-label{font-size:11px;letter-spacing:.1em;font-weight:600;color:#948E80}
+  .fact-value{margin-top:5px;font-size:14.5px;line-height:1.5;font-weight:550;color:#2B3037}
+  .fact-value.small{font-size:13px;font-weight:500;line-height:1.55;color:#464C54}
+  .fact-value .accent{color:#B52F3C}
+  .school-note{
+    display:flex;gap:9px;
+    margin-top:12px;padding:11px 12px;
+    border-radius:11px;
+    background:#EFF3FF;border:1px solid #DCE3FB;
+  }
+  .school-note .icon{flex:0 0 18px;color:#3457D5;padding-top:1px}
+  .school-note .icon svg{width:17px;height:17px}
+  .school-note b{display:block;font-size:11.5px;letter-spacing:.1em;color:#3457D5;font-weight:650}
+  .school-note p{margin:4px 0 0;font-size:13.5px;line-height:1.6;color:#3C4A6B}
+  .drawer-section{margin-top:20px}
+  .drawer-section h3{
+    margin:0 0 8px;
+    font-size:11.5px;font-weight:650;letter-spacing:.16em;color:#948E80;
+  }
+  .drawer-section p{margin:0;font-size:15.5px;line-height:1.75;color:#3E444C}
+  .timeline{position:relative;padding-left:2px}
+  .tl-row{
+    display:grid;grid-template-columns:46px 10px minmax(0,1fr);
+    gap:8px;align-items:start;
+    min-height:32px;
+  }
+  .tl-date{font-size:12.5px;font-weight:600;color:#5F5B52;padding-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tl-rail{position:relative;display:flex;justify-content:center;height:100%}
+  .tl-rail::before{content:"";position:absolute;top:7px;bottom:-3px;width:1px;background:#E2DCCF}
+  .tl-row:last-child .tl-rail::before{display:none}
+  .tl-dot{
+    position:relative;z-index:1;width:5px;height:5px;border-radius:50%;
+    background:var(--c,#4D74FF);margin-top:5px;
+    box-shadow:0 0 0 2.5px #FCFBF7;
+  }
+  .tl-body{padding-bottom:9px;min-width:0}
+  .tl-body b{display:block;font-size:14.5px;font-weight:600;color:#2D3239;line-height:1.35}
+  .tl-body small{display:block;margin-top:2px;font-size:11.5px;color:#9A9487;line-height:1.4}
+  .tips-list{display:flex;flex-direction:column;gap:6px}
+  .tip{
+    display:flex;gap:8px;
+    padding:9px 10px;
+    border:1px solid #EAE4D7;border-radius:9px;
+    background:#fff;
+  }
+  .tip .tick{
+    flex:0 0 15px;width:15px;height:15px;border-radius:50%;
+    display:grid;place-items:center;margin-top:1px;
+    background:#EAF6EF;color:#1B8858;
+  }
+  .tip .tick svg{width:9px;height:9px}
+  .tip p{margin:0;font-size:13.5px;line-height:1.65;color:#3E444C}
+  .my-notes textarea{
+    width:100%;min-height:92px;
+    padding:10px 11px;
+    border:1px solid #E2DCCF;border-radius:10px;
+    background:#fff;color:#2B3037;
+    font-size:14.5px;line-height:1.7;
+    outline:none;resize:vertical;
+    transition:border-color .18s ease,box-shadow .18s ease;
+  }
+  .my-notes textarea:focus{border-color:#AAB9FF;box-shadow:0 0 0 3px rgba(46,91,255,.08)}
+  .my-notes textarea::placeholder{color:#B1AB9E}
+  .note-foot{display:flex;align-items:center;justify-content:space-between;margin-top:5px;font-size:11px;color:#A09A8D}
+  .note-foot .saved{color:#3D8B65}
+  .source{
+    margin-top:18px;padding-top:12px;
+    border-top:1px solid #ECE6DA;
+    font-size:11px;line-height:1.6;color:#A39D90;
+  }
+  .source a{
+    color:#3457D5;text-decoration:underline;text-underline-offset:2px;
+    text-decoration-color:#C9D4F5;
+  }
+  .source a:hover{text-decoration-color:#3457D5}
+  .drawer-foot{
+    flex:0 0 auto;
+    display:flex;align-items:center;gap:8px;
+    padding:14px 24px 18px;
+    border-top:1px solid #EAE4D7;
+    background:rgba(252,251,247,.94);
+    backdrop-filter:blur(8px);
+  }
+  .btn{
+    height:38px;padding:0 14px;border-radius:9px;
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    font-size:14.5px;font-weight:600;text-decoration:none;
+    transition:background .16s ease,border-color .16s ease,transform .16s ease;
+    white-space:nowrap;
+  }
+  .btn.primary{flex:1;background:var(--accent);color:#fff;box-shadow:0 6px 16px -6px rgba(46,91,255,.55)}
+  .btn.primary:hover{background:#244BDD;transform:translateY(-1px)}
+  .btn.primary span{font-size:15.5px;opacity:.8}
+  .btn.ghost{border:1px solid #E0DACD;background:#fff;color:#4F4B43}
+  .btn.ghost:hover{background:#F7F3EB;border-color:#D2CBBC}
+
+  /* ============ DAY MENU / MODAL / TOAST ============ */
+  .day-menu{
+    position:fixed;z-index:70;width:300px;max-height:380px;overflow-y:auto;
+    padding:7px;border-radius:13px;
+    background:#fff;border:1px solid #E4DED1;
+    box-shadow:0 24px 60px -12px rgba(30,25,15,.28),0 4px 12px rgba(30,25,15,.08);
+    animation:menuIn .16s ease both;
+  }
+  @keyframes menuIn{from{opacity:0;transform:translateY(-3px) scale(.99)}to{opacity:1;transform:none}}
+  .dm-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:6px 7px 8px;margin-bottom:2px;
+    border-bottom:1px solid #F0EBE0;
+  }
+  .dm-head b{font-size:13px;font-weight:650;color:#4E4A42;letter-spacing:.02em}
+  .dm-head span{font-size:11px;color:#9D978A}
+  .dm-item{
+    width:100%;display:flex;align-items:flex-start;gap:8px;
+    padding:8px 7px;border-radius:7px;text-align:left;
+    transition:background .13s ease;
+  }
+  .dm-item:hover{background:#F8F5EE}
+  .dm-item .dm-bar{width:3px;height:26px;border-radius:2px;background:var(--c);flex:0 0 3px;margin-top:1px}
+  .dm-item .dm-copy{min-width:0}
+  .dm-item b{display:block;font-size:13.5px;font-weight:600;color:#2A2F36;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dm-item small{display:block;margin-top:2px;font-size:11px;color:#918C80}
+  .dm-item .dm-kind{font-size:10.5px;color:#B0AA9D;margin-left:auto;white-space:nowrap;padding-top:1px}
+  .modal{
+    position:fixed;inset:0;z-index:80;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    background:rgba(17,21,27,.36);
+    backdrop-filter:blur(4px);
+    animation:fadeIn .2s ease both;
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .guide-card{
+    width:520px;max-width:100%;max-height:88vh;overflow-y:auto;
+    padding:27px 27px 22px;
+    border-radius:18px;background:#FCFBF7;
+    box-shadow:0 40px 100px -20px rgba(20,16,8,.4);
+    animation:cardIn .26s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes cardIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
+  .guide-kicker{font-size:11px;font-weight:650;letter-spacing:.2em;color:#9A9487}
+  .guide-card h2{margin:7px 0 0;font-size:27.5px;font-weight:650;letter-spacing:-.03em;color:#14181E}
+  .guide-steps{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:13px}
+  .guide-steps li{display:flex;gap:12px;align-items:flex-start}
+  .guide-num{
+    flex:0 0 26px;width:26px;height:26px;border-radius:8px;
+    display:grid;place-items:center;
+    font-size:11.5px;font-weight:650;color:#3457D5;
+    background:#EDF1FF;border:1px solid #DCE3FB;
+  }
+  .guide-steps b{display:block;font-size:15.5px;font-weight:600;color:#242930}
+  .guide-steps p{margin:4px 0 0;font-size:13.5px;line-height:1.65;color:#68645B}
+  .guide-tip{
+    margin-top:17px;padding:10px 12px;border-radius:9px;
+    border:1px solid #F0E2C2;background:#FDF6E7;
+    font-size:13px;line-height:1.65;color:#7B5D22;
+  }
+  .guide-sources{
+    margin-top:14px;padding-top:12px;
+    border-top:1px solid #ECE6DA;
+    font-size:13px;line-height:1.7;color:#7A756A;
+  }
+  .guide-sources b{color:#4E4A42;font-weight:600}
+  .guide-sources a{
+    color:#2F5BFF;text-decoration:none;font-weight:550;
+    border-bottom:1px solid #C9D4F5;padding-bottom:1px;
+  }
+  .guide-sources a:hover{border-bottom-color:#2F5BFF}
+  .guide-sources > span{color:#C0B9AB;margin:0 4px}
+  .guide-sources-note{margin-top:6px;font-size:11.5px;line-height:1.6;color:#9A9487}
+  .guide-actions{display:flex;justify-content:flex-end;margin-top:17px}
+  .guide-actions .btn{min-width:108px}
+  .update-card{
+    width:540px;max-width:100%;max-height:88vh;overflow-y:auto;
+    padding:25px 25px 19px;
+    border-radius:18px;background:#FCFBF7;
+    box-shadow:0 40px 100px -20px rgba(20,16,8,.4);
+    animation:cardIn .26s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .update-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .update-head h2{margin:6px 0 0;font-size:27.5px;font-weight:650;letter-spacing:-.03em;color:#14181E}
+  .update-state{
+    display:flex;align-items:center;gap:8px;
+    margin-top:16px;padding:10px 12px;
+    border-radius:9px;font-size:14.5px;font-weight:500;line-height:1.5;
+    border:1px solid transparent;
+  }
+  .update-state.checking{background:#EEF2FF;border-color:#DCE3FB;color:#3457D5}
+  .update-state.ok{background:#EAF6EF;border-color:#D2EDDF;color:#1B7A50}
+  .update-state.warn{background:#FDF6E7;border-color:#F0E2C2;color:#8A5D16}
+  .update-state.error{background:#FDECEC;border-color:#F7D6D8;color:#B52F3C}
+  .update-spinner{
+    width:12px;height:12px;flex:0 0 12px;border-radius:50%;
+    border:2px solid currentColor;border-right-color:transparent;
+    animation:spin .8s linear infinite;
+  }
+  .update-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}
+  .update-grid div{padding:9px 10px;background:#F5F1E8;border:1px solid #EAE4D7;border-radius:9px;min-width:0}
+  .update-grid span{display:block;font-size:11px;letter-spacing:.08em;font-weight:600;color:#948E80}
+  .update-grid b{display:block;margin-top:4px;font-size:16px;font-weight:600;color:#2B3037;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .update-field{display:block;margin-top:14px}
+  .update-field > span{display:flex;align-items:center;gap:5px;margin-bottom:5px;font-size:11.5px;letter-spacing:.08em;font-weight:600;color:#7B7569}
+  .update-field > span small{font-size:10.5px;font-weight:500;color:#A39D90;letter-spacing:0}
+  .update-field input{
+    width:100%;height:36px;padding:0 10px;
+    border:1px solid #E2DCCF;border-radius:8px;background:#fff;
+    font-size:13.5px;color:#2B3037;outline:none;
+    transition:border-color .18s ease,box-shadow .18s ease;
+  }
+  .update-field input:focus{border-color:#AAB9FF;box-shadow:0 0 0 3px rgba(46,91,255,.08)}
+  .update-field input::placeholder{color:#B6B0A3}
+  .update-hint{margin:7px 0 0;font-size:11.5px;line-height:1.65;color:#A09A8D}
+  .update-hint code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#F1EDE4;padding:1px 4px;border-radius:3px}
+  .update-actions{display:flex;align-items:center;gap:7px;margin-top:13px;flex-wrap:wrap}
+  .update-actions .btn{height:34px;font-size:13px;padding:0 12px}
+  .update-actions .btn.primary{flex:0 0 auto;min-width:96px}
+  .update-note{
+    margin-top:11px;padding:9px 11px;
+    border:1px solid #EAE4D7;border-radius:8px;background:#F7F3EB;
+    font-size:12.5px;line-height:1.65;color:#6F6A5F;white-space:pre-wrap;
+  }
+  .update-note:empty{display:none}
+  .update-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;font-size:11px;color:#A39D90}
+  .update-foot a{color:#3457D5;text-decoration:none}
+  .update-foot a:hover{text-decoration:underline}
+  .toast{
+    position:fixed;z-index:100;left:50%;bottom:26px;
+    transform:translate(-50%,8px);
+    padding:9px 15px;border-radius:999px;
+    background:#161A20;color:#F5F2EA;
+    font-size:13px;font-weight:500;letter-spacing:.01em;
+    box-shadow:0 12px 30px -8px rgba(0,0,0,.4);
+    opacity:0;pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:1180px){
+    .app{grid-template-columns:248px minmax(0,1fr)}
+    .top-actions{flex:0 0 auto}
+    .main{padding:20px 20px 13px}
+    .search{width:200px}
+    .legend{display:none}
+    .topbar h1{font-size:29.5px}
+  }
+  @media (max-width:1100px){
+    .page-sub{display:none}
+    .search kbd{display:none}
+  }
+  @media (max-width:980px){
+    .app{grid-template-columns:1fr}
+    .sidebar{display:none}
+    .main{padding:18px 16px 12px}
+    .search{width:156px}
+    .search kbd{display:none}
+    .top-actions{gap:6px}
+    .update-btn{padding:0 8px}
+    .update-btn span{display:none}
+    .page-sub{display:none}
+    .agenda-row{grid-template-columns:50px minmax(0,1fr) 104px}
+  }
+  @media (max-width:900px){
+    .top-actions .search{display:none}
+  }
+  @media (max-width:700px){
+    .segmented{display:none}
+    .topbar h1{font-size:26.5px}
+    .cal-toolbar{padding:11px 13px;min-height:56px}
+    .cal-month h2{font-size:20.5px}
+    .cal-meta{display:none}
+    .weekdays div{font-size:11px}
+    .day{padding:5px 4px 3px}
+    .chip{font-size:11px;height:17px}
+    .chip .chip-k{font-size:9px}
+    .agenda{padding:8px 12px 20px}
+    .agenda-row{grid-template-columns:44px minmax(0,1fr);gap:10px}
+    .agenda-right{display:none}
+    .drawer{width:100%;max-width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="bm" x1="4" y1="2" x2="38" y2="42" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3D66FF"/><stop offset="1" stop-color="#1B2E8A"/>
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="42" height="42" rx="12" fill="url(#bm)"/>
+        <rect x="1" y="1" width="42" height="42" rx="12" stroke="rgba(255,255,255,.18)"/>
+        <path d="M12.5 14.5h19M12.5 21.5h11M12.5 28.5h7.5" stroke="#F7F3E9" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="30.5" cy="28" r="5.2" fill="#F7F3E9"/>
+        <circle cx="30.5" cy="28" r="2" fill="#2E5BFF"/>
+      </svg>
+      <div>
+        <div class="brand-title">CS 竞赛日历</div>
+        <div class="brand-sub">CS · 全国</div>
+        <a class="brand-author" href="https://github.com/CentaMatcha" target="_blank" rel="noreferrer noopener">by @CentaMatcha ↗</a>
+      </div>
+    </div>
+
+    <div class="term">
+      <div class="term-top"><b>2026 / 27</b><span class="term-dot"></span></div>
+      <div class="term-name">计算机类竞赛</div>
+      <div class="term-meta">计算机 · 人工智能<br>软件工程 · 信息安全</div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label"><span>筛选</span><span>STATUS</span></div>
+      <button class="side-item active" data-status="all">
+        <span class="glyph"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2.5" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h12M5 1.5v2M11 1.5v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+        全部赛事 <span class="side-count" data-count="all">0</span>
+      </button>
+      <button class="side-item" data-status="open">
+        <span class="glyph"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3.4l2 1.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+        报名中 <span class="side-count" data-count="open">0</span>
+      </button>
+      <button class="side-item" data-status="soon">
+        <span class="glyph"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2.2 14 13H2L8 2.2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.3v3M8 11.2v.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        即将截止 <span class="side-count" data-count="soon">0</span>
+      </button>
+      <button class="side-item" data-status="fav">
+        <span class="glyph"><svg viewBox="0 0 16 16" fill="none"><path d="m8 2.2 1.8 3.7 4.1.6-3 2.9.7 4.1L8 11.6l-3.6 1.9.7-4.1-3-2.9 4.1-.6L8 2.2Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg></span>
+        我的收藏 <span class="side-count" data-count="fav">0</span>
+      </button>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label"><span>方向</span><span>TRACK</span></div>
+      <div id="cat-list"></div>
+    </div>
+
+    <div class="side-spacer"></div>
+
+    <div class="nearest" id="nearest-card" role="button" tabindex="0" aria-label="最近截止的赛事">
+      <div class="nearest-kicker"><span class="pulse"></span> 最近截止</div>
+      <div class="nearest-title" id="nearest-title">加载中</div>
+      <div class="nearest-meta" id="nearest-meta">—</div>
+    </div>
+
+    <div class="side-foot">
+      <button id="btn-guide">使用说明</button>
+      <button id="btn-export-all">导出全部</button>
+      <span class="update" id="side-update">10.22</span>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">CS Competition Calendar · 2026 / 27</div>
+        <h1>CS 竞赛日程</h1>
+        <div class="page-sub" id="page-sub">面向全国高校计算机 / 人工智能专业</div>
+      </div>
+      <div class="top-actions">
+        <label class="search">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.4"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <input id="search" type="search" placeholder="搜索赛事 / 关键词" autocomplete="off" spellcheck="false">
+          <kbd>⌘ K</kbd>
+        </label>
+        <div class="segmented" role="tablist" aria-label="视图切换">
+          <button class="active" data-view="month" role="tab" aria-selected="true">月历</button>
+          <button data-view="agenda" role="tab" aria-selected="false">议程</button>
+        </div>
+        <button class="update-btn" id="btn-update" title="检查赛历更新">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.2 7.2A5.3 5.3 0 1 0 12 11.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 3.7v3.6H9.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>更新</span>
+        </button>
+        <button class="icon-btn" id="btn-guide-2" aria-label="使用说明" title="使用说明">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M6.3 6.1c.1-1 .8-1.7 1.8-1.7 1 0 1.8.7 1.8 1.6 0 1.4-1.8 1.5-1.8 2.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8.1 11.3v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="calendar-card" id="calendar-card">
+      <div class="cal-toolbar">
+        <div class="cal-month">
+          <h2 id="month-label">2026年10月</h2>
+          <span class="cal-meta" id="month-meta">—</span>
+          <button class="search-all" id="search-all" hidden>查看全部结果 →</button>
+        </div>
+        <div class="legend" id="legend">
+          <span><i class="deadline"></i>报名截止</span>
+          <span><i class="contest"></i>开赛 / 决赛</span>
+          <span><i class="pre"></i>预计</span>
+        </div>
+        <div class="cal-nav" id="cal-nav">
+          <button class="nav-arrow" id="prev-month" aria-label="上个月">‹</button>
+          <button class="today-btn" id="today-btn">今天</button>
+          <button class="nav-arrow" id="next-month" aria-label="下个月">›</button>
+        </div>
+      </div>
+      <div class="weekdays" id="weekdays">
+        <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <div class="agenda" id="agenda" hidden></div>
+    </section>
+
+    <footer class="main-foot">
+      <span>点击日期或赛事卡片查看详情 · 备注只保存在本机</span>
+      <div class="foot-right">
+        <span class="foot-author">作者：<a href="https://github.com/CentaMatcha" target="_blank" rel="noreferrer noopener">CentaMatcha</a></span>
+        <span id="foot-update"><i class="live"></i>数据更新 2026.10.22</span>
+        <span><i></i>来源：<a href="https://www.saikr.com/vs" target="_blank" rel="noreferrer">赛氪</a> · 官网 · 高校通知</span>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<!-- ================= DRAWER ================= -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="赛事详情"></aside>
+
+<!-- ================= DAY MENU ================= -->
+<div class="day-menu" id="day-menu" hidden></div>
+
+<!-- ================= GUIDE ================= -->
+<div class="modal" id="guide" hidden>
+  <div class="guide-card" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <div class="guide-kicker">QUICK START</div>
+    <h2 id="guide-title">四步用好这张赛历</h2>
+    <ol class="guide-steps">
+      <li>
+        <span class="guide-num">01</span>
+        <div><b>看颜色</b><p>红色是报名截止，彩色是开赛 / 决赛。带「预」的赛事 2027 年通知尚未发布，日期按往年推算。</p></div>
+      </li>
+      <li>
+        <span class="guide-num">02</span>
+        <div><b>点开看细节</b><p>点击赛事卡片，可以查看报名窗口、比赛时间、报名提示和备赛建议，并一键导出日历。</p></div>
+      </li>
+      <li>
+        <span class="guide-num">03</span>
+        <div><b>写下自己的备注</b><p>详情页里可以记录组队、导师、材料进度。备注自动保存在这台电脑上，不上传网络。</p></div>
+      </li>
+      <li>
+        <span class="guide-num">04</span>
+        <div><b>保持更新</b><p>点右上角「更新」检查本地或在线更新源；有新增赛事会自动合并，也可以导入 JSON 更新文件。</p></div>
+      </li>
+    </ol>
+    <div class="guide-tip"><b>报名提示：</b>标注「院校报名」的赛事通常需要校内选拔或学校统一提交。报名前先找教务部 / 团委确认赛点、名额和截止时间，避免只看到全国通知。</div>
+    <div class="guide-sources">
+      <b>继续找赛事：</b>
+      <a href="https://www.saikr.com/vs" target="_blank" rel="noreferrer">赛氪</a><span>·</span>
+      <a href="http://www.52jingsai.com/" target="_blank" rel="noreferrer">我爱竞赛网</a><span>·</span>
+      <a href="https://www.chsi.com.cn/" target="_blank" rel="noreferrer">学信网</a>
+      <div class="guide-sources-note">赛氪上有很多线上答题 / 付费证书赛，本日历只收 AI、算法、建模、机器人方向且对升学 / 项目有帮助的赛事。</div>
+      <div class="guide-sources-note">作者：<a href="https://github.com/CentaMatcha" target="_blank" rel="noreferrer noopener">CentaMatcha</a> · 发现赛事遗漏或日期变化，欢迎提 issue / PR。</div>
+    </div>
+    <div class="guide-actions"><button class="btn primary" data-close-guide>开始使用</button></div>
+  </div>
+</div>
+
+<!-- ================= UPDATE ================= -->
+<div class="modal" id="update-modal" hidden>
+  <div class="update-card" role="dialog" aria-modal="true" aria-labelledby="update-title">
+    <div class="update-head">
+      <div>
+        <div class="guide-kicker">DATA UPDATE</div>
+        <h2 id="update-title">更新赛历</h2>
+      </div>
+      <button class="icon-btn" data-close-update aria-label="关闭更新面板">✕</button>
+    </div>
+    <div class="update-state checking" id="update-state">
+      <span class="update-spinner" id="update-spinner"></span>
+      <span id="update-state-text">正在检查更新…</span>
+    </div>
+    <div class="update-grid">
+      <div><span>当前赛事</span><b id="update-count">17</b></div>
+      <div><span>数据日期</span><b id="update-date">2026.10.22</b></div>
+      <div><span>更新源</span><b id="update-source">内置</b></div>
+    </div>
+    <label class="update-field">
+      <span>在线更新源 <small>可选</small></span>
+      <input id="update-url" type="url" placeholder="https://example.com/cs-update.json" spellcheck="false" autocomplete="off">
+    </label>
+    <p class="update-hint">留空时先读仓库里的 <code>data/feed.latest.json</code>，读不到再退回内置的 <code>update-feed.js</code>；填了 URL 就优先用你自己的在线源。在线源需要允许跨域（CORS）。</p>
+    <div class="update-actions">
+      <button class="btn primary" id="btn-check-update">重新检查</button>
+      <button class="btn ghost" id="btn-import-feed">导入文件</button>
+      <button class="btn ghost" id="btn-reset-feed">恢复内置</button>
+    </div>
+    <input type="file" id="feed-file" accept=".json,application/json" hidden>
+    <div class="update-note" id="update-note"></div>
+    <div class="update-foot">
+      <a href="https://www.saikr.com/vs" target="_blank" rel="noreferrer">打开赛氪找赛事 ↗</a>
+      <span id="update-checked">尚未检查</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="update-feed.js"></script>
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+const APP_VERSION = '2026.10.22.6';
+let dataUpdated = '2026-10-22';
+let feedVersion = APP_VERSION;
+let feedSource = '内置';
+
+const CATS = {
+  ai:         { label:'人工智能', color:'#0F9D8F' },
+  algo:       { label:'算法编程', color:'#2F5BFF' },
+  math:       { label:'数学基础', color:'#5B5BD6' },
+  modeling:   { label:'数学建模', color:'#A24DE0' },
+  robot:      { label:'机器人',   color:'#E8851B' },
+  english:    { label:'英语能力', color:'#B7791F' },
+  innovation: { label:'创新创业', color:'#E04F6E' },
+  security:   { label:'信息安全', color:'#B4233C' },
+  engineering:{ label:'软件工程', color:'#2B6B8F' }
+};
+
+const SOURCES = {
+  official: { label:'赛事官网', color:'#2F5BFF' },
+  saikr:    { label:'赛氪',     color:'#0E9F9A' },
+  school:   { label:'高校通知', color:'#B26A12' }
+};
+
+const EVENTS = [
+  {
+    id:'mathorcup2026',
+    short:'MathorCup 大数据',
+    title:'2026 第七届 MathorCup 数学应用挑战赛 · 大数据竞赛',
+    subtitle:'企业真实数据 · 算法 + 论文',
+    cat:'modeling', level:'国家级 · 学会主办',
+    org:'中国优选法统筹法与经济数学研究会',
+    format:'1–3 人一队（以官网为准）· 论文 + 代码',
+    regStart:'2026-08-13', regEnd:'2026-10-23',
+    contestStart:'2026-10-23', contestEnd:'2026-10-30',
+    deadlineText:'10月23日 12:00',
+    contestText:'10月23日 18:00 – 10月30日 20:00',
+    contestShort:'开赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    source:'saikr',
+    sourceUrl:'https://m.saikr.com/bigdata2026',
+    sourceNote:'赛氪赛事页',
+    schoolNote:'全日制在校生可报，赛氪 / 官网直接报名；1–3 人一队，可跨专业。报名费 200 元/队，10/9 后不可退费。',
+    link:'https://www.saikr.com/vse/bigdata2026', linkLabel:'MathorCup 大数据竞赛（赛氪）',
+    summary:'MathorCup 数学应用挑战赛从 2020 年起增设的大数据独立赛项。用企业真实场景数据出题，要求提交论文、完整代码和泛化性能评估，初赛—复赛。',
+    why:'这是最贴近 AI 专业的数据竞赛：真实数据、完整代码、论文和泛化评估，做一次就能写进简历。时间只有一周，适合有现成数据处理能力的队伍冲刺。',
+    tips:[
+      '10/23 12:00 报名截止、18:00 开赛，几乎没有缓冲；今晚先组队报名。',
+      '先用 Python + sklearn / LightGBM 跑 baseline，再做特征和模型迭代；论文和代码都要交。',
+      '题目来自企业真实数据，重点看泛化性能，别过拟合公开测试集。'
+    ],
+    tags:['数据竞赛','企业数据','一周冲刺'],
+    schedule:[
+      {d:'08.13', t:'报名开放', s:'2026 年 8 月 13 日'},
+      {d:'10.23', t:'报名截止', s:'12:00'},
+      {d:'10.23', t:'比赛开始', s:'18:00'},
+      {d:'10.30', t:'比赛结束 / 提交', s:'20:00'},
+      {d:'11.15', t:'复赛（预计）', s:'以官网通知为准'}
+    ],
+    deadlines:[{date:'2026-10-23', label:'报名截止'}]
+  },
+  {
+    id:'cmit2026',
+    short:'数媒竞赛',
+    title:'全国大学生数字媒体科技作品及创意竞赛',
+    subtitle:'第十四届 · AIGC / 数字创意',
+    cat:'ai', level:'国家级 · 榜单赛事',
+    org:'全国大学生数字媒体科技作品及创意竞赛组委会',
+    format:'团队 ≤ 5 人 + 1–2 名指导教师',
+    regStart:'2026-09-01', regEnd:'2026-10-23',
+    contestStart:'2026-11-27', contestEnd:'2026-11-29',
+    deadlineText:'10/23 主赛道；11/6 OPC 专项',
+    contestText:'11月27日–29日（全国总决赛）',
+    contestShort:'决赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    schoolNote:'全日制在校生可报，官网直报；可跨校组队，但需明确第一申报单位。AIGC 作品记得附《AI 工具使用情况说明》。',
+    link:'https://www.cmit.cn', linkLabel:'数媒竞赛官网',
+    summary:'面向数字媒体、AIGC、VR/AR、智能产品与数字创意的作品赛。2026 年新增 AIGC 数字创意、OPC 数字新消费、国际专项等赛道，分校赛、赛区选拔、全国总决赛三级。',
+    why:'这是 10 月最值得 AI 专业抓的“作品赛”：AIGC、多模态、智能交互都能直接落题；有英文作品或国际专项计划，还可以考虑国际专项赛。榜单赛事，综测和保研材料里认可度较高。',
+    tips:[
+      '如果现在还没开始：用一门课程项目改造成 AIGC 交互作品，先交最小可演示版本，别追求大而全。',
+      '材料按官网《参赛作品材料提交规范》准备：演示视频、作品说明、原创声明，AIGC 作品还要附《人工智能工具使用情况说明》。',
+      '主赛道 10/23 截止；错过的话关注 11/6 的 OPC 专项赛，以及 11 月的赛区选拔。'
+    ],
+    tags:['AIGC','作品赛','榜单赛事'],
+    schedule:[
+      {d:'10.23', t:'报名及作品提交截止', s:'23:59，官网提交'},
+      {d:'10.24', t:'校级初赛', s:'10.24–10.28'},
+      {d:'11.02', t:'赛区选拔赛', s:'11.02–11.15'},
+      {d:'11.27', t:'全国总决赛', s:'11.27–11.29'}
+    ],
+    deadlines:[
+      {date:'2026-10-23', label:'主赛道报名及作品提交'},
+      {date:'2026-11-06', label:'OPC / 国际专项赛'}
+    ]
+  },
+  {
+    id:'huawei2026',
+    short:'华为 ICT',
+    title:'华为 ICT 大赛 2026–2027',
+    subtitle:'第十一届 · 创新赛 / 挑战赛 / 实践赛',
+    cat:'ai', level:'国家级 · 国际级',
+    org:'华为技术有限公司',
+    format:'团队 3–5 人 + 1 名指导教师',
+    regStart:'2026-08-31', regEnd:'2026-11-30',
+    contestStart:'2026-12-01', contestEnd:'2027-04-30',
+    deadlineText:'10/26 算子赛；10/31 实践/挑战赛；11/30 创新/编程赛',
+    contestText:'12月初赛；2027年3–4月国赛；5月全球赛',
+    contestShort:'12月初赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    source:'school',
+    sourceUrl:'http://jwc.xjtu.edu.cn/info/1172/10521.htm',
+    sourceNote:'西安交大教务处转发华为通知',
+    schoolNote:'全日制在校生可报，官网直报；必须同校组队并配 1 名指导教师。建议找计算机 / AI 方向老师，英文答辩是优势。',
+    link:'https://e.huawei.com/cn/talent/ict-academy/#/ict-contest', linkLabel:'华为 ICT 大赛官网',
+    summary:'华为年度 ICT 赛事，AI 相关赛道包括创新赛（AI + ICT 方案）、挑战赛（昇腾 + 鲲鹏的超智融合调优）、算子赛（Ascend C 算子开发）与实践赛云赛道。同校组队，晋级后有中国总决赛和全球总决赛。',
+    why:'英文表达和国际化背景，在创新赛全球赛的答辩环节很占优势；昇腾生态是国产算力主线，写在简历上比普通课程项目更有辨识度。',
+    tips:[
+      '优先选创新赛：用昇腾 / ModelArts 做一个能现场演示的 AI 应用，评委更看重真实场景和完成度，不是 PPT 厚度。',
+      '挑战赛 / 算子赛更硬核：提前装好 CANN，跑通官方样例；队伍里至少配 1 名懂底层和性能调优的同学。',
+      '准备一版英文 3 分钟介绍，全球总决赛会用到；同校组队，提前锁定指导教师。'
+    ],
+    tags:['昇腾','国产算力','团队赛'],
+    schedule:[
+      {d:'09.01', t:'报名开放', s:'2026 年 8 月 31 日起'},
+      {d:'10.26', t:'算子赛报名 / 资格赛截止', s:'决赛 2026.11–2027.03'},
+      {d:'10.31', t:'实践赛 / 挑战赛报名截止', s:'省赛 11–12 月'},
+      {d:'11.30', t:'创新赛 / 编程赛 / 精英赛截止', s:'初赛 12 月'},
+      {d:'03.01', t:'中国总决赛', s:'2027 年 3–4 月；全球赛 5 月'}
+    ],
+    deadlines:[
+      {date:'2026-10-26', label:'算子赛报名 / 资格赛'},
+      {date:'2026-10-31', label:'实践赛 / 挑战赛报名'},
+      {date:'2026-11-30', label:'创新赛 / 编程赛 / 精英赛报名'}
+    ]
+  },
+  {
+    id:'airace2026',
+    short:'AI 应用创新',
+    title:'2026 第二届全国人工智能应用创新大赛',
+    subtitle:'AI Agent / 大模型 · 1–3 人',
+    cat:'ai', level:'国家级',
+    org:'中国技术经济学会',
+    format:'1–3 人 + 0–2 名指导教师',
+    regStart:'2026-10-21', regEnd:'2026-11-02',
+    contestStart:'2026-11-21', contestEnd:'2026-12-27',
+    deadlineText:'11/2 校赛作品；11/9 官网报名',
+    contestText:'区域赛 11/21–12/11；国赛 12/25–27',
+    contestShort:'区域赛',
+    confidence:'confirmed', route:'院校报名', risk:'mid',
+    source:'school',
+    sourceUrl:'https://dzxy.scau.edu.cn/2026/1021/c9687a449586/page.htm',
+    sourceNote:'华南农大校赛通知（大赛官网 ai-race.com.cn）',
+    schoolNote:'需先通过本校校赛选拔，再由学校推荐区域赛；本校是否组织校赛请尽快问教务部 / 创新创业部门。专项赛道不设校赛，可直接报名区域赛。',
+    link:'https://www.ai-race.com.cn/', linkLabel:'全国人工智能应用创新大赛官网',
+    summary:'中国技术经济学会主办，主题是“让人工智能赋能千行百业”。聚焦 AI Agent、大模型应用和真实业务场景，围绕教育、医疗、制造、消费、金融、出海六大领域，1–3 人组队，校赛—区域赛—国赛三级。',
+    why:'这是目前最对口的“AI 智能体应用”赛：不靠刷题，重点是把大模型 / Agent 做成能演示、能讲清楚业务价值的作品。有英文表达优势的同学适合选“出海”命题，1–3 人组队门槛也低。',
+    tips:[
+      '11/2 前交校赛作品：PPT + 演示视频 + 可访问的智能体链接，三样缺一不可。',
+      '优先选“出海 / 教育 / 医疗”你能讲出真实痛点的方向，别做泛泛的聊天机器人。',
+      '校赛结果 11/8 公布，11/9 才能到官网完成区域赛报名；先确认本校是否组织校赛。'
+    ],
+    tags:['AI Agent','大模型','校赛'],
+    schedule:[
+      {d:'10.21', t:'校赛作品提交开始', s:'各校时间可能不同'},
+      {d:'11.02', t:'校赛作品提交截止', s:'PPT + 视频 + 智能体链接'},
+      {d:'11.03', t:'校赛评审', s:'11.03–11.08'},
+      {d:'11.09', t:'区域赛官网报名', s:'校赛晋级后'},
+      {d:'11.21', t:'区域赛', s:'11.21–12.11'},
+      {d:'12.25', t:'全国总决赛', s:'12.25–12.27'}
+    ],
+    deadlines:[
+      {date:'2026-11-02', label:'校赛作品提交'},
+      {date:'2026-11-09', label:'区域赛官网报名'}
+    ]
+  },
+  {
+    id:'zhuanzhi2026',
+    short:'传智杯',
+    title:'第九届传智杯全国大学生数智创新与 AI 应用大赛',
+    subtitle:'2026 · 数智创新 / AI 应用',
+    cat:'ai', level:'国家级',
+    org:'全国大学生计算机应用能力与数字素养大赛组委会',
+    format:'个人 / 团队（以官网为准）· 研究生组 / A / B / C 组',
+    regStart:'2026-09-01', regEnd:'2026-11-18',
+    contestStart:'2026-11-20', contestEnd:'2026-12-20',
+    deadlineText:'11月18日（报名截止）',
+    contestText:'11月省赛；12月国赛',
+    contestShort:'11月省赛',
+    confidence:'confirmed', route:'院校报名', risk:'mid',
+    source:'school',
+    sourceUrl:'http://jwc.xjtu.edu.cn/info/1172/10505.htm',
+    sourceNote:'西安交大教务处通知',
+    schoolNote:'本科院校，通常报 B 组（A 组限 985/211）。先确认本校是否设赛点：赛点院校由学校遴选省赛名单，非赛点院校需参加初赛。',
+    link:'http://dasai.ityxb.com/', linkLabel:'传智杯官网',
+    summary:'全国大学生计算机应用能力与数字素养大赛暨传智杯，2026 年为第九届，设研究生组、A/B/C 组，覆盖数智创新与 AI 应用。省赛 11 月、国赛 12 月。',
+    why:'比赛内容偏“AI + 应用开发”，比纯算法赛更接近你做项目的方式；B 组对本科院校友好，英文项目或国际化经历可以在答辩里加分。',
+    tips:[
+      '先确认本校是否在赛点名单；非赛点院校要自己走初赛流程，别只等学校通知。',
+      '作品选“AI 应用 + 真实场景”，比纯模型调参更容易拿分。',
+      '报名 11/18 截止，省赛 11 月、国赛 12 月，时间紧，先定题再补细节。'
+    ],
+    tags:['AI 应用','数智创新','B 组'],
+    schedule:[
+      {d:'09.01', t:'报名开放', s:'2026 年 9 月 1 日'},
+      {d:'11.18', t:'报名截止', s:'省赛 11 月，国赛 12 月'},
+      {d:'11.20', t:'省赛（预计）', s:'具体时间另行通知'},
+      {d:'12.20', t:'国赛（预计）', s:'具体时间另行通知'}
+    ]
+  },
+  {
+    id:'apmcm2026',
+    short:'亚太赛',
+    title:'2026 第十六届 APMCM 亚太地区大学生数学建模竞赛',
+    subtitle:'国际赛 · 英文论文 · 1–3 人',
+    cat:'modeling', level:'国际级',
+    org:'中国国际科技促进会物联网工作委员会、北京图象图形学学会、APMCM 组委会',
+    format:'1–3 人一队，可跨校 / 跨专业 · 英文论文',
+    regStart:'2026-09-01', regEnd:'2026-11-25',
+    contestStart:'2026-11-26', contestEnd:'2026-11-30',
+    deadlineText:'11月25日 23:59',
+    contestText:'11月26日 06:00 – 11月30日 09:00',
+    contestShort:'开赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    source:'saikr',
+    sourceUrl:'https://m.saikr.com/vse/apmcm26',
+    sourceNote:'赛氪赛事页（APMCM 官网 apmcm.org）',
+    schoolNote:'全日制在校生可报，可跨校组队；全英文授课对英文论文有优势。赛氪和官网都能报名，最终以 apmcm.org 为准。',
+    link:'http://www.apmcm.org', linkLabel:'APMCM 官网',
+    summary:'亚太地区大学生数学建模竞赛，2026 年为第十六届。1–3 人一队，可跨校跨专业，4 天完成英文论文；题目偏应用，适合作为美赛前的热身。各校认定不同（国 B / 国 C / 省级），以本校文件为准。',
+    why:'比美赛早两个月，难度和节奏更友好，正好用来练英文论文和队内分工；英文写作基础好的同学在写作环节有优势。拿到奖也能先充实简历。',
+    tips:[
+      '直接套美赛的 LaTeX 模板和摘要结构，按 4 天全真模拟走一遍。',
+      '1–3 人即可，不需要凑满 3 人；跨校组队要从队长学校入口报名。',
+      '报名费 100 元/队，11/12 后退赛不退费；11/25 截止，别拖。'
+    ],
+    tags:['英文论文','国际赛','可跨校'],
+    schedule:[
+      {d:'09.01', t:'报名开放', s:'2026 年 9 月 1 日'},
+      {d:'11.25', t:'报名截止', s:'23:59'},
+      {d:'11.26', t:'比赛开始', s:'06:00'},
+      {d:'11.30', t:'比赛结束 / 提交', s:'09:00'},
+      {d:'01.15', t:'结果公布', s:'2027 年 1 月 15 日前'}
+    ]
+  },
+  {
+    id:'neccs2027',
+    short:'英语竞赛',
+    title:'2027 全国大学生英语竞赛（NECCS）',
+    subtitle:'C 类 · 非英语专业本科',
+    cat:'english', level:'国家级 · 榜单赛事',
+    org:'全国高等师范院校外语教学与研究协作组',
+    format:'个人赛 · 听力 / 词汇 / 阅读 / 翻译 / 写作',
+    regStart:'2026-12-17', regEnd:'2027-03-13',
+    contestStart:'2027-04-11', contestEnd:'2027-05-09',
+    deadlineText:'预计 2027年3月中旬',
+    contestText:'预计 4月初赛；5月决赛',
+    contestShort:'初赛',
+    confidence:'expected', route:'院校报名 / 赛氪', risk:'mid',
+    source:'official',
+    schoolNote:'全日制在校生可报，C 类（非英语专业本科）；通常通过学校 / 赛氪分赛区报名。英语基础好的同学性价比很高，但别轻敌——NECCS 题量大、时间紧。',
+    link:'http://www.chinaneccs.cn', linkLabel:'NECCS 官网',
+    summary:'全国大学生英语竞赛，2027 年为第二十九届。分 A/B/C/D 四类，AI 专业报 C 类（非英语专业本科）；一般 12 月报名、4 月初赛、5 月决赛，校内即可参加。',
+    why:'英语基础好，英语竞赛的准备成本低、获奖面广；C 类适合非英语专业本科生，是综测 / 保研材料里最容易补的一块。',
+    tips:[
+      '报 C 类，不要报 A（研究生）或 B（英语专业）。',
+      '按 2 小时整卷模拟，重点听力和阅读速度；NECCS 题量大，先保正确率再提速。',
+      '12 月盯学校 / 赛氪分赛区报名；跨校、跨类别报名无效。'
+    ],
+    tags:['英语','C 类','个人赛'],
+    schedule:[
+      {d:'12.17', t:'报名开放（预计）', s:'参考 2026 年 12 月 17 日'},
+      {d:'03.13', t:'报名截止（预计）', s:'2027 年 3 月中旬'},
+      {d:'04.11', t:'初赛（预计）', s:'4 月第二个周日 9:00–11:00'},
+      {d:'05.09', t:'决赛（预计）', s:'5 月第二个周日 9:00–11:00'}
+    ]
+  },
+  {
+    id:'century2027',
+    short:'21世纪杯',
+    title:'第32届中国日报社“21世纪杯”全国英语演讲比赛',
+    subtitle:'2027 · 大学组 · 个人演讲',
+    cat:'english', level:'国家级 · 英语演讲',
+    org:'中国日报社',
+    format:'个人赛 · 定题演讲 + 即兴演讲 / 问答',
+    regStart:'2027-01-01', regEnd:'2027-04-30',
+    contestStart:'2027-04-30', contestEnd:'2027-04-30',
+    deadlineText:'预计 2027年4月底',
+    contestText:'1–4月报名 / 校赛；9–10月公布结果',
+    contestShort:'校赛',
+    confidence:'expected', route:'官网直报 / 校赛', risk:'low',
+    source:'official',
+    schoolNote:'全日制在校生可报，大学组；学校有校园选拔就走学校通道，没有可走官网个人通道。全英文授课和国际化背景适合演讲赛道。',
+    link:'https://contest.i21st.cn/', linkLabel:'21世纪杯官网',
+    summary:'中国日报社主办的全国英语演讲比赛，个人赛，大学组。一般 1–4 月报名并提交演讲视频，经校赛 / 地区选拔，9–10 月公布省奖、国奖。',
+    why:'英语基础好、愿意表达的同学，演讲是天然优势；比赛看重观点和跨文化表达，AI 学生可以讲“AI 与教育 / 出海”等题目，在留学申请里也有辨识度。',
+    tips:[
+      '准备 3 分钟定题演讲 + 2 分钟即兴演讲，先写中文逻辑再译成英文。',
+      '按官网主题录视频，注意光线、收音和脱稿；不要照读。',
+      '学校有校园选拔就按学校通道报名；没有则走官网个人通道。'
+    ],
+    tags:['英语演讲','个人赛','留学加分'],
+    schedule:[
+      {d:'01.01', t:'报名开放（预计）', s:'参考 2026 年 1 月'},
+      {d:'04.30', t:'报名 / 校赛截止（预计）', s:'提交演讲稿 + 演讲视频'},
+      {d:'09.30', t:'省奖公布（预计）', s:'2027 年 9 月底'},
+      {d:'10.20', t:'国奖公布（预计）', s:'2027 年 10 月'}
+    ]
+  },
+  {
+    id:'stats2027',
+    short:'统计建模',
+    title:'2027 全国大学生统计建模大赛',
+    subtitle:'数据挖掘 / 统计建模 · 3 人队',
+    cat:'modeling', level:'国家级 · 榜单赛事',
+    org:'中国统计教育学会',
+    format:'3 人一队 + 1 名指导教师 · 本科生组 / 研究生组',
+    regStart:'2027-03-01', regEnd:'2027-04-30',
+    contestStart:'2027-05-15', contestEnd:'2027-06-30',
+    deadlineText:'预计 2027年4月底',
+    contestText:'预计 5月省赛；6月国赛',
+    contestShort:'省赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    schoolNote:'全日制在校生可报，3 人一队、不可跨校；需学校推荐 / 校赛。AI 专业适合数据清洗、建模和可视化，找 1 名统计或经济背景队友更稳。',
+    link:'http://tjjmds.ai-learning.net/', linkLabel:'统计建模大赛官网',
+    summary:'中国统计教育学会主办，3 人一队，围绕经济社会热点做数据挖掘、统计分析和论文；校赛—省赛—国赛，2025 年参赛队超过 3 万支。',
+    why:'AI 专业的数据清洗、建模和编程能力直接可用；统计建模比纯数学建模更偏数据和业务，国赛榜单认可度高；和数学建模形成“方法 + 数据”互补。',
+    tips:[
+      '3 月组队，选一个真实经济社会热点，不要做纯算法题。',
+      'Python / R 做数据清洗和可视化，模型解释比复杂模型更重要。',
+      '论文格式、摘要和结论要打磨；校赛名额有限，提前找导师。'
+    ],
+    tags:['数据挖掘','统计建模','3 人队'],
+    schedule:[
+      {d:'03.01', t:'报名 / 组队（预计）', s:'2027 年 3 月'},
+      {d:'04.30', t:'报名截止（预计）', s:'以学校通知为准'},
+      {d:'05.15', t:'省赛（预计）', s:'5 月'},
+      {d:'06.30', t:'国赛（预计）', s:'6 月'}
+    ]
+  },
+  {
+    id:'uchallenge2027',
+    short:'国才杯',
+    title:'2027 “外研社·国才杯”“理解当代中国”全国大学生外语能力大赛',
+    subtitle:'英语组 · 演讲 / 写作 / 阅读 / 翻译',
+    cat:'english', level:'国家级 · 英语系列赛',
+    org:'外语教学与研究出版社',
+    format:'个人 / 团队赛项 · 校赛—省赛—国赛',
+    regStart:'2027-09-01', regEnd:'2027-10-10',
+    contestStart:'2027-12-01', contestEnd:'2027-12-15',
+    deadlineText:'预计 2027年10月上旬（校赛）',
+    contestText:'预计 2027年12月国赛',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'school',
+    sourceUrl:'https://jwc.scu.edu.cn/info/1043/10800.htm',
+    sourceNote:'四川大学 2026 校赛通知（2027 待官宣）',
+    schoolNote:'全日制在校生可报，英语组；校赛由学校组织，2027 通知未出。英语基础好的同学在演讲 / 写作赛道有优势，先确认校内选拔时间。',
+    link:'https://ucc.fltrp.com/', linkLabel:'外研社·国才杯官网',
+    summary:'外研社·国才杯“理解当代中国”全国大学生外语能力大赛，英语组设演讲、写作、阅读、翻译等赛项；校赛—省赛—国赛，2026 年国赛 12 月在北京举行。',
+    why:'国内专业水准最高、认可度最高的英语系列赛之一；英语基础好，在演讲 / 写作赛道有优势；各校多按 A 类赛事认定，对保研和留学都有加分。',
+    tips:[
+      '选演讲或写作一个主项，别同时铺太多；校赛通常 9–10 月截止。',
+      '演讲按 3 分钟定题 + 2 分钟即兴准备；写作练议论文结构。',
+      '2027 主题待官宣，先按 2026 题目“China in the Garden of Civilizations”练手。'
+    ],
+    tags:['英语','演讲 / 写作','A 类'],
+    schedule:[
+      {d:'09.01', t:'校赛报名（预计）', s:'2027 年 9 月'},
+      {d:'10.10', t:'校赛截止（预计）', s:'以学校通知为准'},
+      {d:'11.01', t:'省赛（预计）', s:'11 月'},
+      {d:'12.01', t:'国赛（预计）', s:'12 月'}
+    ]
+  },
+  {
+    id:'icpc2027',
+    short:'ICPC',
+    title:'2027 ICPC / CCPC 程序设计竞赛',
+    subtitle:'亚洲区域赛 / 分站赛 · 3 人队',
+    cat:'algo', level:'国际级 / 国家级',
+    org:'ICPC Foundation / 中国大学生程序设计竞赛组委会',
+    format:'3 人一队 + 1 名教练 · 现场赛',
+    regStart:'2027-06-01', regEnd:'2027-09-15',
+    contestStart:'2027-10-01', contestEnd:'2027-12-15',
+    deadlineText:'预计 2027年9月（校内选拔）',
+    contestText:'预计 2027年10–12月各赛区',
+    contestShort:'区域赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    link:'https://icpc.global/', linkLabel:'ICPC 官网',
+    schoolNote:'需学校教练 / 集训队选拔；以本校 ACM 队伍通知为准。',
+    summary:'ICPC 国际大学生程序设计竞赛与 CCPC 中国大学生程序设计竞赛，是计算机专业最核心的算法团队赛。3 人一队，现场赛，按区域赛 / 分站赛成绩晋级。',
+    why:'这是计算机专业“算法能力”最硬的证明，和蓝桥杯、天梯赛形成从个人到团队的梯度；ICPC/CCPC 奖项在保研、实习和留学申请中都有辨识度。',
+    tips:[
+      '先进校队 / 集训队，再跟队伍打区域赛；个人先刷 Codeforces 1600–2000 和牛客周赛。',
+      '3 人分工：一人主代码、一人想算法、一人构造与调试；赛前固定模板和键盘习惯。',
+      '区域赛名额由学校教练分配，9 月前确认本校报名和选拔安排。'
+    ],
+    tags:['ICPC','算法','3 人队'],
+    schedule:[
+      {d:'06.01', t:'校队选拔 / 报名（预计）', s:'各校时间不同'},
+      {d:'09.15', t:'区域赛名单确认（预计）', s:'由学校教练报名'},
+      {d:'10.01', t:'亚洲区域赛 / 分站赛（预计）', s:'10–12 月各赛区'},
+      {d:'12.15', t:'赛季结束（预计）', s:'以 ICPC / CCPC 官网为准'}
+    ]
+  },
+  {
+    id:'lanqiao2027',
+    short:'蓝桥杯',
+    title:'第十八届蓝桥杯 · 软件赛',
+    subtitle:'2027 · 算法与程序设计',
+    cat:'algo', level:'国家级',
+    org:'蓝桥杯全国大学生软件和信息技术大赛组委会',
+    format:'个人赛 · C/C++、Java、Python',
+    regStart:'2026-10-08', regEnd:'2026-12-31',
+    contestStart:'2027-04-10', contestEnd:'2027-06-15',
+    deadlineText:'12月31日（校赛 / 院校报名）',
+    contestText:'2027年4月省赛；6月国赛',
+    contestShort:'4月省赛',
+    confidence:'confirmed', route:'院校报名', risk:'mid',
+    source:'school',
+    sourceUrl:'http://sise.cqjtu.edu.cn/info/1084/7144.htm',
+    sourceNote:'重庆交大校内选拔通知',
+    schoolNote:'需以院校为单位报名。先确认本校是否设赛点、是否有校内选拔；若没有，联系教务部或蓝桥杯组委会确认借考 / 名额。',
+    link:'https://dasai.lanqiao.cn', linkLabel:'蓝桥杯大赛官网',
+    summary:'国内规模最大的软件和信息技术个人赛之一。软件赛重点考察程序设计语言、数据结构与算法，校赛—省赛—全国总决赛三级赛制。',
+    why:'对 AI 专业来说，这是最稳的算法练兵场：Python 组上手快，C/C++ 组含金量更高。省奖在综测、实习简历里都能用，准备过程也能反哺机器学习代码能力。',
+    tips:[
+      '先在赛链 / 学校系统完成校内选拔报名，再在蓝桥杯官网完成正式报名；两步都别漏。',
+      '刷近 5 年真题 + 洛谷基础题单，重点：DP、图论、二分、前缀和、模拟。',
+      '省赛前两周按 4 小时整卷模拟，训练手速、边界处理和提交策略。'
+    ],
+    tags:['算法','个人赛','院校报名'],
+    schedule:[
+      {d:'10.15', t:'校内选拔 / 报名开放', s:'各校时间略有差异'},
+      {d:'12.31', t:'校赛 / 院校报名截止', s:'以本校通知为准'},
+      {d:'04.10', t:'省赛 / 全国选拔赛', s:'2027 年 4 月'},
+      {d:'06.15', t:'全国总决赛', s:'2027 年 6 月中上旬'}
+    ]
+  },
+  {
+    id:'math2026',
+    short:'数学竞赛',
+    title:'第十八届全国大学生数学竞赛',
+    subtitle:'2026 · 非数学 A 类',
+    cat:'math', level:'国家级',
+    org:'中国数学会',
+    format:'个人赛 · 非数学类 A 类（理工）',
+    regStart:'2026-09-01', regEnd:'2026-10-19',
+    contestStart:'2026-11-14', contestEnd:'2026-11-14',
+    deadlineText:'10月19日（已截止）',
+    contestText:'11月14日 9:00–11:30',
+    contestShort:'初赛',
+    confidence:'confirmed', route:'学校 / 赛区报名', risk:'mid',
+    schoolNote:'通过所在省数学会或学校统一报名；2026 报名已于 10/19 截止。AI 专业报非数学 A 类（理工），不是数学专业类。',
+    link:'https://www.cmathc.org.cn/tzgg/545.html', linkLabel:'全国大学生数学竞赛',
+    summary:'中国数学会主办，初赛考高等数学（非数学 A 类），决赛 2027 年 4 月在大连理工大学举行。AI 专业属于理工类，应报非数学 A 类。',
+    why:'AI 的底层是数学。数理训练和英文教材对这门考试是加分项；如果已经报名，现在只剩三周，值得集中冲一下。',
+    tips:[
+      '高数上下册 + 近 5 年真题，重点：极限、级数、多元微积分、微分方程、空间解析几何。',
+      '非数学 A 类按理工类难度准备，比 B 类高；不要只刷期末题。',
+      '如果错过报名：明年 9 月盯校内通知；也可以先用美赛 / 国赛建模替代。'
+    ],
+    tags:['高数','个人赛','报名已截止'],
+    schedule:[
+      {d:'10.19', t:'报名截止', s:'已截止'},
+      {d:'11.14', t:'初赛', s:'9:00–11:30，全国统一'},
+      {d:'04.01', t:'决赛', s:'2027 年 4 月，大连理工大学'}
+    ]
+  },
+  {
+    id:'mcm2027',
+    short:'美赛',
+    title:'2027 美国大学生数学建模竞赛',
+    subtitle:'MCM / ICM · 国际赛',
+    cat:'modeling', level:'国际级',
+    org:'COMAP（美国数学及其应用联合会）',
+    format:'3 人一队 + 1 名指导教师 · 英文论文',
+    regStart:'2026-09-10', regEnd:'2027-01-28',
+    contestStart:'2027-01-29', contestEnd:'2027-02-02',
+    deadlineText:'2027年1月28日 19:00',
+    contestText:'1月29日 06:00 – 2月2日 09:00',
+    contestShort:'开赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    schoolNote:'全日制在校生可报，官网直报或走辅助报名（注意第三方服务费）。英文授课是优势；需 1 名指导教师，可跨专业组队。',
+    link:'https://www.comap.com/contests/mcm-icm', linkLabel:'COMAP 美赛官网',
+    summary:'国际影响力最大的数学建模竞赛之一。2027 年 1 月 29 日至 2 月 2 日举行，3 人一队，在 4 天内完成建模、求解并提交英文论文。',
+    why:'英文写作基础好，写英文论文和摘要的起点比多数队伍高；AI 队伍可以选数据挖掘、优化、网络科学类题目，美赛奖项在留学申请中认可度很高。',
+    tips:[
+      '1 月寒假集中训练，至少做 2 次四天全真模拟，完整走完“读题—建模—编程—写作—提交”。',
+      '分工：建模 + 编程 + 写作；写作同学必须理解模型，不能只负责排版。',
+      '提前准备 LaTeX 模板、常用图表代码、英文摘要句式；报名 1/28 截止，别拖到最后。'
+    ],
+    tags:['英文论文','国际赛','寒假'],
+    schedule:[
+      {d:'09.10', t:'报名开放', s:'可走官网或辅助报名'},
+      {d:'01.28', t:'报名截止', s:'19:00（北京时间）'},
+      {d:'01.29', t:'比赛开始', s:'06:00（北京时间）'},
+      {d:'02.02', t:'比赛结束 / 提交截止', s:'09:00 结束，10:00 提交截止'}
+    ]
+  },
+  {
+    id:'jsjds2027',
+    short:'计设大赛',
+    title:'2027 中国大学生计算机设计大赛',
+    subtitle:'第二十届 · 人工智能应用',
+    cat:'ai', level:'国家级 · 榜单赛事',
+    org:'中国大学生计算机设计大赛组委会',
+    format:'团队 1–3 人 + 指导教师 · 校赛—省赛—国赛',
+    regStart:'2027-03-01', regEnd:'2027-04-15',
+    contestStart:'2027-07-15', contestEnd:'2027-07-31',
+    deadlineText:'预计 2027年4月中旬',
+    contestText:'预计 2027年7月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'需学校管理员统一报名，校内名额有限。先找教务部确认本校校赛时间、申报名额和作品类别。',
+    link:'https://jsjds.blcu.edu.cn', linkLabel:'计算机设计大赛官网',
+    summary:'教育部相关教指委主办的榜单赛事，设人工智能应用、软件应用、数媒设计等大类。一般 3–4 月校赛报名，5 月省赛，7 月国赛。',
+    why:'“人工智能应用”大类与专业完全对口，课程项目稍加打磨就能参赛；国际化背景适合做跨境、多语种、教育类 AI 应用。',
+    tips:[
+      '3 月前把课程项目升级成可演示作品：明确痛点、数据、模型、评估指标。',
+      '准备 5 分钟演示视频 + 答辩 PPT，突出创新点和工程量，别只讲模型结构。',
+      '校赛名额有限，先找指导教师占位；确认学校是否统一组织报名。'
+    ],
+    tags:['AI 应用','作品赛','校赛选拔'],
+    schedule:[
+      {d:'03.01', t:'校赛 / 报名启动（预计）', s:'以学校通知为准'},
+      {d:'04.15', t:'校赛报名截止（预计）', s:'需学校统一提交'},
+      {d:'05.15', t:'省赛（预计）', s:'5 月'},
+      {d:'07.15', t:'全国总决赛（预计）', s:'7 月'}
+    ]
+  },
+  {
+    id:'internetplus2027',
+    short:'创新大赛',
+    title:'2027 中国国际大学生创新大赛',
+    subtitle:'“互联网+” · 高教主赛道',
+    cat:'innovation', level:'国家级 · 顶级双创',
+    org:'教育部 等',
+    format:'团队 3–15 人 + 指导教师 · 校赛—省赛—国赛',
+    regStart:'2027-03-01', regEnd:'2027-05-15',
+    contestStart:'2027-10-15', contestEnd:'2027-10-20',
+    deadlineText:'预计 2027年5月中旬',
+    contestText:'预计 2027年10月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'校赛由学校创新创业部门组织，需学校推荐。国际化背景适合做跨境 AI、教育科技项目；提前找导师和商科队友。',
+    link:'https://cy.ncss.cn', linkLabel:'全国大学生创业服务网',
+    summary:'国内规格最高的高校双创赛事，设高教主赛道、红旅、产业命题等。一般 3–5 月报名，6 月校赛，7–8 月省赛，10 月国赛。',
+    why:'AI + 垂直场景最容易讲出商业故事；国际化背景可以做跨境 AI 应用、教育科技、智能制造。获奖对保研、创业资源和融资都有帮助。',
+    tips:[
+      '尽早组队：技术 + 产品 + 商科，别全是算法同学；找 1 位愿意深度参与的导师。',
+      '先做 MVP 和真实用户数据，再写商业计划书；评委很看重落地和增长。',
+      '产业命题赛道竞争相对小，重点关注华为、百度等企业发布的 AI 命题。'
+    ],
+    tags:['双创','商业计划','校赛'],
+    schedule:[
+      {d:'03.01', t:'报名启动（预计）', s:'以教育部通知为准'},
+      {d:'05.15', t:'报名截止（预计）', s:'校赛 5–6 月'},
+      {d:'07.15', t:'省赛（预计）', s:'7–8 月'},
+      {d:'10.15', t:'全国总决赛（预计）', s:'10 月'}
+    ]
+  },
+  {
+    id:'challengecup2027',
+    short:'挑战杯',
+    title:'第二十届“挑战杯”课外学术科技作品竞赛',
+    subtitle:'2027 · 学术论文 / 科技发明',
+    cat:'innovation', level:'国家级 · 顶级学术',
+    org:'共青团中央 等',
+    format:'个人 / 团队 · 自然科学论文或科技发明制作',
+    regStart:'2027-01-01', regEnd:'2027-03-31',
+    contestStart:'2027-11-01', contestEnd:'2027-11-05',
+    deadlineText:'预计 2027年3月底（校赛）',
+    contestText:'预计 2027年11月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'校团委组织校赛并推荐，个人不能直接报国赛。提前联系实验室 / 导师，把大创或课程成果转成参赛作品。',
+    link:'https://www.tiaozhanbei.net', linkLabel:'挑战杯官网',
+    summary:'“挑战杯”全国大学生课外学术科技作品竞赛，2027 年为第二十届。含自然科学类学术论文、哲学社会科学类社会调查报告、科技发明制作等赛道。',
+    why:'AI 项目可以走科技发明制作（实物 + 论文），也可以把实验室成果提炼成学术论文。对想保研、进实验室的同学，这是含金量最高的选项之一。',
+    tips:[
+      '从大创 / 实验室项目里提炼，强调原创性和技术深度，不要做“调用 API 的演示”。',
+      '准备实物演示、查新报告、软著 / 专利；论文赛道要提前打磨摘要和贡献点。',
+      '校赛通常 3–4 月，寒假就要定题并找好指导教师。'
+    ],
+    tags:['学术科技','校团委','论文 / 发明'],
+    schedule:[
+      {d:'01.01', t:'校赛启动（预计）', s:'以校团委通知为准'},
+      {d:'03.31', t:'校赛截止（预计）', s:'3–4 月'},
+      {d:'05.31', t:'省赛（预计）', s:'5–6 月'},
+      {d:'11.01', t:'全国总决赛（预计）', s:'11 月'}
+    ]
+  },
+  {
+    id:'smartcar2027',
+    short:'智能汽车',
+    title:'2027 全国大学生智能汽车竞赛',
+    subtitle:'第二十二届 · 视觉 / 自动驾驶',
+    cat:'robot', level:'国家级',
+    org:'中国自动化学会',
+    format:'团队 · 摄像头 / 电磁 / 百度智慧交通等组别',
+    regStart:'2027-03-01', regEnd:'2027-04-30',
+    contestStart:'2027-08-15', contestEnd:'2027-08-20',
+    deadlineText:'预计 2027年4月底',
+    contestText:'预计 2027年8月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'需学校领队统一报名，涉及车模采购、实验室和经费。先确认工程系是否有带队老师和往届车模。',
+    link:'https://www.smartcarrace.com', linkLabel:'智能汽车竞赛官网',
+    summary:'全国大学生智能汽车竞赛，含摄像头、电磁、百度智慧交通、讯飞智慧餐厅等组别，分区赛—全国总决赛。',
+    why:'AI 视觉 + 控制 + 嵌入式的综合度最高，和机器人方向课程衔接很好。做完一辆车，简历上就是一个完整的“感知—决策—控制”项目。',
+    tips:[
+      '选组别前先看实验室积累：有车模选摄像头组，没硬件基础选百度智慧交通 / 仿真组。',
+      'ROS + PyTorch + 控制算法，至少提前 3 个月调车；暑假基本要留校。',
+      '分区赛 7 月、国赛 8 月；提前确认学校领队、经费和车模采购周期。'
+    ],
+    tags:['自动驾驶','嵌入式','暑期'],
+    schedule:[
+      {d:'03.01', t:'报名 / 校赛（预计）', s:'3–5 月'},
+      {d:'04.30', t:'报名截止（预计）', s:'以组委会通知为准'},
+      {d:'07.15', t:'分区赛（预计）', s:'7 月'},
+      {d:'08.15', t:'全国总决赛（预计）', s:'8 月'}
+    ]
+  },
+  {
+    id:'gplt2027',
+    short:'天梯赛',
+    title:'2027 中国高校计算机大赛 · 团体程序设计天梯赛',
+    subtitle:'GPLT · PAT 风格',
+    cat:'algo', level:'国家级',
+    org:'中国高校计算机大赛组委会',
+    format:'团体赛 · 每队 10 人 · 学校统一报名',
+    regStart:'2027-03-01', regEnd:'2027-03-15',
+    contestStart:'2027-04-18', contestEnd:'2027-04-18',
+    deadlineText:'预计 2027年3月中旬',
+    contestText:'预计 2027年4月',
+    contestShort:'比赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'每校名额有限，需学校统一组队报名。先问教务部 / 计算机方向老师是否组织校队；没有校队可尝试联系组委会。',
+    link:'https://gplt.patest.cn', linkLabel:'天梯赛官网',
+    summary:'团体程序设计天梯赛，PAT 风格，题目分基础、进阶、顶级三个难度，按团队总分排名。',
+    why:'比蓝桥杯更偏基础算法，适合大一 / 大二打底；团队赛氛围好，能带动一整个班级的算法学习。如果组队，英文编程习惯是加分项。',
+    tips:[
+      '刷 PAT 乙级 / 甲级真题，重点：模拟、排序、图、DP、字符串处理。',
+      '团队策略：先稳拿基础分，再冲中档题；不要一个人卡难题。',
+      '校队选拔通常在 3 月，提前联系算法社团或计算机方向老师。'
+    ],
+    tags:['PAT','团队赛','算法'],
+    schedule:[
+      {d:'03.01', t:'报名（预计）', s:'3 月'},
+      {d:'03.15', t:'报名截止（预计）', s:'每校名额有限'},
+      {d:'04.18', t:'比赛（预计）', s:'4 月'}
+    ]
+  },
+  {
+    id:'cumcm2027',
+    short:'建模国赛',
+    title:'2027 全国大学生数学建模竞赛',
+    subtitle:'CUMCM · 3 天 4 夜',
+    cat:'modeling', level:'国家级 · 榜单赛事',
+    org:'中国工业与应用数学学会',
+    format:'3 人一队 + 指导教师 · 3 天 4 夜',
+    regStart:'2027-06-01', regEnd:'2027-07-31',
+    contestStart:'2027-09-09', contestEnd:'2027-09-12',
+    deadlineText:'预计 2027年7月底',
+    contestText:'预计 2027年9月上旬',
+    contestShort:'开赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'学校统一报名，需指导教师，通常有校内选拔或集训。暑假前确认本校报名入口和集训安排。',
+    link:'https://www.mcm.edu.cn', linkLabel:'全国大学生数学建模竞赛',
+    summary:'国内规模最大的数学建模竞赛，每年 9 月举行，3 人一队，在 3 天 4 夜内完成建模、求解和论文。',
+    why:'AI 专业的数据处理、编程和调参能力在建模队里非常吃香；国奖在保研综测中认可度高，和美赛形成“国际 + 国内”双线。',
+    tips:[
+      '暑假参加学校集训，至少完成 2 次完整模拟；不要等到 9 月才组队。',
+      '分工：建模 + 编程 + 写作；AI 同学负责数据清洗、算法实现和结果可视化。',
+      '提前准备 Python / Matlab 代码模板、LaTeX 论文模板和常用图表。'
+    ],
+    tags:['国赛','3 人队','暑假集训'],
+    schedule:[
+      {d:'06.01', t:'报名（预计）', s:'6–8 月'},
+      {d:'07.31', t:'报名截止（预计）', s:'以学校通知为准'},
+      {d:'09.09', t:'比赛开始（预计）', s:'9 月上旬，3 天 4 夜'}
+    ]
+  },
+  {
+    id:'raicom2027',
+    short:'睿抗',
+    title:'2027 睿抗机器人开发者大赛',
+    subtitle:'RAICOM · 机器视觉 / ROS',
+    cat:'robot', level:'国家级',
+    org:'工业和信息化部人才交流中心 等',
+    format:'团队 · CAIP 编程 / 视觉 / 导航等赛道',
+    regStart:'2027-03-01', regEnd:'2027-05-31',
+    contestStart:'2027-08-15', contestEnd:'2027-08-20',
+    deadlineText:'预计 2027年5月底',
+    contestText:'预计 2027年8月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    schoolNote:'官网直报，学校限制相对少；仍需指导教师。报名前确认本校是否将该赛事列入竞赛目录，避免综测不认。',
+    link:'https://www.raicom.com.cn', linkLabel:'RAICOM 官网',
+    summary:'睿抗机器人开发者大赛，含编程、机器视觉、ROS 导航、机器人应用等赛道，省赛—全国总决赛。',
+    why:'AI 视觉 / ROS 方向对口，比赛周期比智能汽车短，适合先积累一个机器人项目；官网直报，学校限制相对少。',
+    tips:[
+      '选 CAIP 编程或视觉赛道，先用仿真跑通，再上实车。',
+      '准备技术文档和演示视频，答辩占比不低。',
+      '报名前确认学校是否认定该赛事级别，避免影响综测加分。'
+    ],
+    tags:['ROS','机器视觉','官网直报'],
+    schedule:[
+      {d:'03.01', t:'报名（预计）', s:'3–5 月'},
+      {d:'05.31', t:'报名截止（预计）', s:'官网直报'},
+      {d:'08.15', t:'全国总决赛（预计）', s:'8 月'}
+    ]
+  },
+  {
+    id:'fwwb2027',
+    short:'服务外包',
+    title:'2027 中国大学生服务外包创新创业大赛',
+    subtitle:'企业命题 · AI 应用落地',
+    cat:'innovation', level:'国家级',
+    org:'教育部 等',
+    format:'团队 3–5 人 + 指导教师 · 企业命题',
+    regStart:'2027-02-01', regEnd:'2027-03-31',
+    contestStart:'2027-07-15', contestEnd:'2027-07-20',
+    deadlineText:'预计 2027年3月底',
+    contestText:'预计 2027年7月（国赛）',
+    contestShort:'国赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    schoolNote:'学校统一报名并推荐；先确认校内赛时间和名额。企业命题可直接对接实习，适合有项目经验的同学。',
+    link:'http://www.fwwb.org.cn', linkLabel:'服务外包大赛官网',
+    summary:'中国大学生服务外包创新创业大赛，企业命题 + 自主命题，区域赛—全国总决赛。题目偏真实业务场景和落地。',
+    why:'AI 应用落地类题目多，适合有课程项目或实习经验的同学；企业命题做得好，可以直接对接实习和校招。',
+    tips:[
+      '选企业命题前先看数据和 API 是否开放，避免做到一半发现拿不到数据。',
+      '作品要能跑通端到端 demo，别只交算法 notebook。',
+      '商业计划书 + 技术文档一起准备，答辩讲清楚“谁会用、为什么付费”。'
+    ],
+    tags:['企业命题','AI 应用','校赛'],
+    schedule:[
+      {d:'02.01', t:'报名（预计）', s:'2–3 月'},
+      {d:'03.31', t:'报名截止（预计）', s:'学校统一提交'},
+      {d:'07.15', t:'全国总决赛（预计）', s:'7 月'}
+    ]
+  },
+  {
+    id:'ciscn2027',
+    short:'信安作品赛',
+    title:'2027 第二十届全国大学生信息安全竞赛（作品赛）',
+    subtitle:'自由作品 + 命题挑战 · 网安榜单赛事',
+    cat:'security', level:'国家级 · 榜单赛事',
+    org:'中国信息安全测评中心 / 教育部网络空间安全专业教学指导委员会',
+    format:'团队 ≤ 4 人（含组长）+ 指导教师 · 作品设计',
+    regStart:'2027-06-01', regEnd:'2027-07-05',
+    contestStart:'2027-08-20', contestEnd:'2027-08-22',
+    deadlineText:'预计 2027年7月5日',
+    contestText:'预计 8 月全国决赛',
+    contestShort:'决赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'school',
+    sourceUrl:'https://jiaowu.nwpu.edu.cn/info/1160/28818.htm',
+    sourceNote:'西工大教务部 2026 年报名通知（第十九届）',
+    schoolNote:'每队不超过 4 名学生（含 1 名组长），每人限报 1 队；作品要先过校内评审，再在官网完成校级审核提交组委会。',
+    link:'http://www.ciscn.cn', linkLabel:'全国大学生信息安全竞赛官网',
+    summary:'网络空间安全方向规格最高的本科生赛事，分自由作品赛和命题挑战赛：作品可以是软件、硬件或安全方案，决赛现场答辩评审。',
+    why:'信安方向唯一"教指委 + 榜单"级别的作品赛，信安、软工、AI 安全都能落题；写进保研和综测材料分量足。',
+    tips:[
+      '作品要能演示：软件、硬件、方案都行，评审看"能不能跑通 + 安全价值"，别只交 PPT。',
+      '先过校内评审再提交：学校一般 6 月组织校内选拔，别等官网截止才想起来。',
+      '命题挑战赛的题目每年更新，提前看官网 PDF，选自己有数据或代码基础的题。'
+    ],
+    tags:['信息安全','作品赛','榜单赛事'],
+    schedule:[
+      {d:'06.01', t:'报名启动（预计）', s:'以官网通知为准'},
+      {d:'07.03', t:'作品提交截止（预计）', s:'校内评审后提交'},
+      {d:'07.05', t:'报名截止（预计）', s:'2026 年为 7 月 5 日'},
+      {d:'08.20', t:'全国决赛（预计）', s:'8 月现场评审'}
+    ],
+    deadlines:[{date:'2027-07-05', label:'报名截止'}]
+  },
+  {
+    id:'ciscnsec2027',
+    short:'信安实践赛',
+    title:'2027 第二十届全国大学生信息安全竞赛（创新实践能力赛）',
+    subtitle:'CTF / AWD · 线上初赛 + 分区赛',
+    cat:'security', level:'国家级 · 榜单赛事',
+    org:'教育部高等学校网络空间安全专业教学指导委员会',
+    format:'3–4 人一队 · 解题赛 + 攻防赛',
+    regStart:'2027-03-15', regEnd:'2027-04-30',
+    contestStart:'2027-05-16', contestEnd:'2027-05-17',
+    deadlineText:'预计 4 月底',
+    contestText:'预计 5 月线上初赛；8 月决赛',
+    contestShort:'初赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    sourceUrl:'http://www.ciscn.cn',
+    sourceNote:'全国大学生信息安全竞赛官网',
+    schoolNote:'一般 3–4 人一队，多由学校统一报名或先校内选拔；线上初赛是解题（Jeopardy），分区赛和决赛是攻防（AWD）。',
+    link:'http://www.ciscn.cn', linkLabel:'全国大学生信息安全竞赛官网',
+    summary:'信息安全竞赛的实战赛项：线上初赛解题，分区赛、决赛打 AWD 攻防，是国内高校 CTF 选手的主战场。',
+    why:'想走安全方向，这是最"对口"的国家级赛事；AWD 经历在安全岗实习和保研面试里都直接可用。',
+    tips:[
+      'Pwn / Web / Crypto / Reverse / Misc 分工，2–3 人覆盖 3 个方向最稳，别全员只打 Web。',
+      '用校内靶场或 CTF 平台刷题，重点练 Pwn 和 Web 的手速；AWD 阶段比的是脚本化和修复速度。',
+      '赛后把 writeup 写完，既能复盘也是简历材料。'
+    ],
+    tags:['信息安全','CTF','AWD'],
+    schedule:[
+      {d:'03.15', t:'报名启动（预计）', s:'以官网通知为准'},
+      {d:'04.30', t:'报名截止（预计）', s:'各校安排不同'},
+      {d:'05.16', t:'线上初赛（预计）', s:'解题赛'},
+      {d:'08.20', t:'全国决赛（预计）', s:'攻防赛'}
+    ],
+    deadlines:[{date:'2027-04-30', label:'报名截止'}]
+  },
+  {
+    id:'qwb2027',
+    short:'强网杯',
+    title:'2027 第十一届"强网杯"全国网络安全挑战赛',
+    subtitle:'CTF + 线下攻防 · 郑州',
+    cat:'security', level:'国家级 · 网安顶级赛事',
+    org:'中央网信办、河南省人民政府指导 / 信息工程大学等主办',
+    format:'个人或团队 · 线上解题 + 线下攻防',
+    regStart:'2027-09-20', regEnd:'2027-10-15',
+    contestStart:'2027-10-25', contestEnd:'2027-10-26',
+    deadlineText:'预计 10 月中旬',
+    contestText:'预计 10 月下旬线上赛；11 月下旬线下赛',
+    contestShort:'线上赛',
+    confidence:'expected', route:'官网直报', risk:'mid',
+    source:'official',
+    sourceUrl:'https://www.jswx.gov.cn/yw/202610/t20261010_1363840.shtml',
+    sourceNote:'中国网信网 2026 年第十届启动报道',
+    schoolNote:'线上赛个人/团队都能参加，晋级后到郑州打线下赛；报名入口在"强网竞赛"公众号，学校一般不统一组织。',
+    link:'https://www.jswx.gov.cn/yw/202610/t20261010_1363840.shtml', linkLabel:'强网杯赛事信息（中国网信网）',
+    summary:'国内影响力最大的网络安全挑战赛之一，线上解题赛筛选后进入线下攻防，2026 年为第十届，含行业专项、学院邀请赛等六个部分。',
+    why:'安全方向"简历硬通货"，线上赛门槛不高、线下赛含金量高；打一次能看清自己 Pwn/Web 的真实水平。',
+    tips:[
+      '线上赛是解题 + 攻防混合，先保简单题拿分，再攻 Pwn/Web 高分题。',
+      '晋级线下赛要提前确认差旅和组队信息，郑州现场赛一般 2 天。',
+      '赛题偏真实场景，平时多打 XCTF 分站和校内 CTF 练手。'
+    ],
+    tags:['信息安全','CTF','线下赛'],
+    schedule:[
+      {d:'09.20', t:'报名启动（预计）', s:'关注"强网竞赛"公众号'},
+      {d:'10.15', t:'报名截止（预计）', s:'以官方通知为准'},
+      {d:'10.25', t:'线上赛（预计）', s:'10 月下旬'},
+      {d:'11.25', t:'线下赛（预计）', s:'11 月下旬，郑州'}
+    ],
+    deadlines:[{date:'2027-10-15', label:'报名截止'}]
+  },
+  {
+    id:'ccpc2027',
+    short:'CCPC',
+    title:'2027 中国大学生程序设计竞赛（CCPC）',
+    subtitle:'网络预选 → 分站赛 → 总决赛',
+    cat:'algo', level:'国家级 · 现场赛',
+    org:'中国大学生程序设计竞赛组委会',
+    format:'3 人一队 · 5 小时现场赛',
+    regStart:'2027-08-20', regEnd:'2027-09-10',
+    contestStart:'2027-10-17', contestEnd:'2027-10-18',
+    deadlineText:'预计 9 月上旬（网络赛报名）',
+    contestText:'预计 10–11 月分站赛',
+    contestShort:'分站赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    sourceUrl:'https://ccpc.io',
+    sourceNote:'CCPC 官网',
+    schoolNote:'3 人一队，先打网络预选赛拿分站赛名额；多数学校由教练统一报名，没有教练的同学可以找学院竞赛负责人。',
+    link:'https://ccpc.io', linkLabel:'CCPC 官网',
+    summary:'与 ICPC 同规则的中国大学生程序设计竞赛，网络预选赛后进入各分站现场赛，年底总决赛；赛区与 ICPC 相互独立。',
+    why:'算法竞赛的另一条主线，和 ICPC 分站赛时间错开、可以两条线都报，现场赛经历对算法岗简历很直接。',
+    tips:[
+      '3 人一队一台机器，赛前定好读题顺序和封榜策略，别三个人同时卡一道题。',
+      '网络预选赛是拿分站赛名额的唯一通道，9 月别错过报名。',
+      '和 ICPC 时间不冲突，两边都报能多一次现场赛机会。'
+    ],
+    tags:['算法','现场赛','ICPC 同规则'],
+    schedule:[
+      {d:'08.20', t:'网络赛报名（预计）', s:'以官网通知为准'},
+      {d:'09.10', t:'网络预选赛（预计）', s:'线上'},
+      {d:'10.17', t:'分站赛（预计）', s:'10–11 月各站'},
+      {d:'12.15', t:'总决赛（预计）', s:'12 月'}
+    ],
+    deadlines:[{date:'2027-09-10', label:'网络赛报名截止'}]
+  },
+  {
+    id:'mooctest2026',
+    short:'软件测试',
+    title:'2026 第十一届全国大学生软件测试大赛',
+    subtitle:'开发者 / Web / 嵌入式测试 + AI 评测专项',
+    cat:'engineering', level:'国家级 · 榜单赛事',
+    org:'全国大学生软件测试大赛组委会 / CCF 软件工程、系统软件、容错计算专委会',
+    format:'个人赛 + 团队赛 · 预选赛 → 省赛 → 总决赛',
+    regStart:'2026-09-20', regEnd:'2026-10-30',
+    contestStart:'2026-10-31', contestEnd:'2026-11-01',
+    deadlineText:'10月30日 24:00',
+    contestText:'10月31日–11月1日 预选赛',
+    contestShort:'预选赛',
+    confidence:'confirmed', route:'官网直报', risk:'low',
+    source:'school',
+    sourceUrl:'http://jwc.ynu.edu.cn/info/1009/4389.htm',
+    sourceNote:'云南大学本科生院 2026 年参赛通知',
+    schoolNote:'个人赛需 1 名指导教师，报名免费，在 mooctest.net 报名；省赛 11/14–15，全国总决赛 12/5–6 在广州。',
+    link:'https://www.mooctest.org', linkLabel:'全国大学生软件测试大赛官网',
+    summary:'软件工程方向最对口的国家级赛事，四个赛项：开发者测试（JUnit）、Web 应用测试（Selenium）、嵌入式测试，以及微信小微 AI 助手评测专项赛。',
+    why:'想走测试 / 质量 / 后端方向，这是唯一对口的榜单赛事；四赛项可多选，个人赛门槛低、拿奖面广，写简历比"熟悉测试理论"有说服力。',
+    tips:[
+      '四个赛项时间有冲突：嵌入式 10/31 下午、Web 11/1 上午、开发者 11/1 下午，最多选两个。',
+      '开发者测试考 JUnit 写测试脚本，Web 测试考 Selenium + 用例设计，按自己技术栈选。',
+      '报名免费但 10/30 24:00 截止，先报名再准备。'
+    ],
+    tags:['软件工程','软件测试','榜单赛事'],
+    schedule:[
+      {d:'09.20', t:'报名开放', s:'mooctest.net'},
+      {d:'10.30', t:'报名截止', s:'24:00'},
+      {d:'10.31', t:'预选赛', s:'嵌入式 10/31 下午；Web、开发者 11/1'},
+      {d:'11.14', t:'省赛', s:'11/14–11/15'},
+      {d:'12.05', t:'全国总决赛', s:'12/5–12/6，广州'}
+    ],
+    deadlines:[{date:'2026-10-30', label:'报名截止'}]
+  },
+  {
+    id:'huaweisof2027',
+    short:'华为软挑',
+    title:'2027 第十三届华为软件精英挑战赛',
+    subtitle:'工程优化题 · 大厂直通面试',
+    cat:'algo', level:'企业级 · 全国赛区',
+    org:'华为技术有限公司',
+    format:'≤ 3 人一队 · 线上初赛 + 区域赛 + 总决赛',
+    regStart:'2027-03-01', regEnd:'2027-04-15',
+    contestStart:'2027-05-15', contestEnd:'2027-05-16',
+    deadlineText:'预计 4 月中旬',
+    contestText:'预计 5 月区域赛；6 月总决赛',
+    contestShort:'区域赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'https://s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html',
+    sourceNote:'中国青年报 2026 年第十二届启动报道',
+    schoolNote:'面向在校大学生，官网直接报名、按赛区参赛；赛题来自华为真实业务，允许使用 AI 编程助手。',
+    link:'https://s.cyol.com/articles/2026-03/16/content_3nlGLYS0.html', linkLabel:'2026 大赛启动报道（中国青年报）',
+    summary:'华为每年 3 月启动的软件工程竞赛，赛题来自真实业务场景（调度、资源分配、路径优化等），分区域赛和总决赛，历届都有实习/校招绿色通道。',
+    why:'工程优化 + 大厂直通，是"算法能落地"的最好证明；比刷题更能体现工程能力，简历上比普通课程项目有辨识度。',
+    tips:[
+      '初赛是工程优化题，评分看正确性和性能，先把 baseline 跑通再调参。',
+      '3 人以内组队、语言不限，但性能题 C++ 更有优势。',
+      '区域赛晋级后有面试直通机会，值得认真准备答辩材料。'
+    ],
+    tags:['工程优化','大厂','校招直通'],
+    schedule:[
+      {d:'03.01', t:'报名启动（预计）', s:'3 月中旬前后'},
+      {d:'04.15', t:'报名截止（预计）', s:'以官网通知为准'},
+      {d:'05.15', t:'区域赛（预计）', s:'5 月'},
+      {d:'06.15', t:'总决赛（预计）', s:'6 月'}
+    ],
+    deadlines:[{date:'2027-04-15', label:'报名截止'}]
+  },
+  {
+    id:'bdc2027',
+    short:'大数据挑战赛',
+    title:'2027 中国高校计算机大赛 · 大数据挑战赛',
+    subtitle:'企业真实数据 · 线上赛 + 现场决赛',
+    cat:'ai', level:'国家级 · 榜单赛事',
+    org:'中国高校计算机大赛组委会 / 清华大学大数据系统软件国家工程研究中心',
+    format:'≤ 4 人一队 · 线上赛 A/B 阶段 + 决赛',
+    regStart:'2027-04-01', regEnd:'2027-05-31',
+    contestStart:'2027-08-15', contestEnd:'2027-08-16',
+    deadlineText:'预计 5 月底',
+    contestText:'预计 5–8 月线上赛，8 月决赛',
+    contestShort:'决赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'https://nercbds.tsinghua.edu.cn/bdc/zytz.html',
+    sourceNote:'清华大数据系统软件国家工程研究中心 竞赛通知',
+    schoolNote:'可跨校组队，学生队伍要做学信网学籍验证；决赛需提交 Docker 复现，代码规范要提前读。',
+    link:'https://nercbds.tsinghua.edu.cn/bdc/zytz.html', linkLabel:'大数据挑战赛官网',
+    summary:'中国高校计算机大赛系列的数据竞赛，用真实业务数据（如金融量价）出题，线上赛 A/B 阶段按排行榜晋级，决赛现场答辩并做代码复现。',
+    why:'数据方向含金量最高的赛事之一，看重可复现的建模能力而不是调包；和 MathorCup 大数据互补，一个偏论文、一个偏工程。',
+    tips:[
+      '线上赛分 A/B 阶段按排行榜晋级，先跑通 baseline 再堆特征。',
+      '决赛要交 Docker 复现，data 目录挂载规则提前读，别最后一天才发现跑不通。',
+      '可跨校组队，但学籍验证要用学信网验证码，提前准备。'
+    ],
+    tags:['数据竞赛','真实数据','榜单赛事'],
+    schedule:[
+      {d:'04.01', t:'报名启动（预计）', s:'4 月'},
+      {d:'05.31', t:'报名截止（预计）', s:'5 月底'},
+      {d:'06.15', t:'线上赛 A 阶段（预计）', s:'6–7 月'},
+      {d:'08.15', t:'决赛（预计）', s:'8 月，含 Docker 复现'}
+    ],
+    deadlines:[{date:'2027-05-31', label:'报名截止'}]
+  },
+  {
+    id:'cnsoftbei2027',
+    short:'软件杯',
+    title:'2027 第十六届"中国软件杯"大学生软件设计大赛',
+    subtitle:'企业真赛题 · 区域赛 + 全国总决赛',
+    cat:'engineering', level:'国家级 · 工信部主办',
+    org:'工业和信息化部 / 教育部 / 江苏省人民政府',
+    format:'团队 3–4 人 + 指导教师 · 按赛题开发',
+    regStart:'2027-03-01', regEnd:'2027-05-15',
+    contestStart:'2027-08-21', contestEnd:'2027-08-24',
+    deadlineText:'预计 5 月中旬',
+    contestText:'预计 8 月下旬全国总决赛',
+    contestShort:'总决赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'https://www.cnsoftbei.com',
+    sourceNote:'中国软件杯官网（2026 年第十五届总决赛 8/21–8/24）',
+    schoolNote:'按赛题组队，一队 3–4 人 + 1 名指导教师；赛题由企业出，交作品后先打区域赛，再进全国总决赛答辩。',
+    link:'https://www.cnsoftbei.com', linkLabel:'中国软件杯官网',
+    summary:'工信部系的老牌软件赛事，赛题来自企业真实需求（信创、AI 应用、大数据方向都有），按赛题分别评审，分区域赛和全国总决赛。',
+    why:'赛题就是企业项目，做完能直接放进作品集；信创、国企方向的认可度比纯算法赛更高。',
+    tips:[
+      '先挑赛题再组队：同一道题历年有获奖作品可参考，官网"往届赛题"里有。',
+      '作品要能现场跑通，答辩占比不低，别只交代码和文档。',
+      '8 月总决赛前留两周做演示脚本和 PPT。'
+    ],
+    tags:['软件工程','企业赛题','信创'],
+    schedule:[
+      {d:'03.01', t:'报名启动（预计）', s:'以官网通知为准'},
+      {d:'05.15', t:'报名截止（预计）', s:'5 月中旬'},
+      {d:'07.15', t:'区域赛（预计）', s:'7 月'},
+      {d:'08.21', t:'全国总决赛（预计）', s:'8 月下旬'}
+    ],
+    deadlines:[{date:'2027-05-15', label:'报名截止'}]
+  },
+  {
+    id:'appcontest2027',
+    short:'移动应用创新赛',
+    title:'2027 第十一届中国高校计算机大赛 · 移动应用创新赛',
+    subtitle:'iOS / iPadOS 应用 · 作品赛',
+    cat:'engineering', level:'国家级 · 榜单赛事',
+    org:'中国高校计算机大赛组委会 / 浙江大学',
+    format:'团队 ≤ 3 人 + 指导老师 · 完整 App 作品',
+    regStart:'2027-04-15', regEnd:'2027-06-30',
+    contestStart:'2027-07-15', contestEnd:'2027-07-16',
+    deadlineText:'预计 6 月 30 日',
+    contestText:'预计 6 月底初赛截止，7–8 月复赛',
+    contestShort:'初赛',
+    confidence:'expected', route:'官网直报', risk:'mid',
+    source:'official',
+    sourceUrl:'https://www.appcontest.net',
+    sourceNote:'竞赛官网（2026 年初赛作品 6/30 截止）',
+    schoolNote:'要有 Mac + Xcode 才能做 iOS 作品；晋级复赛需提交学校教务盖章或指导教师签名的报名表。',
+    link:'https://www.appcontest.net', linkLabel:'移动应用创新赛官网',
+    summary:'面向 iOS / iPadOS / visionOS 的 App 作品赛，分启明（设计）、启迪（完整产品）、启航（已上架）三条赛道，评审看创新性、前景和完成度。',
+    why:'想走移动端或产品方向，这是最对口的国家级作品赛；有上架作品还能走启航赛道，获奖即"产品经历"。',
+    tips:[
+      '没有 Mac 就别选这个赛：iOS 开发绕不开 Xcode 和真机调试。',
+      '启迪赛道看重"能跑 + 完整"，一个能演示的小产品胜过一堆功能列表。',
+      '初赛交说明文档 + 效果图就够，别在视频上过度投入。'
+    ],
+    tags:['软件工程','移动开发','作品赛'],
+    schedule:[
+      {d:'04.15', t:'报名启动（预计）', s:'以官网通知为准'},
+      {d:'06.30', t:'初赛作品截止（预计）', s:'启明 / 启迪赛道'},
+      {d:'07.15', t:'复赛（预计）', s:'线上评审'},
+      {d:'09.15', t:'决赛（预计）', s:'现场答辩'}
+    ],
+    deadlines:[{date:'2027-06-30', label:'初赛作品截止'}]
+  },
+  {
+    id:'iot2027',
+    short:'物联网设计',
+    title:'2027 全国大学生物联网设计竞赛',
+    subtitle:'实物作品 · 硬件 + 云平台',
+    cat:'engineering', level:'国家级 · 教指委主办',
+    org:'教育部高等学校计算机类专业教学指导委员会 / 上海交通大学',
+    format:'团队 3–4 人 + 指导教师 · 实物作品',
+    regStart:'2027-04-01', regEnd:'2027-06-15',
+    contestStart:'2027-08-22', contestEnd:'2027-08-24',
+    deadlineText:'预计 6 月中旬',
+    contestText:'预计 8 月下旬全国总决赛',
+    contestShort:'总决赛',
+    confidence:'expected', route:'官网直报', risk:'mid',
+    source:'official',
+    sourceUrl:'https://iot.sjtu.edu.cn',
+    sourceNote:'竞赛官网（2026 年总决赛 8/22–8/24，贵州大学）',
+    schoolNote:'要做实物（开发板 + 传感器），分赛区预赛晋级全国总决赛；每队必须有 1 名领队，一般由指导老师兼任。',
+    link:'https://iot.sjtu.edu.cn', linkLabel:'物联网设计竞赛官网',
+    summary:'物联网方向的实物作品赛，用厂商套件做硬件 + 云平台联动，分赛区预赛、全国总决赛，总决赛还有八强争霸赛。',
+    why:'软硬结合的项目经历在嵌入式、IoT、智能硬件岗位很吃香；做出来是"看得见"的东西，比纯软件项目好讲。',
+    tips:[
+      '先确认学校有没有开发板套件，没有的话赛题方一般会提供借用渠道。',
+      '作品分 = 创意 + 完成度 + 演示，能稳定跑通比堆传感器重要。',
+      '分赛区预赛在 7 月，晋级后 8 月才去现场，暑期留出时间。'
+    ],
+    tags:['软件工程','物联网','硬件'],
+    schedule:[
+      {d:'04.01', t:'报名启动（预计）', s:'以官网通知为准'},
+      {d:'06.15', t:'报名截止（预计）', s:'6 月中旬'},
+      {d:'07.15', t:'分赛区预赛（预计）', s:'7 月'},
+      {d:'08.22', t:'全国总决赛（预计）', s:'8 月下旬'}
+    ],
+    deadlines:[{date:'2027-06-15', label:'报名截止'}]
+  },
+  {
+    id:'iscc2027',
+    short:'ISCC',
+    title:'2027 第二十四届信息安全与对抗技术竞赛（ISCC）',
+    subtitle:'夺旗 / 博弈对抗 / 智能安全 · 三级赛制',
+    cat:'security', level:'国家级 · 榜单赛事',
+    org:'北京理工大学 / 中国兵工学会 / 教育部信息对抗技术专业虚拟教研室',
+    format:'1–3 人一队 + 1 名指导教师 · 校级赛 → 区域赛 → 国赛',
+    regStart:'2027-08-01', regEnd:'2027-10-10',
+    contestStart:'2027-10-20', contestEnd:'2027-10-21',
+    deadlineText:'预计 8–10 月（分赛项）',
+    contestText:'预计 10 月区域赛，11 月总决赛',
+    contestShort:'区域赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    sourceUrl:'https://www.isclab.org.cn',
+    sourceNote:'ISCC 官网（2026 年第 23 届：报名 8–10 月、区域赛 10 月、总决赛 11 月）',
+    schoolNote:'必须先打校级赛才能进区域赛；同一作品只能报一个赛项，报名要交加盖学院公章的报名表。',
+    link:'https://www.isclab.org.cn', linkLabel:'ISCC 官网',
+    summary:'国内最早的信安竞赛（2004 年起），含破阵夺旗、博弈对抗、数据安全、智能安全等多个赛项，校级赛—区域赛—国赛三级，获奖面较宽。',
+    why:'信安方向入门最友好的国赛：校级赛门槛低，适合作为第一个 CTF 类比赛，再往强网杯冲。',
+    tips:[
+      '先从"破阵夺旗赛"入手，题目难度梯度比强网杯平缓。',
+      '校级赛是必经环节，注意学校通知，别直接去报名区域赛。',
+      '一个作品只能报一个赛项，选题前想清楚打哪个方向。'
+    ],
+    tags:['信息安全','CTF','三级赛制'],
+    schedule:[
+      {d:'08.01', t:'报名开始（预计）', s:'分赛项陆续开放'},
+      {d:'09.15', t:'校级赛（预计）', s:'8–9 月'},
+      {d:'10.20', t:'区域赛（预计）', s:'10 月'},
+      {d:'11.20', t:'全国总决赛（预计）', s:'11 月'}
+    ],
+    deadlines:[{date:'2027-10-10', label:'报名截止'}]
+  },
+  {
+    id:'ospp2027',
+    short:'开源之夏',
+    title:'2027 开源之夏（OSPP）',
+    subtitle:'开源项目开发 · 导师制 + 奖金',
+    cat:'engineering', level:'开源项目 · 中科院软件所',
+    org:'中国科学院软件研究所',
+    format:'个人项目 · 申请 → 导师双选 → 结项',
+    regStart:'2027-04-01', regEnd:'2027-05-20',
+    contestStart:'2027-06-01', contestEnd:'2027-09-30',
+    deadlineText:'预计 5 月中下旬',
+    contestText:'预计 6–9 月开发，9 月结项',
+    contestShort:'开发期',
+    confidence:'expected', route:'官网直报', risk:'mid',
+    source:'official',
+    sourceUrl:'https://summer.ospp.ac.cn',
+    sourceNote:'开源之夏官网',
+    schoolNote:'严格说不是比赛，是项目制活动：要写申请材料、和导师双选，按期结项才有奖金和证书，中途退出没有。',
+    link:'https://summer.ospp.ac.cn', linkLabel:'开源之夏官网',
+    summary:'中科院软件所发起的开源暑期活动：给 RISC-V、操作系统、编译器、AI 等方向的开源项目做贡献，通过导师评审后结项，拿奖金与证书。',
+    why:'比刷题更能证明工程能力，结项证书在简历里分量很足；想进基础软件、开源方向几乎是必经之路。',
+    tips:[
+      '提前一个月给目标项目提 PR 混脸熟，申请通过率高很多。',
+      '选项目看导师回复速度，冷门项目更容易中但学到的东西少。',
+      '开发期 3 个月，最少每周 10 小时，别和期末周硬撞。'
+    ],
+    tags:['开源','工程项目','导师制'],
+    schedule:[
+      {d:'04.01', t:'项目列表公布（预计）', s:'以官网为准'},
+      {d:'05.20', t:'申请截止（预计）', s:'5 月中下旬'},
+      {d:'06.01', t:'开发期开始（预计）', s:'6 月'},
+      {d:'09.30', t:'结项（预计）', s:'9 月'}
+    ],
+    deadlines:[{date:'2027-05-20', label:'申请截止'}]
+  },
+  {
+    id:'robomaster2027',
+    short:'RoboMaster',
+    title:'2027 RoboMaster 机甲大师高校系列赛',
+    subtitle:'机器人 5v5 对抗 · 视觉/算法方向',
+    cat:'robot', level:'国家级 · 企业主办',
+    org:'大疆创新（DJI）',
+    format:'校队 8–20 人 · 机械 / 电控 / 视觉 / 算法',
+    regStart:'2027-02-01', regEnd:'2027-04-30',
+    contestStart:'2027-05-15', contestEnd:'2027-05-16',
+    deadlineText:'预计 4 月底',
+    contestText:'预计 5–6 月分区赛，8 月总决赛',
+    contestShort:'分区赛',
+    confidence:'expected', route:'院校报名', risk:'mid',
+    source:'official',
+    sourceUrl:'https://www.robomaster.com',
+    sourceNote:'RoboMaster 官网',
+    schoolNote:'需要学校战队、场地和经费，招新一般在秋季；非机械专业的同学主要做视觉自瞄、决策和电控。',
+    link:'https://www.robomaster.com', linkLabel:'RoboMaster 官网',
+    summary:'DJI 主办的机器人对抗赛，战队自制步兵、英雄、工程机器人打 5v5，涉及机械设计、电控、视觉识别和自动决策四个方向。',
+    why:'想做机器人、视觉算法，这是最能打的赛事；视觉组做的自瞄和能量机关识别，几乎就是 CV 工程实战。',
+    tips:[
+      '视觉组入门先做装甲板识别，官网有开源数据集和往届代码。',
+      '战队一学年投入很大，先确认自己每周能投入 10 小时以上。',
+      '算法方向记得把调参和部署过程写成文档，面试时是加分项。'
+    ],
+    tags:['机器人','计算机视觉','校队'],
+    schedule:[
+      {d:'02.01', t:'报名启动（预计）', s:'校队报名'},
+      {d:'04.30', t:'报名截止（预计）', s:'4 月底'},
+      {d:'05.15', t:'分区赛（预计）', s:'5–6 月'},
+      {d:'08.15', t:'全国总决赛（预计）', s:'8 月'}
+    ],
+    deadlines:[{date:'2027-04-30', label:'报名截止'}]
+  }
+];
+
+EVENTS.forEach(e => { if (!e.source) e.source = 'official'; if (!e.sourceUrl) e.sourceUrl = e.link; });
+const BASE_EVENTS = JSON.parse(JSON.stringify(EVENTS));
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const pad = n => String(n).padStart(2, '0');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function parseDate(str){
+  if (!str) return null;
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function startOfDay(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function addMonths(d, n){ return new Date(d.getFullYear(), d.getMonth() + n, 1); }
+function sameDay(a, b){ return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+function daysBetween(a, b){ return Math.round((startOfDay(b) - startOfDay(a)) / 86400000); }
+function isoDate(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function shortDate(d){ return `${d.getMonth()+1}.${pad(d.getDate())}`; }
+function weekdayCN(d){ return '日一二三四五六'[d.getDay()]; }
+function monthLabel(d){ return `${d.getFullYear()}年${d.getMonth()+1}月`; }
+
+const params = new URLSearchParams(location.search);
+let TODAY = (() => {
+  const t = params.get('today');
+  if (t && /^\d{4}-\d{2}-\d{2}$/.test(t)) return parseDate(t);
+  return startOfDay(new Date());
+})();
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+const NOTES_KEY = 'cs-competition-calendar-notes-v1';
+const FAV_KEY   = 'cs-competition-calendar-favs-v1';
+const GUIDE_KEY = 'cs-competition-calendar-guide-v1';
+let storageOK = true;
+function readJSON(key, fallback){
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (err) {
+    storageOK = false;
+    return fallback;
+  }
+}
+function writeJSON(key, value){
+  try { localStorage.setItem(key, JSON.stringify(value)); }
+  catch (err) { storageOK = false; }
+}
+let notes = readJSON(NOTES_KEY, {});
+let favs = new Set(readJSON(FAV_KEY, []));
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  view: 'month',
+  cursor: new Date(TODAY.getFullYear(), TODAY.getMonth(), 1),
+  status: 'all',
+  cat: 'all',
+  query: '',
+  selectedId: null
+};
+if (params.get('view') === 'agenda') state.view = 'agenda';
+if (params.get('month') && /^\d{4}-\d{2}$/.test(params.get('month'))) {
+  const [y, m] = params.get('month').split('-').map(Number);
+  state.cursor = new Date(y, m - 1, 1);
+}
+
+/* =========================================================
+   SELECTORS / STATUS
+   ========================================================= */
+function deadlinesOf(e){
+  return (e.deadlines && e.deadlines.length) ? e.deadlines : [{ date:e.regEnd, label:e.deadlineText || '报名截止' }];
+}
+function nextDeadline(e){
+  const ds = deadlinesOf(e).slice().sort((a,b) => parseDate(a.date) - parseDate(b.date));
+  const future = ds.filter(d => parseDate(d.date) >= TODAY);
+  return future.length ? future[0] : ds[ds.length - 1];
+}
+function statusOf(e){
+  const dl = nextDeadline(e);
+  const dlDate = parseDate(dl.date);
+  const start = parseDate(e.regStart);
+  const contestStart = parseDate(e.contestStart);
+  const contestEnd = parseDate(e.contestEnd || e.contestStart);
+
+  if (e.confidence === 'expected') {
+    return TODAY < start
+      ? { key:'watch', tone:'watch', label:'待官宣' }
+      : { key:'watch', tone:'watch', label:'预计报名' };
+  }
+  if (TODAY < start) return { key:'soon', tone:'watch', label:'即将开始' };
+
+  if (TODAY <= dlDate) {
+    const d = daysBetween(TODAY, dlDate);
+    if (d <= 7) {
+      const label = d === 0 ? '今天截止' : d === 1 ? '明天截止' : `${d} 天后截止`;
+      return { key:'urgent', tone:'urgent', label };
+    }
+    return { key:'open', tone:'open', label:'报名中' };
+  }
+  if (TODAY < contestStart) return { key:'closed', tone:'closed', label:'报名已截止' };
+  if (TODAY <= contestEnd) return { key:'live', tone:'live', label:'进行中' };
+  return { key:'ended', tone:'ended', label:'已结束' };
+}
+function isSoon(e){
+  if (e.confidence === 'expected') return false;
+  const dl = nextDeadline(e);
+  const d = daysBetween(TODAY, parseDate(dl.date));
+  return d >= 0 && d <= 14;
+}
+function matchesFilters(e){
+  if (state.cat !== 'all' && e.cat !== state.cat) return false;
+  const s = statusOf(e);
+  if (state.status === 'open' && !['open','urgent'].includes(s.key)) return false;
+  if (state.status === 'soon' && !isSoon(e)) return false;
+  if (state.status === 'fav' && !favs.has(e.id)) return false;
+  if (state.query) {
+    const hay = [e.title, e.subtitle, e.org, e.summary, e.tags.join(' '), CATS[e.cat].label, (SOURCES[e.source] || SOURCES.official).label, e.sourceNote || ''].join(' ').toLowerCase();
+    if (!hay.includes(state.query)) return false;
+  }
+  return true;
+}
+function filteredEvents(){ return EVENTS.filter(matchesFilters); }
+
+/* =========================================================
+   CALENDAR ENTRIES
+   ========================================================= */
+function entriesForDay(day){
+  const out = [];
+  for (const e of filteredEvents()) {
+    const dl = nextDeadline(e);
+    if (parseDate(dl.date) >= TODAY && sameDay(parseDate(dl.date), day)) {
+      out.push({ e, kind:'deadline', label:dl.label, date:parseDate(dl.date) });
+    } else if (sameDay(parseDate(e.contestStart), day)) {
+      out.push({ e, kind:'contest', label:e.contestText || e.contestLabel || '开赛', date:parseDate(e.contestStart) });
+    }
+  }
+  out.sort((a,b) => (a.kind === b.kind ? a.e.title.localeCompare(b.e.title,'zh') : a.kind === 'deadline' ? -1 : 1));
+  return out;
+}
+function eventsInMonth(y, m){
+  const ids = new Set();
+  let deadlines = 0;
+  for (const e of filteredEvents()) {
+    const d = parseDate(nextDeadline(e).date);
+    const c = parseDate(e.contestStart);
+    if (d >= TODAY && d.getFullYear() === y && d.getMonth() === m) { ids.add(e.id); deadlines++; }
+    if (c.getFullYear() === y && c.getMonth() === m) ids.add(e.id);
+  }
+  return { count: ids.size, deadlines };
+}
+
+/* =========================================================
+   RENDER: CHROME
+   ========================================================= */
+function renderChrome(){
+  const urgent = EVENTS.filter(isSoon).length;
+  const updDate = parseDate(dataUpdated);
+    const staleDays = updDate ? Math.round((startOfDay(new Date()) - updDate) / 86400000) : 0;
+    $('#page-sub').innerHTML = `面向 <b>全国高校计算机 / 人工智能</b> · ${EVENTS.length} 场赛事 · ${urgent} 场 14 天内截止` + (staleDays > STALE_DAYS ? ` · <span class="stale">数据已 ${staleDays} 天未更新</span>` : '');
+
+  const counts = {
+    all: EVENTS.length,
+    open: EVENTS.filter(e => ['open','urgent'].includes(statusOf(e).key)).length,
+    soon: EVENTS.filter(isSoon).length,
+    fav: favs.size
+  };
+  $$('[data-count]').forEach(el => {
+    const k = el.dataset.count;
+    el.textContent = counts[k] ?? 0;
+  });
+
+  const catList = $('#cat-list');
+  catList.innerHTML = `
+    <button class="side-item ${state.cat === 'all' ? 'active' : ''}" data-cat="all">
+      <span class="dot" style="--c:#8F96A1"></span>全部方向
+      <span class="side-count">${EVENTS.length}</span>
+    </button>
+    ${Object.entries(CATS).map(([key, c]) => {
+      const n = EVENTS.filter(e => e.cat === key).length;
+      return `<button class="side-item ${state.cat === key ? 'active' : ''}" data-cat="${key}">
+        <span class="dot" style="--c:${c.color}"></span>${c.label}
+        <span class="side-count">${n}</span>
+      </button>`;
+    }).join('')}
+  `;
+
+  $$('.side-item[data-status]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.status === state.status);
+  });
+
+  // nearest confirmed deadline still ahead
+  const candidates = EVENTS
+    .filter(e => e.confidence === 'confirmed')
+    .map(e => ({ e, dl: nextDeadline(e) }))
+    .filter(x => parseDate(x.dl.date) >= TODAY)
+    .sort((a,b) => parseDate(a.dl.date) - parseDate(b.dl.date));
+
+  const nearest = $('#nearest-card');
+  if (candidates.length) {
+    const { e, dl } = candidates[0];
+    const d = daysBetween(TODAY, parseDate(dl.date));
+    const when = d === 0 ? '今天' : d === 1 ? '明天' : `${d} 天后`;
+    $('#nearest-title').textContent = e.short;
+    $('#nearest-meta').innerHTML = `<b>${when}</b> · ${shortDate(parseDate(dl.date))} · 点击查看`;
+    nearest.dataset.id = e.id;
+    nearest.style.display = '';
+  } else {
+    $('#nearest-title').textContent = '暂无临近截止';
+    $('#nearest-meta').textContent = '可以开始准备长期赛事';
+    delete nearest.dataset.id;
+  }
+
+  // view + toolbar
+  const isAgenda = state.view === 'agenda';
+  $('.segmented [data-view="month"]').classList.toggle('active', !isAgenda);
+  $('.segmented [data-view="agenda"]').classList.toggle('active', isAgenda);
+  $('.segmented [data-view="month"]').setAttribute('aria-selected', String(!isAgenda));
+  $('.segmented [data-view="agenda"]').setAttribute('aria-selected', String(isAgenda));
+
+  if (isAgenda) {
+    $('#month-label').textContent = '全部赛程';
+    $('#month-meta').textContent = `${filteredEvents().length} 场 · 按最近节点排序`;
+    $('#cal-nav').style.display = 'none';
+    $('#legend').style.display = 'none';
+    $('#search-all').hidden = true;
+  } else {
+    $('#month-label').textContent = monthLabel(state.cursor);
+    const info = eventsInMonth(state.cursor.getFullYear(), state.cursor.getMonth());
+    if (state.query) {
+      const all = filteredEvents().length;
+      $('#month-meta').textContent = `本月 ${info.count} 场 · 全部 ${all} 场`;
+      $('#search-all').hidden = all === 0;
+    } else {
+      $('#month-meta').textContent = `本月 ${info.count} 场 · ${info.deadlines} 个截止`;
+      $('#search-all').hidden = true;
+    }
+    $('#cal-nav').style.display = '';
+    $('#legend').style.display = '';
+  }
+}
+
+/* =========================================================
+   RENDER: MONTH
+   ========================================================= */
+function renderMonth(){
+  const grid = $('#calendar-grid');
+  const agenda = $('#agenda');
+  const weekdays = $('#weekdays');
+  grid.hidden = false;
+  agenda.hidden = true;
+  weekdays.hidden = false;
+
+  const y = state.cursor.getFullYear();
+  const m = state.cursor.getMonth();
+  const first = new Date(y, m, 1);
+  const offset = (first.getDay() + 6) % 7; // Monday first
+  const start = addDays(first, -offset);
+
+  let html = '';
+  for (let i = 0; i < 42; i++) {
+    const day = addDays(start, i);
+    const inMonth = day.getMonth() === m;
+    const isToday = sameDay(day, TODAY);
+    const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+    const entries = entriesForDay(day);
+    const visible = entries.slice(0, 3);
+    const more = entries.length - visible.length;
+
+    const chips = visible.map(({ e, kind }) => {
+      const c = CATS[e.cat].color;
+      const isDeadline = kind === 'deadline';
+      const expected = e.confidence === 'expected';
+      const key = isDeadline ? '截止' : (e.contestShort || '开赛');
+      const note = notes[e.id] && notes[e.id].trim() ? '<span class="note-dot"></span>' : '';
+      const title = `${e.title} · ${isDeadline ? '报名截止' : (e.contestText || '开赛')}`;
+      return `<button class="chip ${isDeadline ? 'deadline' : ''} ${expected ? 'expected' : ''}" style="--c:${c}" data-id="${e.id}" title="${esc(title)}">
+        <span class="chip-k">${key}</span><span class="chip-t">${esc(e.short)}</span>${expected ? '<span class="chip-pre">预</span>' : ''}${note}
+      </button>`;
+    }).join('');
+
+    html += `<div class="day ${inMonth ? '' : 'other'} ${isWeekend ? 'weekend' : ''} ${isToday ? 'today' : ''}"
+      style="--i:${i}" data-date="${isoDate(day)}">
+      <div class="day-head">
+        <span class="day-num">${day.getDate()}</span>
+        ${day.getDate() === 1 ? `<span class="day-month">${day.getMonth()+1}月</span>` : ''}
+      </div>
+      <div class="chips">${chips}${more > 0 ? `<button class="chip-more" data-more="1">+${more} 更多</button>` : ''}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+/* =========================================================
+   RENDER: AGENDA
+   ========================================================= */
+function nextMilestone(e){
+  const dl = nextDeadline(e);
+  const dld = parseDate(dl.date);
+  if (dld >= TODAY) {
+    return { date:dld, label:e.confidence === 'expected' ? '预计报名截止' : dl.label, kind:'deadline' };
+  }
+  const cs = parseDate(e.contestStart);
+  if (cs >= TODAY) return { date:cs, label:e.contestText || '比赛', kind:'contest' };
+  return { date:parseDate(e.contestEnd || e.contestStart), label:'已结束', kind:'ended' };
+}
+function renderAgenda(){
+  const grid = $('#calendar-grid');
+  const agenda = $('#agenda');
+  const weekdays = $('#weekdays');
+  grid.hidden = true;
+  weekdays.hidden = true;
+  agenda.hidden = false;
+
+  const list = filteredEvents()
+    .map(e => ({ e, ms: nextMilestone(e) }))
+    .sort((a,b) => a.ms.date - b.ms.date || a.e.title.localeCompare(b.e.title,'zh'));
+
+  if (!list.length) {
+    agenda.innerHTML = `<div class="agenda-empty">
+      <div class="empty-mark"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 7.5h15M6.5 2v3M13.5 2v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+      <h4>没有匹配的赛事</h4>
+      <p>试试切换方向、清除搜索，或者把筛选改回“全部赛事”。</p>
+      <button data-reset>清除筛选</button>
+    </div>`;
+    return;
+  }
+
+  const groups = new Map();
+  for (const item of list) {
+    const key = `${item.ms.date.getFullYear()}年${item.ms.date.getMonth()+1}月`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(item);
+  }
+
+  let html = '';
+  for (const [label, items] of groups) {
+    html += `<div class="agenda-group"><h3>${label}</h3>`;
+    for (const { e, ms } of items) {
+      const c = CATS[e.cat];
+      const src = SOURCES[e.source] || SOURCES.official;
+      const s = statusOf(e);
+      const hasNote = notes[e.id] && notes[e.id].trim();
+      const date = ms.date;
+      html += `<article class="agenda-row" data-id="${e.id}" tabindex="0">
+        <div class="date-block">
+          <span class="date-day">${date.getDate()}</span>
+          <span class="date-mon">${date.getMonth()+1}月</span>
+          <span class="date-wd">周${weekdayCN(date)}</span>
+        </div>
+        <div class="agenda-body">
+          <div class="agenda-title-line"><span class="cat-line" style="--c:${c.color}"></span><h4>${esc(e.title)}</h4></div>
+          <div class="agenda-org">${esc(e.org)} · ${esc(e.format)}</div>
+          <div class="agenda-tags">${e.tags.slice(0,3).map(t => `<span>${esc(t)}</span>`).join('')}<span class="src-tag" style="--s:${src.color}">${src.label}</span></div>
+        </div>
+        <div class="agenda-right">
+          <span class="status ${s.tone}">${s.label}</span>
+          <span class="milestone">${ms.kind === 'deadline' ? '截止' : ms.kind === 'contest' ? '节点' : ''} <b>${shortDate(date)}</b></span>
+          ${hasNote ? '<span class="milestone" style="color:#B07A1E">有备注</span>' : ''}
+          <button class="star-btn ${favs.has(e.id) ? 'on' : ''}" data-fav="${e.id}" aria-label="收藏" aria-pressed="${favs.has(e.id)}">★</button>
+        </div>
+      </article>`;
+    }
+    html += '</div>';
+  }
+  agenda.innerHTML = html;
+}
+
+/* =========================================================
+   RENDER: ROOT
+   ========================================================= */
+function render(){
+  renderChrome();
+  if (state.view === 'month') renderMonth(); else renderAgenda();
+}
+
+/* =========================================================
+   DETAIL DRAWER
+   ========================================================= */
+function statusPillHTML(e){
+  const s = statusOf(e);
+  return `<span class="status ${s.tone}">${s.label}</span>`;
+}
+function drawerHTML(e){
+  const c = CATS[e.cat];
+  const src = SOURCES[e.source] || SOURCES.official;
+  const s = statusOf(e);
+  const isFav = favs.has(e.id);
+  const myNote = notes[e.id] || '';
+  const expected = e.confidence === 'expected';
+  const riskLabel = e.route === '官网直报' ? '学校限制较少' : '需校内确认 / 选拔';
+  const timeline = e.schedule.map((x, i) => `
+    <div class="tl-row">
+      <span class="tl-date">${esc(x.d)}</span>
+      <span class="tl-rail"><i class="tl-dot" style="--c:${c.color}"></i></span>
+      <span class="tl-body"><b>${esc(x.t)}</b><small>${esc(x.s || '')}</small></span>
+    </div>`).join('');
+
+  return `
+  <div class="drawer-head">
+    <div class="drawer-eyebrow">
+      <span class="cat-pill" style="--c:${c.color}">${c.label}</span>
+      <span class="conf-pill ${expected ? 'expected' : ''}">${expected ? '预计 · 待官宣' : '时间已确认'}</span>
+      <span class="source-pill" style="--s:${src.color}">来源 · ${src.label}</span>
+    </div>
+    <div class="drawer-head-actions">
+      <button class="star-btn ${isFav ? 'on' : ''}" data-fav="${e.id}" aria-label="收藏" aria-pressed="${isFav}">★</button>
+      <button class="icon-btn" data-close-drawer aria-label="关闭详情">✕</button>
+    </div>
+  </div>
+  <div class="drawer-scroll">
+    <h2>${esc(e.title)}</h2>
+    <p class="drawer-sub">${esc(e.subtitle)} · ${esc(e.level)}</p>
+    <div class="tag-row">${e.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
+
+    <div class="fact-grid">
+      <div class="fact">
+        <div class="fact-label">报名截止</div>
+        <div class="fact-value small">${esc(e.deadlineText)}</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">比赛时间</div>
+        <div class="fact-value small">${esc(e.contestText)}</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">参赛形式</div>
+        <div class="fact-value small">${esc(e.format)}</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">报名方式</div>
+        <div class="fact-value small">${esc(e.route)}<br><span style="color:#8A8579">${riskLabel}</span></div>
+      </div>
+    </div>
+
+    <div class="school-note">
+      <span class="icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5 3 5.5v4.2c0 4.1 3 7.1 7 8.3 4-1.2 7-4.2 7-8.3V5.5L10 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="m7.2 10 1.9 1.9 3.7-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div><b>报名提示</b><p>${esc(e.schoolNote || '全国全日制普通高校在籍学生均可报名；具体以赛事官网和校内通知为准。')}</p></div>
+    </div>
+
+    <section class="drawer-section my-notes">
+      <h3>我的备注</h3>
+      <textarea id="note-input" maxlength="800" placeholder="例如：找 2 个队友、约导师周三聊、10 月底前做完 demo……">${esc(myNote)}</textarea>
+      <div class="note-foot"><span id="note-status">${storageOK ? '自动保存于本机' : '本机存储不可用'}</span><span id="note-count">${myNote.length}/800</span></div>
+    </section>
+
+    <section class="drawer-section">
+      <h3>关键节点</h3>
+      <div class="timeline">${timeline}</div>
+    </section>
+
+    <section class="drawer-section">
+      <h3>赛事简介</h3>
+      <p>${esc(e.summary)}</p>
+    </section>
+
+    <section class="drawer-section">
+      <h3>为什么适合你</h3>
+      <p>${esc(e.why)}</p>
+    </section>
+
+    <section class="drawer-section">
+      <h3>备赛建议</h3>
+      <div class="tips-list">
+        ${e.tips.map(t => `<div class="tip"><span class="tick"><svg viewBox="0 0 10 10" fill="none"><path d="m2 5.2 2 2 4-4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>${esc(t)}</p></div>`).join('')}
+      </div>
+    </section>
+
+    <div class="source">信息来源：<a href="${esc(e.sourceUrl || e.link)}" target="_blank" rel="noreferrer">${esc(src.label)}</a>${e.sourceNote ? ' · ' + esc(e.sourceNote) : ''} · <a href="${esc(e.link)}" target="_blank" rel="noreferrer">${esc(e.linkLabel)}</a> · 赛程与资格以官方最新通知为准。${expected ? '该赛事 2027 年通知尚未发布，日期按往年推算。' : ''}</div>
+  </div>
+  <div class="drawer-foot">
+    <a class="btn primary" href="${esc(e.link)}" target="_blank" rel="noreferrer">打开官网 <span>↗</span></a>
+    <button class="btn ghost" id="btn-ics">导出 .ics</button>
+  </div>`;
+}
+
+function openDetail(id){
+  const e = EVENTS.find(x => x.id === id);
+  if (!e) return;
+  state.selectedId = id;
+  const drawer = $('#drawer');
+  drawer.innerHTML = drawerHTML(e);
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  $('#drawer-backdrop').classList.add('open');
+  hideDayMenu();
+
+  const input = $('#note-input');
+  if (input) {
+    let timer = null;
+    input.addEventListener('input', () => {
+      const value = input.value;
+      $('#note-count').textContent = `${value.length}/800`;
+      const st = $('#note-status');
+      st.textContent = '正在保存…';
+      st.classList.remove('saved');
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        notes[id] = value;
+        if (!value.trim()) delete notes[id];
+        writeJSON(NOTES_KEY, notes);
+        if (storageOK) {
+          st.textContent = `已保存 ${new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}`;
+          st.classList.add('saved');
+        } else {
+          st.textContent = '本机存储不可用，请自行备份';
+        }
+        render();
+      }, 350);
+    });
+  }
+}
+
+function closeDetail(){
+  const drawer = $('#drawer');
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  $('#drawer-backdrop').classList.remove('open');
+  state.selectedId = null;
+  setTimeout(() => {
+    if (state.selectedId === null && !drawer.classList.contains('open')) drawer.innerHTML = '';
+    render();
+  }, 120);
+}
+
+/* =========================================================
+   FAVORITES / NOTES / TOAST
+   ========================================================= */
+function toggleFav(id){
+  if (favs.has(id)) favs.delete(id); else favs.add(id);
+  writeJSON(FAV_KEY, Array.from(favs));
+  $$(`[data-fav="${id}"]`).forEach(btn => {
+    const on = favs.has(id);
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', String(on));
+  });
+  render();
+  toast(favs.has(id) ? '已加入收藏' : '已取消收藏');
+}
+let toastTimer = null;
+function toast(msg){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1900);
+}
+
+/* =========================================================
+   DAY MENU
+   ========================================================= */
+function hideDayMenu(){
+  const menu = $('#day-menu');
+  menu.hidden = true;
+  menu.innerHTML = '';
+}
+function openDayMenu(day, entries, anchor){
+  const menu = $('#day-menu');
+  menu.hidden = false;
+  menu.innerHTML = `<div class="dm-head"><b>${day.getMonth()+1}月${day.getDate()}日 · 周${weekdayCN(day)}</b><span>${entries.length} 项</span></div>` +
+    entries.map(({ e, kind }) => {
+      const c = CATS[e.cat].color;
+      const kindText = kind === 'deadline' ? '报名截止' : (e.contestShort || '开赛');
+      return `<button class="dm-item" data-id="${e.id}">
+        <span class="dm-bar" style="--c:${kind === 'deadline' ? '#D93B4A' : c}"></span>
+        <span class="dm-copy"><b>${esc(e.short)}</b><small>${esc(kind === 'deadline' ? e.deadlineText : e.contestText)}</small></span>
+        <span class="dm-kind">${esc(kindText)}</span>
+      </button>`;
+    }).join('');
+
+  const r = anchor.getBoundingClientRect();
+  const mw = 300;
+  let left = Math.min(Math.max(10, r.left + r.width / 2 - mw / 2), window.innerWidth - mw - 10);
+  menu.style.left = `${left}px`;
+  menu.style.top = '0px';
+  const mh = menu.offsetHeight;
+  let top = r.bottom + 6;
+  if (top + mh > window.innerHeight - 10) top = Math.max(10, r.top - mh - 6);
+  menu.style.top = `${top}px`;
+}
+
+/* =========================================================
+   ICS EXPORT
+   ========================================================= */
+function icsEsc(s){
+  return String(s ?? '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
+}
+function icsDate(d){ return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`; }
+function foldICS(line){
+  const enc = new TextEncoder();
+  if (enc.encode(line).length <= 75) return line;
+  const out = [];
+  let cur = '';
+  let curBytes = 0;
+  for (const ch of line) {
+    const n = enc.encode(ch).length;
+    if (curBytes + n > 73) { out.push(cur); cur = ''; curBytes = 0; }
+    cur += ch; curBytes += n;
+  }
+  if (cur) out.push(cur);
+  return out.join('\r\n ');
+}
+function buildICS(events){
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CS Competition Calendar//CN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  for (const e of events) {
+    const dl = nextDeadline(e);
+    const dld = parseDate(dl.date);
+    const cs = parseDate(e.contestStart);
+    const ce = parseDate(e.contestEnd || e.contestStart);
+    const desc = `${e.subtitle}\n报名：${e.deadlineText}\n比赛：${e.contestText}\n报名方式：${e.route}\n报名提示：${e.schoolNote}\n${e.link}`;
+    lines.push(
+      'BEGIN:VEVENT',
+      `UID:${e.id}-deadline@cs-competition-calendar`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${icsDate(dld)}`,
+      `DTEND;VALUE=DATE:${icsDate(addDays(dld,1))}`,
+      `SUMMARY:${icsEsc('【截止】' + e.title)}`,
+      `DESCRIPTION:${icsEsc(desc)}`,
+      `URL:${e.link}`,
+      'END:VEVENT',
+      'BEGIN:VEVENT',
+      `UID:${e.id}-contest@cs-competition-calendar`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${icsDate(cs)}`,
+      `DTEND;VALUE=DATE:${icsDate(addDays(ce,1))}`,
+      `SUMMARY:${icsEsc('【' + (e.contestShort || '比赛') + '】' + e.title)}`,
+      `DESCRIPTION:${icsEsc(desc)}`,
+      `URL:${e.link}`,
+      'END:VEVENT'
+    );
+  }
+  lines.push('END:VCALENDAR');
+  return lines.map(foldICS).join('\r\n');
+}
+function downloadICS(events, filename){
+  if (!events.length) { toast('没有可导出的赛事'); return; }
+  const blob = new Blob([buildICS(events)], { type:'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+  toast(`已导出 ${events.length} 场赛事`);
+}
+
+/* =========================================================
+   UPDATE FEED
+   ========================================================= */
+const FEED_URL_KEY = 'cs-competition-calendar-feed-url-v1';
+const FEED_CACHE_KEY = 'cs-competition-calendar-feed-cache-v1';
+const DEFAULT_FEED_URL = 'data/feed.latest.json';
+const STALE_DAYS = 120;
+let updateBusy = false;
+
+const EVENT_FIELDS = [
+  'short','title','subtitle','cat','level','org','format',
+  'regStart','regEnd','contestStart','contestEnd',
+  'deadlineText','contestText','contestShort',
+  'confidence','route','risk','source','sourceUrl','sourceNote',
+  'schoolNote','link','linkLabel','summary','why','tips','tags','schedule','deadlines'
+];
+
+function safeUrl(u){
+  const s = String(u || '').trim();
+  if (/["'<>\s]/.test(s)) return '';
+  return /^https?:\/\//i.test(s) ? s : '';
+}
+function isDateString(v){
+  return typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+}
+function sanitizePatch(raw){
+  const patch = {};
+  for (const key of EVENT_FIELDS) {
+    if (raw[key] === undefined) continue;
+    let value = raw[key];
+    if (typeof value === 'string') value = value.trim();
+    if (value === '') continue;
+    if (key === 'cat' && !CATS[value]) continue;
+    if (key === 'source' && !SOURCES[value]) continue;
+    if (key === 'confidence' && !['confirmed','expected'].includes(value)) continue;
+    if ((key === 'link' || key === 'sourceUrl')) {
+      const url = safeUrl(value);
+      if (!url) continue;
+      value = url;
+    }
+    if (['regStart','regEnd','contestStart','contestEnd'].includes(key) && !isDateString(value)) continue;
+    if (['tips','tags','schedule','deadlines'].includes(key) && !Array.isArray(value)) continue;
+    patch[key] = value;
+  }
+  return patch;
+}
+function normalizeNewEvent(raw){
+  const p = sanitizePatch(raw);
+  if (!p.title || !p.regEnd || !p.contestStart || !p.link) return null;
+  return {
+    id: String(raw.id),
+    short: p.short || p.title.slice(0, 10),
+    title: p.title,
+    subtitle: p.subtitle || '',
+    cat: p.cat || 'ai',
+    level: p.level || '赛事',
+    org: p.org || '',
+    format: p.format || '',
+    regStart: p.regStart || p.regEnd,
+    regEnd: p.regEnd,
+    contestStart: p.contestStart,
+    contestEnd: p.contestEnd || p.contestStart,
+    deadlineText: p.deadlineText || p.regEnd,
+    contestText: p.contestText || p.contestStart,
+    contestShort: p.contestShort || '开赛',
+    confidence: p.confidence === 'expected' ? 'expected' : 'confirmed',
+    route: p.route || '官网直报',
+    risk: p.risk || 'low',
+    source: SOURCES[p.source] ? p.source : 'official',
+    sourceUrl: p.sourceUrl || p.link,
+    sourceNote: p.sourceNote || '',
+    schoolNote: p.schoolNote || '以赛事官网和校内通知为准。',
+    link: p.link,
+    linkLabel: p.linkLabel || '赛事官网',
+    summary: p.summary || '',
+    why: p.why || '',
+    tips: Array.isArray(p.tips) ? p.tips : [],
+    tags: Array.isArray(p.tags) ? p.tags : [],
+    schedule: Array.isArray(p.schedule) ? p.schedule : [],
+    deadlines: Array.isArray(p.deadlines) ? p.deadlines : undefined
+  };
+}
+function mergeFeed(feed){
+  const rawEvents = Array.isArray(feed.events) ? feed.events : [];
+  const removeIds = Array.isArray(feed.remove) ? feed.remove.map(String) : [];
+  const merged = EVENTS.map(e => ({ ...e }));
+  const index = new Map(merged.map((e, i) => [e.id, i]));
+  let added = 0, changed = 0, removed = 0;
+
+  for (const raw of rawEvents) {
+    if (!raw || typeof raw !== 'object') continue;
+    const id = String(raw.id || '').trim();
+    if (!/^[a-z0-9_-]{3,80}$/i.test(id)) continue;
+    const patch = sanitizePatch(raw);
+    if (index.has(id)) {
+      const i = index.get(id);
+      const next = { ...merged[i], ...patch, id };
+      if (JSON.stringify(next) !== JSON.stringify(merged[i])) {
+        merged[i] = next;
+        changed++;
+      }
+    } else {
+      const e = normalizeNewEvent({ ...raw, id });
+      if (!e) continue;
+      merged.push(e);
+      index.set(id, merged.length - 1);
+      added++;
+    }
+  }
+  for (const id of removeIds) {
+    const i = merged.findIndex(e => e.id === id);
+    if (i >= 0) { merged.splice(i, 1); removed++; }
+  }
+  EVENTS.splice(0, EVENTS.length, ...merged);
+  return { added, changed, removed, total: EVENTS.length, changes: added + changed + removed };
+}
+function updateDateLabels(){
+  const d = parseDate(dataUpdated);
+  if (!d) return;
+  const short = `${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
+  const full = `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
+  const side = $('#side-update');
+  if (side) side.textContent = short;
+  const foot = $('#foot-update');
+  if (foot) foot.innerHTML = `<i class="live"></i>数据更新 ${full}`;
+  const modalDate = $('#update-date');
+  if (modalDate) modalDate.textContent = full;
+}
+function applyFeed(feed, opts = {}){
+  if (!feed || typeof feed !== 'object' || Array.isArray(feed)) {
+    throw new Error('更新源必须是一个 JSON 对象');
+  }
+  if (feed.events !== undefined && !Array.isArray(feed.events)) {
+    throw new Error('events 必须是数组');
+  }
+  const result = mergeFeed(feed);
+  if (isDateString(feed.updatedAt)) dataUpdated = feed.updatedAt;
+  if (feed.version) feedVersion = String(feed.version);
+  feedSource = opts.source || '在线';
+  TODAY = startOfDay(new Date());
+  updateDateLabels();
+  if (opts.persist !== false) {
+    writeJSON(FEED_CACHE_KEY, { feed, source: feedSource, savedAt: new Date().toISOString() });
+  }
+  if (opts.render !== false) {
+    render();
+    if (state.selectedId) {
+      if (EVENTS.some(e => e.id === state.selectedId) && $('#drawer').classList.contains('open')) {
+        openDetail(state.selectedId);
+      } else if (!EVENTS.some(e => e.id === state.selectedId)) {
+        closeDetail();
+      }
+    }
+  }
+  return result;
+}
+function loadLocalFeed(){
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      script.remove();
+      reject(new Error('加载 update-feed.js 超时'));
+    }, 4500);
+    script.src = 'update-feed.js?t=' + Date.now();
+    script.async = true;
+    script.onload = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      script.remove();
+      if (window.__CS_FEED__) resolve(window.__CS_FEED__);
+      else reject(new Error('update-feed.js 没有定义 __CS_FEED__'));
+    };
+    script.onerror = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      script.remove();
+      reject(new Error('找不到 update-feed.js'));
+    };
+    document.head.appendChild(script);
+  });
+}
+async function fetchFeedJSON(url){
+  const raw = String(url || '').trim();
+  let target = '';
+  if (safeUrl(raw)) target = raw;
+  else if (/^[\w.\/-]+$/.test(raw)) { try { target = new URL(raw, location.href).href; } catch (err) { target = ''; } }
+  if (!target) throw new Error('在线更新源必须是 http(s) 地址');
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 9000);
+  try {
+    const res = await fetch(target, { cache:'no-store', signal:ctrl.signal, headers:{ 'Accept':'application/json' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    return JSON.parse(text.replace(/^\uFEFF/, ''));
+  } catch (err) {
+    if (err.name === 'AbortError') throw new Error('请求超时（9 秒）');
+    if (err instanceof SyntaxError) throw new Error('在线更新源返回的不是有效 JSON');
+    throw new Error(err.message || '无法读取在线更新源');
+  } finally {
+    clearTimeout(timer);
+  }
+}
+function setUpdateState(kind, text){
+  const box = $('#update-state');
+  if (box) box.className = 'update-state ' + kind;
+  const label = $('#update-state-text');
+  if (label) label.textContent = text;
+  const spinner = $('#update-spinner');
+  if (spinner) spinner.style.display = kind === 'checking' ? '' : 'none';
+}
+function setUpdateNote(text){
+  const el = $('#update-note');
+  if (el) el.textContent = text || '';
+}
+function refreshUpdateMeta(){
+  const count = $('#update-count');
+  if (count) count.textContent = EVENTS.length;
+  const date = $('#update-date');
+  if (date) date.textContent = dataUpdated.replace(/-/g, '.');
+  const source = $('#update-source');
+  if (source) source.textContent = feedSource;
+  const checked = $('#update-checked');
+  if (checked) checked.textContent = '检查于 ' + new Date().toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+}
+async function checkForUpdates(){
+  if (updateBusy) return;
+  updateBusy = true;
+  const btn = $('#btn-update');
+  if (btn) btn.classList.add('loading');
+  setUpdateState('checking', '正在检查更新…');
+  setUpdateNote('');
+
+  const urlInput = $('#update-url');
+  const url = urlInput ? urlInput.value.trim() : '';
+  if (url && !safeUrl(url)) {
+    setUpdateState('error', '在线更新源格式不正确');
+    setUpdateNote('请填写以 http:// 或 https:// 开头的 JSON 地址，或留空使用应用内的 update-feed.js。');
+    updateBusy = false;
+    if (btn) btn.classList.remove('loading');
+    return;
+  }
+  try {
+    if (url) {
+      try { localStorage.setItem(FEED_URL_KEY, url); } catch (err) {}
+    } else {
+      try { localStorage.removeItem(FEED_URL_KEY); } catch (err) {}
+    }
+    let feed, sourceLabel;
+    if (url) {
+      feed = await fetchFeedJSON(url);
+      sourceLabel = '在线';
+    } else {
+      try {
+        feed = await fetchFeedJSON(DEFAULT_FEED_URL);
+        sourceLabel = '官方源';
+      } catch (err) {
+        feed = await loadLocalFeed();
+        sourceLabel = '内置';
+      }
+    }
+    const result = applyFeed(feed, { source: sourceLabel, persist:true });
+    if (result.changes > 0) {
+      setUpdateState('ok', `已更新 ${result.changes} 处 · 当前 ${result.total} 场`);
+      toast(`赛历已更新 · ${result.total} 场`);
+    } else {
+      setUpdateState('ok', `已是最新 · ${result.total} 场`);
+      toast('赛历已是最新');
+    }
+    if (feed.notice) {
+      setUpdateNote(feed.notice);
+    } else if (url) {
+      setUpdateNote('已读取在线更新源。');
+    } else {
+      setUpdateNote('已读取应用内的 update-feed.js。修改该文件后，再次点「更新」即可生效。');
+    }
+  } catch (err) {
+    setUpdateState('error', '更新失败 · 仍使用当前数据');
+    setUpdateNote(`${err.message}\n\n可以检查网络或 URL；也可以点「导入文件」手动更新，或点「恢复内置」回到应用自带赛历。`);
+  } finally {
+    updateBusy = false;
+    if (btn) btn.classList.remove('loading');
+    refreshUpdateMeta();
+  }
+}
+function openUpdateModal(){
+  const modal = $('#update-modal');
+  if (!modal) return;
+  modal.hidden = false;
+  const urlInput = $('#update-url');
+  if (urlInput) {
+    try { urlInput.value = localStorage.getItem(FEED_URL_KEY) || ''; } catch (err) { urlInput.value = ''; }
+  }
+  refreshUpdateMeta();
+  setUpdateState('checking', '正在检查更新…');
+  setUpdateNote('');
+  checkForUpdates();
+}
+function closeUpdateModal(){
+  const modal = $('#update-modal');
+  if (modal) modal.hidden = true;
+}
+async function importFeedFile(file){
+  if (!file) return;
+  setUpdateState('checking', '正在读取更新文件…');
+  setUpdateNote('');
+  try {
+    const text = await file.text();
+    let feed;
+    try { feed = JSON.parse(text); }
+    catch (err) { throw new Error('文件不是有效的 JSON，请选择 .json 更新文件'); }
+    const result = applyFeed(feed, { source:'导入', persist:true });
+    if (result.changes > 0) {
+      setUpdateState('ok', `已导入 ${result.changes} 处 · 当前 ${result.total} 场`);
+      toast('更新文件已导入');
+    } else {
+      setUpdateState('ok', `已读取文件 · 当前 ${result.total} 场（无变化）`);
+    }
+    setUpdateNote(feed.notice || `已从 ${file.name} 导入更新。`);
+  } catch (err) {
+    setUpdateState('error', '导入失败');
+    setUpdateNote(err.message);
+  } finally {
+    const input = $('#feed-file');
+    if (input) input.value = '';
+    refreshUpdateMeta();
+  }
+}
+function resetFeed(){
+  try {
+    localStorage.removeItem(FEED_CACHE_KEY);
+    localStorage.removeItem(FEED_URL_KEY);
+  } catch (err) {}
+  EVENTS.splice(0, EVENTS.length, ...JSON.parse(JSON.stringify(BASE_EVENTS)));
+  dataUpdated = '2026-10-22';
+  feedVersion = APP_VERSION;
+  feedSource = '内置';
+  TODAY = startOfDay(new Date());
+  const urlInput = $('#update-url');
+  if (urlInput) urlInput.value = '';
+  updateDateLabels();
+  render();
+  setUpdateState('ok', `已恢复内置 · ${EVENTS.length} 场`);
+  setUpdateNote('已清除导入 / 在线更新缓存，恢复应用自带的赛历。');
+  refreshUpdateMeta();
+  toast('已恢复内置赛历');
+}
+async function maybeRefreshFeed(){
+  if (params.has('nofeed')) return;
+  let url = '';
+  try { url = localStorage.getItem(FEED_URL_KEY) || ''; } catch (err) { url = ''; }
+  const target = url || DEFAULT_FEED_URL;
+  try {
+    const feed = await fetchFeedJSON(target);
+    if (!feed || (feed.version && String(feed.version) === String(feedVersion))) return;
+    applyFeed(feed, { source: url ? '在线' : '官方源', persist: false });
+  } catch (err) {
+    /* 离线或没有在线源：保持内置数据，不打扰用户 */
+  }
+}
+function applyCachedFeed(){
+  const cached = readJSON(FEED_CACHE_KEY, null);
+  if (!cached || !cached.feed) return;
+  const cachedVersion = cached.feed.version ? String(cached.feed.version) : '';
+  if (cachedVersion && cachedVersion < APP_VERSION) {
+    try { localStorage.removeItem(FEED_CACHE_KEY); } catch (err) {}
+    return;
+  }
+  try {
+    applyFeed(cached.feed, { source: cached.source || '缓存', persist:false, render:false });
+  } catch (err) {
+    console.warn('cached feed ignored:', err);
+  }
+}
+
+/* =========================================================
+   GUIDE
+   ========================================================= */
+function openGuide(){
+  $('#guide').hidden = false;
+}
+function closeGuide(){
+  $('#guide').hidden = true;
+  try { localStorage.setItem(GUIDE_KEY, '1'); } catch (err) {}
+}
+
+/* =========================================================
+   EVENTS / BINDINGS
+   ========================================================= */
+function resetFilters(){
+  state.status = 'all';
+  state.cat = 'all';
+  state.query = '';
+  $('#search').value = '';
+  render();
+}
+
+// sidebar status
+$$('.side-item[data-status]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    state.status = btn.dataset.status;
+    render();
+  });
+});
+
+// category delegation
+$('#cat-list').addEventListener('click', ev => {
+  const btn = ev.target.closest('[data-cat]');
+  if (!btn) return;
+  state.cat = btn.dataset.cat;
+  render();
+});
+
+// search
+$('#search').addEventListener('input', ev => {
+  state.query = ev.target.value.trim().toLowerCase();
+  render();
+});
+document.addEventListener('keydown', ev => {
+  if ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === 'k') {
+    ev.preventDefault();
+    $('#search').focus();
+    $('#search').select();
+  }
+});
+
+// view toggle
+$$('.segmented [data-view]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    state.view = btn.dataset.view;
+    hideDayMenu();
+    render();
+  });
+});
+
+// month nav
+$('#search-all').addEventListener('click', () => { state.view = 'agenda'; render(); });
+$('#prev-month').addEventListener('click', () => { state.cursor = addMonths(state.cursor, -1); render(); });
+$('#next-month').addEventListener('click', () => { state.cursor = addMonths(state.cursor, 1); render(); });
+$('#today-btn').addEventListener('click', () => {
+  state.view = 'month';
+  state.cursor = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
+  render();
+});
+document.addEventListener('keydown', ev => {
+  if (ev.target.matches('input, textarea')) return;
+  if (state.view !== 'month') return;
+  if (ev.key === 'ArrowLeft') { state.cursor = addMonths(state.cursor, -1); render(); }
+  if (ev.key === 'ArrowRight') { state.cursor = addMonths(state.cursor, 1); render(); }
+});
+
+// calendar & agenda clicks
+$('#calendar-card').addEventListener('click', ev => {
+  const fav = ev.target.closest('[data-fav]');
+  if (fav) { ev.stopPropagation(); toggleFav(fav.dataset.fav); return; }
+
+  const more = ev.target.closest('[data-more]');
+  if (more) {
+    ev.stopPropagation();
+    const cell = more.closest('.day');
+    const day = parseDate(cell.dataset.date);
+    openDayMenu(day, entriesForDay(day), cell);
+    return;
+  }
+
+  const dmItem = ev.target.closest('.dm-item');
+  if (dmItem) { openDetail(dmItem.dataset.id); return; }
+
+  const chip = ev.target.closest('.chip');
+  if (chip) { openDetail(chip.dataset.id); return; }
+
+  const row = ev.target.closest('.agenda-row');
+  if (row) { openDetail(row.dataset.id); return; }
+
+  const reset = ev.target.closest('[data-reset]');
+  if (reset) { resetFilters(); return; }
+
+  const cell = ev.target.closest('.day');
+  if (cell) {
+    const day = parseDate(cell.dataset.date);
+    const entries = entriesForDay(day);
+    if (entries.length) openDayMenu(day, entries, cell);
+  }
+});
+
+// day menu item
+$('#day-menu').addEventListener('click', ev => {
+  const btn = ev.target.closest('.dm-item');
+  if (btn) openDetail(btn.dataset.id);
+});
+document.addEventListener('click', ev => {
+  const menu = $('#day-menu');
+  if (menu.hidden) return;
+  if (ev.target.closest('#day-menu') || ev.target.closest('.day')) return;
+  hideDayMenu();
+});
+
+// drawer actions (delegation)
+$('#drawer').addEventListener('click', ev => {
+  if (ev.target.closest('[data-close-drawer]')) { closeDetail(); return; }
+  const fav = ev.target.closest('[data-fav]');
+  if (fav) { toggleFav(fav.dataset.fav); return; }
+  if (ev.target.closest('#btn-ics')) {
+    const e = EVENTS.find(x => x.id === state.selectedId);
+    if (e) downloadICS([e], `CS-${e.short}.ics`);
+  }
+});
+$('#drawer-backdrop').addEventListener('click', closeDetail);
+
+// nearest card
+$('#nearest-card').addEventListener('click', () => {
+  if ($('#nearest-card').dataset.id) openDetail($('#nearest-card').dataset.id);
+});
+$('#nearest-card').addEventListener('keydown', ev => {
+  if ((ev.key === 'Enter' || ev.key === ' ') && $('#nearest-card').dataset.id) {
+    ev.preventDefault();
+    openDetail($('#nearest-card').dataset.id);
+  }
+});
+
+// export all
+$('#btn-export-all').addEventListener('click', () => downloadICS(EVENTS, 'CS-全部赛程.ics'));
+
+// guide
+$('#btn-guide').addEventListener('click', openGuide);
+$('#btn-guide-2').addEventListener('click', openGuide);
+$('#guide').addEventListener('click', ev => {
+  if (ev.target === $('#guide') || ev.target.closest('[data-close-guide]')) closeGuide();
+});
+
+// update
+$('#btn-update').addEventListener('click', openUpdateModal);
+$('#btn-check-update').addEventListener('click', checkForUpdates);
+$('#btn-import-feed').addEventListener('click', () => $('#feed-file').click());
+$('#feed-file').addEventListener('change', ev => {
+  const file = ev.target.files && ev.target.files[0];
+  if (file) importFeedFile(file);
+});
+$('#btn-reset-feed').addEventListener('click', resetFeed);
+$('#update-modal').addEventListener('click', ev => {
+  if (ev.target === $('#update-modal') || ev.target.closest('[data-close-update]')) closeUpdateModal();
+});
+$('#update-url').addEventListener('keydown', ev => {
+  if (ev.key === 'Enter') { ev.preventDefault(); checkForUpdates(); }
+});
+
+// escape
+document.addEventListener('keydown', ev => {
+  if (ev.key !== 'Escape') return;
+  hideDayMenu();
+  if (!$('#update-modal').hidden) { closeUpdateModal(); return; }
+  if (!$('#guide').hidden) { closeGuide(); return; }
+  if ($('#drawer').classList.contains('open')) closeDetail();
+});
+
+// deep link + first-run guide
+applyCachedFeed();
+render();
+updateDateLabels();
+setTimeout(maybeRefreshFeed, 350);
+if (params.get('open')) {
+  const id = params.get('open');
+  if (EVENTS.some(e => e.id === id)) setTimeout(() => openDetail(id), 80);
+}
+if (!params.has('noguide')) {
+  let seen = false;
+  try { seen = localStorage.getItem(GUIDE_KEY) === '1'; } catch (err) { seen = false; }
+  if (!seen) setTimeout(openGuide, 700);
+}
+
+if (params.has('debug')) {
+  window.addEventListener('error', ev => document.body.setAttribute('data-error', ev.message));
+  setTimeout(() => {
+    const g = $('#calendar-grid');
+    const d = $('.day');
+    const card = $('#calendar-card');
+    const cs = getComputedStyle(g);
+    const info = {
+      winH: innerHeight, bodyH: document.body.scrollHeight, appH: $('.app').clientHeight,
+      mainH: $('.main').clientHeight, cardH: card.clientHeight, gridH: g.clientHeight,
+      rows: cs.gridTemplateRows, cols: cs.gridTemplateColumns, dayH: d ? d.offsetHeight : null,
+      dayTop: d ? d.getBoundingClientRect().top : null, dayCount: $$('.day').length
+    };
+    document.body.setAttribute('data-debug', JSON.stringify(info));
+  }, 900);
+}
+</script>
+</body>
+</html>
