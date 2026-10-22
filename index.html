@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：35 场赛事、月历/议程、备注、ICS 导出、可更新数据源。">
+<meta name="description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：39 场赛事、月历/议程、备注、ICS 导出、可更新数据源。">
 <meta name="theme-color" content="#12161B">
 <meta name="author" content="CentaMatcha">
 <link rel="author" href="https://github.com/CentaMatcha">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CS 竞赛日历">
 <meta property="og:title" content="CS 竞赛日历 · 计算机专业">
-<meta property="og:description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：35 场赛事、月历 / 议程、备注、ICS 导出、可更新数据源。">
+<meta property="og:description" content="面向全国高校计算机 / 人工智能专业的精选竞赛日历：39 场赛事、月历 / 议程、备注、ICS 导出、可更新数据源。">
 <meta property="og:url" content="https://centamatcha.github.io/cs-competition-calendar/">
 <meta property="og:image" content="https://centamatcha.github.io/cs-competition-calendar/screenshots/calendar.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -1105,7 +1105,7 @@
 /* =========================================================
    DATA
    ========================================================= */
-const APP_VERSION = '2026.10.22.6';
+const APP_VERSION = '2026.10.22.7';
 let dataUpdated = '2026-10-22';
 let feedVersion = APP_VERSION;
 let feedSource = '内置';
@@ -2305,6 +2305,147 @@ const EVENTS = [
       {d:'08.15', t:'全国总决赛（预计）', s:'8 月'}
     ],
     deadlines:[{date:'2027-04-30', label:'报名截止'}]
+  },
+  {
+    id:'baidustar2027',
+    short:'百度之星',
+    title:'2027 第二十三届百度之星程序设计大赛',
+    subtitle:'个人算法赛 · 线上初赛 + 现场决赛',
+    cat:'algo', level:'企业级 · 百度',
+    org:'百度',
+    format:'个人赛 · 初赛 3 小时 8 题，决赛 5 小时 12 题',
+    regStart:'2027-06-15', regEnd:'2027-08-15',
+    contestStart:'2027-08-22', contestEnd:'2027-08-22',
+    deadlineText:'预计 8 月中旬',
+    contestText:'预计 8 月下旬、9 月中旬各一场线上初赛',
+    contestShort:'初赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'https://astar.baidu.com',
+    sourceNote:'2026 年第二十二届：8/23、9/19 两场线上初赛',
+    schoolNote:'报名在官网完成，线上初赛两场可任选一场参加；决赛按大学组、高中组分别排名，报名费按当年章程。',
+    link:'https://astar.baidu.com', linkLabel:'百度之星官网',
+    summary:'百度办了二十多年的算法赛，初赛三小时八题、决赛五小时十二题，题目以算法和数据结构为主，分省赛和总决赛两级评奖。',
+    why:'适合算法底子扎实、想拿一次大厂比赛名次的学生。两场初赛可以挑状态好的一场打，时间上比现场赛灵活。',
+    tips:[
+      '往届真题在码蹄集上能刷，先按 3 小时 8 题的节奏练两套。',
+      '初赛两场任选一场，别两场都打：第二场题目不一定更简单，状态更关键。',
+      '决赛按大学组排名，前 10 名有奖金，前 60% 有金银铜奖。'
+    ],
+    tags:['算法','个人赛','大厂'],
+    schedule:[
+      {d:'06.15', t:'报名开始（预计）', s:'以官网为准'},
+      {d:'08.15', t:'报名截止（预计）', s:'8 月中旬'},
+      {d:'08.22', t:'初赛第一场（预计）', s:'线上，3 小时 8 题'},
+      {d:'09.18', t:'初赛第二场（预计）', s:'线上'},
+      {d:'10.15', t:'总决赛（预计）', s:'时间地点待定'}
+    ],
+    deadlines:[{date:'2027-08-15', label:'报名截止'}]
+  },
+  {
+    id:'zte2027',
+    short:'中兴捧月',
+    title:'2027 第十七届"中兴捧月"全球精英挑战赛',
+    subtitle:'算法 / 软件赛道 · 区域赛 + 决赛',
+    cat:'algo', level:'企业级 · 中兴通讯',
+    org:'中兴通讯',
+    format:'个人或 3 人团队 · 赛道制',
+    regStart:'2027-03-15', regEnd:'2027-05-31',
+    contestStart:'2027-06-20', contestEnd:'2027-06-21',
+    deadlineText:'预计 5 月底',
+    contestText:'预计 6 月区域赛，7 月决赛',
+    contestShort:'区域赛',
+    confidence:'expected', route:'官网直报', risk:'mid',
+    source:'official',
+    sourceUrl:'http://mp.weixin.qq.com/s?__biz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1&sn=98161956c172566baeac4c34cc1c2698',
+    sourceNote:'2026 年第十六届启动公告（微信公众号）',
+    schoolNote:'一般 3 人一队，分算法、软件、硬件多个赛道；获奖选手有实习和校招绿色通道，具体以当年公告为准。',
+    link:'http://mp.weixin.qq.com/s?__biz=MjM5NDkwMTI3MQ==&mid=2652632099&idx=1&sn=98161956c172566baeac4c34cc1c2698', linkLabel:'2026 启动公告',
+    summary:'中兴每年春季启动的算法与软件挑战赛，赛题偏通信、调度和工程优化，分区域赛和全国决赛，获奖有实习与校招通道。',
+    why:'适合想进通信、嵌入式或后端方向，又需要一段大厂项目经历的同学。',
+    tips:[
+      '赛题偏工程优化，先把 baseline 跑通再谈性能。',
+      '组队时配一个能写文档和答辩的人，决赛答辩占比不低。',
+      '关注中兴校招公众号，报名和实习通道通常同时开放。'
+    ],
+    tags:['算法','大厂','实习通道'],
+    schedule:[
+      {d:'03.15', t:'报名开始（预计）', s:'以官方公告为准'},
+      {d:'05.31', t:'报名截止（预计）', s:'5 月底'},
+      {d:'06.20', t:'区域赛（预计）', s:'6 月'},
+      {d:'07.15', t:'决赛（预计）', s:'7 月'}
+    ],
+    deadlines:[{date:'2027-05-31', label:'报名截止'}]
+  },
+  {
+    id:'tencenttaa2027',
+    short:'腾讯广告算法',
+    title:'2027 腾讯广告算法大赛',
+    subtitle:'真实广告数据 · 线上赛 + 现场答辩',
+    cat:'ai', level:'企业级 · 腾讯',
+    org:'腾讯广告',
+    format:'团队 ≤ 3 人 · 线上评测 + 决赛答辩',
+    regStart:'2027-04-15', regEnd:'2027-05-31',
+    contestStart:'2027-07-15', contestEnd:'2027-07-16',
+    deadlineText:'预计 5 月底',
+    contestText:'预计 6–7 月线上赛，8 月决赛答辩',
+    contestShort:'线上赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'http://www.c114.net.cn/ainews/68160.html',
+    sourceNote:'2026 年大赛官宣报道（C114）',
+    schoolNote:'组队参赛，赛题用脱敏后的真实广告数据；晋级决赛要现场答辩并提交可复现代码。',
+    link:'http://www.c114.net.cn/ainews/68160.html', linkLabel:'2026 大赛介绍',
+    summary:'腾讯广告办的算法赛，题目基于真实的广告投放数据，考察推荐、点击率预估和排序模型，决赛现场答辩。',
+    why:'适合做过推荐或预估模型、想拿真实业务数据练手的同学。工业界数据分布和公开数据集差很多，这一段经历在简历里能讲清楚。',
+    tips:[
+      '先复现往届 baseline，理解特征构造再动模型。',
+      '线上赛按榜单排名，A/B 阶段之间留出做特征的时间。',
+      '决赛要答辩，代码封版前把训练流程写成文档。'
+    ],
+    tags:['推荐系统','大厂','真实数据'],
+    schedule:[
+      {d:'04.15', t:'报名开始（预计）', s:'以官网为准'},
+      {d:'05.31', t:'报名截止（预计）', s:'5 月底'},
+      {d:'07.15', t:'线上赛（预计）', s:'6–7 月'},
+      {d:'08.20', t:'决赛答辩（预计）', s:'8 月'}
+    ],
+    deadlines:[{date:'2027-05-31', label:'报名截止'}]
+  },
+  {
+    id:'iflytek1024_2027',
+    short:'讯飞 1024',
+    title:'2027 科大讯飞 AI 开发者大赛',
+    subtitle:'多赛道 · 1024 开发者节现场决赛',
+    cat:'ai', level:'企业级 · 科大讯飞',
+    org:'科大讯飞',
+    format:'个人或团队 · 线上赛 + 1024 现场决赛',
+    regStart:'2027-05-01', regEnd:'2027-09-15',
+    contestStart:'2027-10-22', contestEnd:'2027-10-24',
+    deadlineText:'预计 9 月中旬',
+    contestText:'预计 10 月下旬 1024 开发者节现场决赛',
+    contestShort:'决赛',
+    confidence:'expected', route:'官网直报', risk:'low',
+    source:'official',
+    sourceUrl:'https://1024.iflytek.com/',
+    sourceNote:'讯飞 1024 开发者节官网',
+    schoolNote:'赛道覆盖语音、视觉、大模型应用，个人或组队都能报；决赛在合肥 1024 开发者节现场，差旅自理。',
+    link:'https://1024.iflytek.com/', linkLabel:'讯飞 1024 官网',
+    summary:'讯飞每年在 1024 开发者节期间办的 AI 赛，赛道覆盖语音识别、计算机视觉和大模型应用，多数题目用讯飞开放平台的接口完成。',
+    why:'适合想用现成 API 快速做出 AI 应用、顺便看看行业怎么落地的同学。作品能直接演示，投入产出比高。',
+    tips:[
+      '选题优先挑能两周做出 demo 的，别一上来做平台。',
+      '用讯飞开放平台前先申请免费额度，语音和 OCR 接口都有。',
+      '决赛在合肥，提前订票；现场答辩带一台能跑 demo 的电脑。'
+    ],
+    tags:['AI 应用','大厂','现场决赛'],
+    schedule:[
+      {d:'05.01', t:'报名开始（预计）', s:'以官网为准'},
+      {d:'09.15', t:'报名截止（预计）', s:'9 月中旬'},
+      {d:'10.22', t:'1024 开发者节（预计）', s:'合肥'},
+      {d:'10.24', t:'决赛答辩（预计）', s:'10 月下旬'}
+    ],
+    deadlines:[{date:'2027-09-15', label:'报名截止'}]
   }
 ];
 
