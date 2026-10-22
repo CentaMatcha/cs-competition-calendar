@@ -1,3 +1,5 @@
+![CS 竞赛日历](screenshots/cover.jpg)
+
 # CS 竞赛日历
 
 面向计算机、人工智能、软件工程、信息安全专业的竞赛日历。单页应用，一个 `index.html`，放到 GitHub Pages 就能用。
